@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:appbasce/loading.dart';
+import 'package:appbasce/home.dart';
 
 void main() {
   runApp(MaterialApp(
     initialRoute: "/",
     routes: {
-      "/": (context) => Loading(),
-      //'/home': (context) => Home(),
+      '/': (context) => Home(),
+      '/loading': (context) => Loading(),
       //'/location': (context) => Profile(),
     },
   ));
