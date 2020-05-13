@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
               accountEmail: Text(''),
               accountName: Text('App Bascé'),
               currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/Logo.jpg'),
+                backgroundImage: AssetImage('assets/naismith.jpg'),
               ),
             ),
             Padding(
@@ -43,14 +43,14 @@ class _HomeState extends State<Home> {
               },
             ),
             ListTile(
-              leading: Icon(MdiIcons.trophy),
+              leading: Icon(MdiIcons.podium),
               title: Text("Albo d'oro"),
               onTap: () {
                 Navigator.pushNamed(context, '/wip');
               },
             ),
             ListTile(
-              leading: Icon(Icons.star, color: Colors.yellow[700]),
+              leading: Icon(MdiIcons.basketball),
               title: Text('Partecipa al Torneo Bascé'),
               onTap: () {
                 Navigator.pushNamed(context, '/wip');
