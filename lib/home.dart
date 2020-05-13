@@ -31,22 +31,30 @@ class _HomeState extends State<Home> {
             ListTile(
               leading: Icon(Icons.info_outline),
               title: Text('Info'),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, '/wip');
+              },
             ),
             ListTile(
               leading: Icon(Icons.people),
               title: Text('Profili'),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, '/wip');
+              },
             ),
             ListTile(
               leading: Icon(MdiIcons.trophy),
               title: Text("Albo d'oro"),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, '/wip');
+              },
             ),
             ListTile(
               leading: Icon(Icons.star, color: Colors.yellow[700]),
               title: Text('Partecipa al Torneo Bascé'),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, '/wip');
+              },
             ),
             Divider(),
             Expanded(
@@ -55,7 +63,9 @@ class _HomeState extends State<Home> {
                 child: ListTile(
                   leading: Icon(Icons.settings),
                   title: Text('Impostazioni'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/wip');
+                  },
                 ),
               ),
             ),
