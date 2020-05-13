@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
               leading: Icon(Icons.people),
               title: Text('Profili'),
               onTap: () {
-                Navigator.pushNamed(context, '/wip');
+                Navigator.pushNamed(context, '/profile_list');
               },
             ),
             ListTile(
@@ -77,17 +77,18 @@ class _HomeState extends State<Home> {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.dstATop),
+              colorFilter: ColorFilter.mode(Colors.black.withOpacity(1), BlendMode.dstATop),
               image: AssetImage('assets/Logo.jpg'),
               fit: BoxFit.fitWidth,
             ),
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+              SizedBox(height: 20),
               Text(
-                'La App ufficiale della Chattina Bascé',
+                'Welcome Biatch!',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 40,
