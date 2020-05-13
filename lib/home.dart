@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -11,8 +12,55 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
-        title: Text('Home Screen'),
+        title: Text('App Bascé Home'),
         centerTitle: true,
+      ),
+      drawer: Drawer(
+        child: Column(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountEmail: Text(''),
+              accountName: Text('App Bascé'),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: AssetImage('assets/Logo.jpg'),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+            ),
+            ListTile(
+              leading: Icon(Icons.info_outline),
+              title: Text('Info'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.people),
+              title: Text('Profili'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(MdiIcons.trophy),
+              title: Text("Albo d'oro"),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.star, color: Colors.yellow[700]),
+              title: Text('Partecipa al Torneo Bascé'),
+              onTap: () {},
+            ),
+            Divider(),
+            Expanded(
+              child: Align(
+                alignment: FractionalOffset.bottomCenter,
+                child: ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text('Impostazioni'),
+                  onTap: () {},
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       backgroundColor: Colors.grey[200],
       body: SafeArea(
@@ -29,7 +77,7 @@ class _HomeState extends State<Home> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                'La App ufficiale della Chattina Bascè',
+                'La App ufficiale della Chattina Bascé',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 40,
