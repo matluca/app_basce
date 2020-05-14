@@ -83,7 +83,7 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.blue[200],
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
