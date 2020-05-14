@@ -18,11 +18,22 @@ class _HomeState extends State<Home> {
       drawer: Drawer(
         child: Column(
           children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountEmail: Text(''),
-              accountName: Text('App Bascé'),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/naismith.jpg'),
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue[400],
+              ),
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Center(
+                      child: CircleAvatar(
+                        radius: 60,
+                        backgroundImage: AssetImage('assets/naismith.jpg'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Padding(
