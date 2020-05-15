@@ -4,6 +4,13 @@ import 'package:appbasce/classes/profile_class.dart';
 import 'package:appbasce/pages/home.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
+Map tournamentMap = {
+  2016: 'I',
+  2017: 'II',
+  2018: 'III',
+  2019: 'IV'
+};
+
 class PersonalProfile extends StatefulWidget {
   @override
   _PersonalProfileState createState() => _PersonalProfileState();
@@ -44,6 +51,18 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+
+    List tournaments = List.generate(profiles[widget.screen].tournamentYears.length,
+            (index) => tournamentMap[profiles[widget.screen].tournamentYears[index]]);
+    List secondPlaces = List.generate(profiles[widget.screen].secondYears.length,
+            (index) => tournamentMap[profiles[widget.screen].secondYears[index]]);
+    List thirdPlaces = List.generate(profiles[widget.screen].thirdYears.length,
+            (index) => tournamentMap[profiles[widget.screen].thirdYears[index]]);
+    List brackets = List.generate(profiles[widget.screen].bracketYears.length,
+            (index) => tournamentMap[profiles[widget.screen].bracketYears[index]]);
+    List rounds = List.generate(profiles[widget.screen].roundsYears.length,
+            (index) => tournamentMap[profiles[widget.screen].roundsYears[index]]);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
@@ -91,8 +110,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     Text(
-                      profiles[widget.screen].tournamentYears.length == 0 ? profiles[widget.screen].tournamentYears.length.toString() :
-                      '${profiles[widget.screen].tournamentYears.length}  (${profiles[widget.screen].tournamentYears.toString().substring(1,profiles[widget.screen].tournamentYears.toString().length-1)})',
+                      tournaments.length == 0 ? tournaments.length.toString() :
+                      '${tournaments.length}  (${tournaments.toString().substring(1, tournaments.toString().length-1)} TB)',
                       style: TextStyle(
                         color: Colors.grey[800],
                         fontSize: 25,
@@ -120,8 +139,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     Text(
-                      profiles[widget.screen].secondYears.length == 0 ? profiles[widget.screen].secondYears.length.toString() :
-                      '${profiles[widget.screen].secondYears.length}  (${profiles[widget.screen].secondYears.toString().substring(1,profiles[widget.screen].secondYears.toString().length-1)})',
+                      secondPlaces.length == 0 ? secondPlaces.length.toString() :
+                      '${secondPlaces.length}  (${secondPlaces.toString().substring(1,secondPlaces.toString().length-1)} TB)',
                       style: TextStyle(
                         color: Colors.grey[800],
                         fontSize: 25,
@@ -149,8 +168,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     Text(
-                      profiles[widget.screen].thirdYears.length == 0 ? profiles[widget.screen].thirdYears.length.toString() :
-                      '${profiles[widget.screen].thirdYears.length}  (${profiles[widget.screen].thirdYears.toString().substring(1,profiles[widget.screen].thirdYears.toString().length-1)})',
+                      thirdPlaces.length == 0 ? thirdPlaces.length.toString() :
+                      '${thirdPlaces.length}  (${thirdPlaces.toString().substring(1,thirdPlaces.toString().length-1)} TB)',
                       style: TextStyle(
                         color: Colors.grey[800],
                         fontSize: 25,
@@ -178,8 +197,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     Text(
-                      profiles[widget.screen].bracketYears.length == 0 ? profiles[widget.screen].bracketYears.length.toString() :
-                      '${profiles[widget.screen].bracketYears.length}  (${profiles[widget.screen].bracketYears.toString().substring(1,profiles[widget.screen].bracketYears.toString().length-1)})',
+                      brackets.length == 0 ? brackets.length.toString() :
+                      '${brackets.length}  (${brackets.toString().substring(1,brackets.toString().length-1)} TB)',
                       style: TextStyle(
                         color: Colors.grey[800],
                         fontSize: 25,
@@ -207,8 +226,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     Text(
-                      profiles[widget.screen].roundsYears.length == 0 ? profiles[widget.screen].roundsYears.length.toString() :
-                      '${profiles[widget.screen].roundsYears.length}  (${profiles[widget.screen].roundsYears.toString().substring(1,profiles[widget.screen].roundsYears.toString().length-1)})',
+                      rounds.length == 0 ? rounds.length.toString() :
+                      '${rounds.length}  (${rounds.toString().substring(1,rounds.toString().length-1)} TB)',
                       style: TextStyle(
                         color: Colors.grey[800],
                         fontSize: 25,

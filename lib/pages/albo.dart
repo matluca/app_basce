@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:appbasce/classes/yearStat_class.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class Albo extends StatefulWidget {
-  @override
-  _AlboState createState() => _AlboState();
-}
-
 Map iconMap = {
   i : MdiIcons.romanNumeral1,
   ii : MdiIcons.romanNumeral2,
   iii : MdiIcons.romanNumeral3,
   iv : MdiIcons.romanNumeral4,
 };
+
+class Albo extends StatefulWidget {
+  @override
+  _AlboState createState() => _AlboState();
+}
 
 class _AlboState extends State<Albo> {
   @override

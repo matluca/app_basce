@@ -64,7 +64,7 @@ class _YearPageState extends State<YearPage> {
             children: <Widget>[
               Positioned(
                 left: (MediaQuery.of(context).size.width-350)/2,
-                top: 120,
+                top: 110,
                 child: Image.asset('assets/podium.png', width: 350),
               ),
               Center(
@@ -117,7 +117,7 @@ class _YearPageState extends State<YearPage> {
               ),
             ],
           ),
-          SizedBox(height: 200),
+          SizedBox(height: 190),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Divider(height: 50, thickness: 2),
@@ -209,7 +209,7 @@ class _YearPageState extends State<YearPage> {
               ],
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 25),
           DotsIndicator(
             dotsCount: yearStats.length,
             position: widget.screen.toDouble(),
