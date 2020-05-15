@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:appbasce/classes/yearStat_class.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 
 class YearStats extends StatefulWidget {
   @override
@@ -11,12 +12,39 @@ class _YearStatsState extends State<YearStats> {
   @override
   Widget build(BuildContext context) {
 
-    Stats stats =  ModalRoute.of(context).settings.arguments;
+    int screen = ModalRoute.of(context).settings.arguments;
+    final controller = PageController(
+      initialPage: screen,
+    );
 
+    //List<Widget> pages = List.generate(yearStats.length, (index) => Page(screen: index));
+    List<Widget> _createChildren() {
+      return new List<Widget>.generate(yearStats.length, (int index) {
+        return YearPage(screen: index);
+      });
+    }
+
+    return PageView(
+      controller: controller,
+      children: _createChildren(),
+    );
+  }
+}
+
+class YearPage extends StatefulWidget {
+  final int screen;
+  const YearPage ({Key key, this.screen}): super(key: key);
+  @override
+  _YearPageState createState() => _YearPageState();
+}
+
+class _YearPageState extends State<YearPage> {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
-        title: Text('${stats.label} Torneo Bascé (${stats.year.toString()})'),
+        title: Text('${yearStats[widget.screen].label} Torneo Bascé (${yearStats[widget.screen].year.toString()})'),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
@@ -29,7 +57,7 @@ class _YearStatsState extends State<YearStats> {
       body: Column(
         //mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          SizedBox(height: 50),
+          SizedBox(height: 30),
           Stack(
             overflow: Overflow.visible,
             alignment: Alignment.center,
@@ -42,15 +70,15 @@ class _YearStatsState extends State<YearStats> {
               Center(
                 child: CircleAvatar(
                   radius: 35,
-                  backgroundImage: AssetImage('assets/${stats.first[0].image}'),
+                  backgroundImage: AssetImage('assets/${yearStats[widget.screen].first[0].image}'),
                 ),
               ),
-              if (stats.second.length == 1) Positioned(
+              if (yearStats[widget.screen].second.length == 1) Positioned(
                 top: 40,
                 left: 50,
                 child: CircleAvatar(
                   radius: 35,
-                  backgroundImage: AssetImage('assets/${stats.second[0].image}'),
+                  backgroundImage: AssetImage('assets/${yearStats[widget.screen].second[0].image}'),
                 ),
               ) else Positioned(
                 top: 60,
@@ -60,12 +88,12 @@ class _YearStatsState extends State<YearStats> {
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
-                    itemCount: stats.second.length,
+                    itemCount: yearStats[widget.screen].second.length,
                     itemBuilder: (context, index) {return
                       Row(
                         children: <Widget>[
                           CircleAvatar(
-                            backgroundImage: AssetImage('assets/${stats.second[index].image}'),
+                            backgroundImage: AssetImage('assets/${yearStats[widget.screen].second[index].image}'),
                             radius: 30,
                           ),
                           SizedBox(width: 5),
@@ -75,7 +103,7 @@ class _YearStatsState extends State<YearStats> {
                   ),
                 ),
               ),
-              if (stats.third.length == 0) Positioned(
+              if (yearStats[widget.screen].third.length == 0) Positioned(
                 top: 60,
                 right: 50,
                 child: Container(),
@@ -84,7 +112,7 @@ class _YearStatsState extends State<YearStats> {
                 right: 50,
                 child: CircleAvatar(
                   radius: 35,
-                  backgroundImage: AssetImage('assets/${stats.third[0].image}'),
+                  backgroundImage: AssetImage('assets/${yearStats[widget.screen].third[0].image}'),
                 ),
               ),
             ],
@@ -118,12 +146,12 @@ class _YearStatsState extends State<YearStats> {
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
-                        itemCount: stats.bracket.length,
+                        itemCount: yearStats[widget.screen].bracket.length,
                         itemBuilder: (context, index) {return
                           Row(
                             children: <Widget>[
                               CircleAvatar(
-                                backgroundImage: AssetImage('assets/${stats.bracket[index].image}'),
+                                backgroundImage: AssetImage('assets/${yearStats[widget.screen].bracket[index].image}'),
                                 radius: 30,
                               ),
                               SizedBox(width: 5),
@@ -162,12 +190,12 @@ class _YearStatsState extends State<YearStats> {
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
-                        itemCount: stats.rounds.length,
+                        itemCount: yearStats[widget.screen].rounds.length,
                         itemBuilder: (context, index) {return
                           Row(
                             children: <Widget>[
                               CircleAvatar(
-                                backgroundImage: AssetImage('assets/${stats.rounds[index].image}'),
+                                backgroundImage: AssetImage('assets/${yearStats[widget.screen].rounds[index].image}'),
                                 radius: 30,
                               ),
                               SizedBox(width: 5),
@@ -181,8 +209,14 @@ class _YearStatsState extends State<YearStats> {
               ],
             ),
           ),
+          SizedBox(height: 20),
+          DotsIndicator(
+            dotsCount: yearStats.length,
+            position: widget.screen.toDouble(),
+          ),
         ],
       ),
     );
   }
 }
+

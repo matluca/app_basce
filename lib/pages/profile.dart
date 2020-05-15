@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:appbasce/classes/profile_class.dart';
 import 'package:appbasce/pages/home.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 
 class PersonalProfile extends StatefulWidget {
   @override
@@ -11,13 +12,42 @@ class PersonalProfile extends StatefulWidget {
 class _PersonalProfileState extends State<PersonalProfile> {
   @override
   Widget build(BuildContext context) {
+    int screen = ModalRoute
+        .of(context)
+        .settings
+        .arguments;
+    final controller = PageController(
+      initialPage: screen,
+    );
 
-    Profile profile = ModalRoute.of(context).settings.arguments;
+    //List<Widget> pages = List.generate(yearStats.length, (index) => Page(screen: index));
+    List<Widget> _createChildren() {
+      return new List<Widget>.generate(profiles.length, (int index) {
+        return ProfilePage(screen: index);
+      });
+    }
 
+    return PageView(
+      controller: controller,
+      children: _createChildren(),
+    );
+  }
+}
+
+class ProfilePage extends StatefulWidget {
+  final int screen;
+  const ProfilePage ({Key key, this.screen}): super(key: key);
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
-        title: Text('${profile.name}'),
+        title: Text('${profiles[widget.screen].name}'),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
@@ -34,9 +64,9 @@ class _PersonalProfileState extends State<PersonalProfile> {
           children: <Widget>[
             Center(
               child: InkWell(
-                onTap: () {showImage(context, 'assets/${profile.image}');},
+                onTap: () {showImage(context, 'assets/${profiles[widget.screen].image}');},
                 child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/${profile.image}'),
+                  backgroundImage: AssetImage('assets/${profiles[widget.screen].image}'),
                   radius: 70,
                 ),
               ),
@@ -61,8 +91,8 @@ class _PersonalProfileState extends State<PersonalProfile> {
                       ),
                     ),
                     Text(
-                      profile.tournamentYears.length == 0 ? profile.tournamentYears.length.toString() :
-                      '${profile.tournamentYears.length}  (${profile.tournamentYears.toString().substring(1,profile.tournamentYears.toString().length-1)})',
+                      profiles[widget.screen].tournamentYears.length == 0 ? profiles[widget.screen].tournamentYears.length.toString() :
+                      '${profiles[widget.screen].tournamentYears.length}  (${profiles[widget.screen].tournamentYears.toString().substring(1,profiles[widget.screen].tournamentYears.toString().length-1)})',
                       style: TextStyle(
                         color: Colors.grey[800],
                         fontSize: 25,
@@ -90,8 +120,8 @@ class _PersonalProfileState extends State<PersonalProfile> {
                       ),
                     ),
                     Text(
-                      profile.secondYears.length == 0 ? profile.secondYears.length.toString() :
-                      '${profile.secondYears.length}  (${profile.secondYears.toString().substring(1,profile.secondYears.toString().length-1)})',
+                      profiles[widget.screen].secondYears.length == 0 ? profiles[widget.screen].secondYears.length.toString() :
+                      '${profiles[widget.screen].secondYears.length}  (${profiles[widget.screen].secondYears.toString().substring(1,profiles[widget.screen].secondYears.toString().length-1)})',
                       style: TextStyle(
                         color: Colors.grey[800],
                         fontSize: 25,
@@ -119,8 +149,8 @@ class _PersonalProfileState extends State<PersonalProfile> {
                       ),
                     ),
                     Text(
-                      profile.thirdYears.length == 0 ? profile.thirdYears.length.toString() :
-                      '${profile.thirdYears.length}  (${profile.thirdYears.toString().substring(1,profile.thirdYears.toString().length-1)})',
+                      profiles[widget.screen].thirdYears.length == 0 ? profiles[widget.screen].thirdYears.length.toString() :
+                      '${profiles[widget.screen].thirdYears.length}  (${profiles[widget.screen].thirdYears.toString().substring(1,profiles[widget.screen].thirdYears.toString().length-1)})',
                       style: TextStyle(
                         color: Colors.grey[800],
                         fontSize: 25,
@@ -148,8 +178,8 @@ class _PersonalProfileState extends State<PersonalProfile> {
                       ),
                     ),
                     Text(
-                      profile.bracketYears.length == 0 ? profile.bracketYears.length.toString() :
-                      '${profile.bracketYears.length}  (${profile.bracketYears.toString().substring(1,profile.bracketYears.toString().length-1)})',
+                      profiles[widget.screen].bracketYears.length == 0 ? profiles[widget.screen].bracketYears.length.toString() :
+                      '${profiles[widget.screen].bracketYears.length}  (${profiles[widget.screen].bracketYears.toString().substring(1,profiles[widget.screen].bracketYears.toString().length-1)})',
                       style: TextStyle(
                         color: Colors.grey[800],
                         fontSize: 25,
@@ -177,8 +207,8 @@ class _PersonalProfileState extends State<PersonalProfile> {
                       ),
                     ),
                     Text(
-                      profile.roundsYears.length == 0 ? profile.roundsYears.length.toString() :
-                      '${profile.roundsYears.length}  (${profile.roundsYears.toString().substring(1,profile.roundsYears.toString().length-1)})',
+                      profiles[widget.screen].roundsYears.length == 0 ? profiles[widget.screen].roundsYears.length.toString() :
+                      '${profiles[widget.screen].roundsYears.length}  (${profiles[widget.screen].roundsYears.toString().substring(1,profiles[widget.screen].roundsYears.toString().length-1)})',
                       style: TextStyle(
                         color: Colors.grey[800],
                         fontSize: 25,
@@ -189,10 +219,16 @@ class _PersonalProfileState extends State<PersonalProfile> {
                 ),
               ],
             ),
+            SizedBox(height: 20),
+            Center(
+              child: DotsIndicator(
+                dotsCount: profiles.length,
+                position: widget.screen.toDouble(),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 }
-

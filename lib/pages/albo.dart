@@ -45,7 +45,7 @@ class _AlboState extends State<Albo> {
                 child: Card(
                   child: ListTile(
                     onTap: () {
-                      Navigator.pushNamed(context, '/year_stats', arguments: yearStats[index]);
+                      Navigator.pushNamed(context, '/year_stats', arguments: index);
                     },
                     title: Center(
                       child: Text(

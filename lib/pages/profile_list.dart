@@ -35,7 +35,7 @@ class _ProfileListState extends State<ProfileList> {
                 child: Card(
                   child: ListTile(
                     onTap: () {
-                      Navigator.pushNamed(context, '/profile', arguments: profiles[index]);
+                      Navigator.pushNamed(context, '/profile', arguments: index);
                     },
                     title: Center(
                       child: Text(
