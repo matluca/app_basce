@@ -90,7 +90,10 @@ class _YearStatsState extends State<YearStats> {
             ],
           ),
           SizedBox(height: 200),
-          Divider(height: 50),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Divider(height: 50, thickness: 2),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
             child: Row(

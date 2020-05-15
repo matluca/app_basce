@@ -27,7 +27,7 @@ class WorkInProgress extends StatelessWidget {
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: Colors.blue[900],
+                color: Colors.grey[800],
               ),
             ),
           ),

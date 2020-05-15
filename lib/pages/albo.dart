@@ -7,11 +7,12 @@ class Albo extends StatefulWidget {
   _AlboState createState() => _AlboState();
 }
 
-TValue case2<TOptionType, TValue>(
-    TOptionType selectedOption,
-    Map<TOptionType, TValue> branches) {
-  return branches[selectedOption];
-}
+Map iconMap = {
+  i : MdiIcons.romanNumeral1,
+  ii : MdiIcons.romanNumeral2,
+  iii : MdiIcons.romanNumeral3,
+  iv : MdiIcons.romanNumeral4,
+};
 
 class _AlboState extends State<Albo> {
   @override
@@ -55,13 +56,7 @@ class _AlboState extends State<Albo> {
                         ),
                       ),
                     ),
-                    leading: case2(yearStats[index].label,
-                        {
-                          'I': Icon(MdiIcons.romanNumeral1),
-                          'II': Icon(MdiIcons.romanNumeral2),
-                          'III': Icon(MdiIcons.romanNumeral3),
-                          'IV': Icon(MdiIcons.romanNumeral4)
-                        }),
+                    leading: Icon(iconMap[yearStats[index]], size: 40),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[

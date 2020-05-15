@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:appbasce/classes/profile_class.dart';
+import 'package:appbasce/pages/home.dart';
 
 class PersonalProfile extends StatefulWidget {
   @override
@@ -32,14 +33,17 @@ class _PersonalProfileState extends State<PersonalProfile> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Center(
-              child: CircleAvatar(
-                backgroundImage: AssetImage('assets/${profile.image}'),
-                radius: 70,
+              child: InkWell(
+                onTap: () {showImage(context, 'assets/${profile.image}');},
+                child: CircleAvatar(
+                  backgroundImage: AssetImage('assets/${profile.image}'),
+                  radius: 70,
+                ),
               ),
             ),
             Divider(
+              thickness: 2,
               height: 50,
-              color: Colors.grey[800],
             ),
             Row(
               children: <Widget>[
