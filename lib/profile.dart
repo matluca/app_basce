@@ -35,22 +35,22 @@ class _PersonalProfileState extends State<PersonalProfile> {
               ),
             ),
             Divider(
-              height: 60,
+              height: 50,
               color: Colors.grey[800],
             ),
-            Text(
-              profile.name,
-              style: TextStyle(
-                color: Colors.grey[800],
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 30),
+//            Text(
+//              profile.name,
+//              style: TextStyle(
+//                color: Colors.grey[800],
+//                fontSize: 25,
+//                fontWeight: FontWeight.bold,
+//              ),
+//            ),
+//            SizedBox(height: 30),
             Row(
               children: <Widget>[
                 SizedBox(width: 10),
-                Icon(MdiIcons.trophy, size: 40),
+                Icon(MdiIcons.trophy, size: 40, color: Color(0xFFFFD700)),
                 SizedBox(width: 50),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,12 +62,11 @@ class _PersonalProfileState extends State<PersonalProfile> {
                         letterSpacing: 2,
                       ),
                     ),
-                    SizedBox(height: 10),
                     Text(
-                      profile.tournamentYears.length==0 ? '${profile.tournaments.toString()}' : '${profile.tournaments.toString()}  ${profile.tournamentYears.toString()}',
+                      profile.tournamentYears.length == 0 ? '${profile.tournamentYears.length.toString()}' : '${profile.tournamentYears.length.toString()}  ${profile.tournamentYears.toString()}',
                       style: TextStyle(
                         color: Colors.grey[800],
-                        fontSize: 30,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -75,7 +74,63 @@ class _PersonalProfileState extends State<PersonalProfile> {
                 ),
               ],
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 25),
+            Row(
+              children: <Widget>[
+                SizedBox(width: 10),
+                Icon(MdiIcons.trophy, size: 40, color: Color(0xFFA9A9A9)),
+                SizedBox(width: 50),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'SECONDI POSTI',
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                        letterSpacing: 2,
+                      ),
+                    ),
+                    Text(
+                      profile.secondYears.length == 0 ? '${profile.secondYears.length.toString()}' : '${profile.secondYears.length.toString()}  ${profile.secondYears.toString()}',
+                      style: TextStyle(
+                        color: Colors.grey[800],
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 25),
+            Row(
+              children: <Widget>[
+                SizedBox(width: 10),
+                Icon(MdiIcons.trophy, size: 40, color: Color(0xFFFCD7F32)),
+                SizedBox(width: 50),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'TERZI POSTI',
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                        letterSpacing: 2,
+                      ),
+                    ),
+                    Text(
+                      profile.thirdYears.length == 0 ? '${profile.thirdYears.length.toString()}' : '${profile.thirdYears.length.toString()}  ${profile.thirdYears.toString()}',
+                      style: TextStyle(
+                        color: Colors.grey[800],
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 25),
             Row(
               children: <Widget>[
                 Icon(MdiIcons.reorderHorizontal, size: 30),
@@ -91,12 +146,11 @@ class _PersonalProfileState extends State<PersonalProfile> {
                         letterSpacing: 2,
                       ),
                     ),
-                    SizedBox(height: 10),
                     Text(
-                      profile.brackets.toString(),
+                      profile.bracketYears.length == 0 ? '${profile.bracketYears.length.toString()}' : '${profile.bracketYears.length.toString()}  ${profile.bracketYears.toString()}',
                       style: TextStyle(
                         color: Colors.grey[800],
-                        fontSize: 30,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -104,7 +158,7 @@ class _PersonalProfileState extends State<PersonalProfile> {
                 ),
               ],
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 25),
             Row(
               children: <Widget>[
                 Icon(MdiIcons.numeric4Circle, size: 30),
@@ -120,12 +174,11 @@ class _PersonalProfileState extends State<PersonalProfile> {
                         letterSpacing: 2,
                       ),
                     ),
-                    SizedBox(height: 10),
                     Text(
-                      profile.rounds.toString(),
+                      profile.roundsYears.length == 0 ? '${profile.roundsYears.length.toString()}' : '${profile.roundsYears.length.toString()}  ${profile.roundsYears.toString()}',
                       style: TextStyle(
                         color: Colors.grey[800],
-                        fontSize: 30,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
