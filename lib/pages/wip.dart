@@ -8,6 +8,12 @@ class WorkInProgress extends StatelessWidget {
         backgroundColor: Colors.blue[400],
         title: Text('Work in Progress'),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.home, color: Colors.white),
+            onPressed: () {Navigator.popUntil(context, ModalRoute.withName('/'));},
+          ),
+        ],
       ),
       backgroundColor: Colors.blue[200],
       body: Column(

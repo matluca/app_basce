@@ -1,6 +1,6 @@
-import 'package:appbasce/profile_list.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:appbasce/classes/profile_class.dart';
 
 class PersonalProfile extends StatefulWidget {
   @override
@@ -8,23 +8,26 @@ class PersonalProfile extends StatefulWidget {
 }
 
 class _PersonalProfileState extends State<PersonalProfile> {
-
-  Profile profile;
-
   @override
   Widget build(BuildContext context) {
 
-    profile = ModalRoute.of(context).settings.arguments;
+    Profile profile = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
-        title: Text('Profilo di ${profile.name}'),
+        title: Text('${profile.name}'),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.home, color: Colors.white),
+            onPressed: () {Navigator.popUntil(context, ModalRoute.withName('/'));},
+          ),
+        ],
       ),
       backgroundColor: Colors.blue[200],
       body: Padding(
-        padding: EdgeInsets.fromLTRB(30, 40, 30, 0),
+        padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -38,15 +41,6 @@ class _PersonalProfileState extends State<PersonalProfile> {
               height: 50,
               color: Colors.grey[800],
             ),
-//            Text(
-//              profile.name,
-//              style: TextStyle(
-//                color: Colors.grey[800],
-//                fontSize: 25,
-//                fontWeight: FontWeight.bold,
-//              ),
-//            ),
-//            SizedBox(height: 30),
             Row(
               children: <Widget>[
                 SizedBox(width: 10),
@@ -63,7 +57,8 @@ class _PersonalProfileState extends State<PersonalProfile> {
                       ),
                     ),
                     Text(
-                      profile.tournamentYears.length == 0 ? '${profile.tournamentYears.length.toString()}' : '${profile.tournamentYears.length.toString()}  ${profile.tournamentYears.toString()}',
+                      profile.tournamentYears.length == 0 ? profile.tournamentYears.length.toString() :
+                      '${profile.tournamentYears.length}  (${profile.tournamentYears.toString().substring(1,profile.tournamentYears.toString().length-1)})',
                       style: TextStyle(
                         color: Colors.grey[800],
                         fontSize: 25,
@@ -91,7 +86,8 @@ class _PersonalProfileState extends State<PersonalProfile> {
                       ),
                     ),
                     Text(
-                      profile.secondYears.length == 0 ? '${profile.secondYears.length.toString()}' : '${profile.secondYears.length.toString()}  ${profile.secondYears.toString()}',
+                      profile.secondYears.length == 0 ? profile.secondYears.length.toString() :
+                      '${profile.secondYears.length}  (${profile.secondYears.toString().substring(1,profile.secondYears.toString().length-1)})',
                       style: TextStyle(
                         color: Colors.grey[800],
                         fontSize: 25,
@@ -119,7 +115,8 @@ class _PersonalProfileState extends State<PersonalProfile> {
                       ),
                     ),
                     Text(
-                      profile.thirdYears.length == 0 ? '${profile.thirdYears.length.toString()}' : '${profile.thirdYears.length.toString()}  ${profile.thirdYears.toString()}',
+                      profile.thirdYears.length == 0 ? profile.thirdYears.length.toString() :
+                      '${profile.thirdYears.length}  (${profile.thirdYears.toString().substring(1,profile.thirdYears.toString().length-1)})',
                       style: TextStyle(
                         color: Colors.grey[800],
                         fontSize: 25,
@@ -147,7 +144,8 @@ class _PersonalProfileState extends State<PersonalProfile> {
                       ),
                     ),
                     Text(
-                      profile.bracketYears.length == 0 ? '${profile.bracketYears.length.toString()}' : '${profile.bracketYears.length.toString()}  ${profile.bracketYears.toString()}',
+                      profile.bracketYears.length == 0 ? profile.bracketYears.length.toString() :
+                      '${profile.bracketYears.length}  (${profile.bracketYears.toString().substring(1,profile.bracketYears.toString().length-1)})',
                       style: TextStyle(
                         color: Colors.grey[800],
                         fontSize: 25,
@@ -175,7 +173,8 @@ class _PersonalProfileState extends State<PersonalProfile> {
                       ),
                     ),
                     Text(
-                      profile.roundsYears.length == 0 ? '${profile.roundsYears.length.toString()}' : '${profile.roundsYears.length.toString()}  ${profile.roundsYears.toString()}',
+                      profile.roundsYears.length == 0 ? profile.roundsYears.length.toString() :
+                      '${profile.roundsYears.length}  (${profile.roundsYears.toString().substring(1,profile.roundsYears.toString().length-1)})',
                       style: TextStyle(
                         color: Colors.grey[800],
                         fontSize: 25,
