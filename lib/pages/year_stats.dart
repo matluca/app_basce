@@ -41,6 +41,9 @@ class YearPage extends StatefulWidget {
 class _YearPageState extends State<YearPage> {
   @override
   Widget build(BuildContext context) {
+
+    final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
@@ -149,22 +152,24 @@ class _YearPageState extends State<YearPage> {
                                 ),
                                 SizedBox(height: 10),
                                 Container(
-                                  height: 60,
-                                  child: ListView.builder(
+                                  height: (width - 140)/yearStats[widget.screen].bracket.length>65 ? 60 : ((width - 140)/yearStats[widget.screen].bracket.length-5),
+                                  child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
-                                    shrinkWrap: true,
-                                    itemCount: yearStats[widget.screen].bracket.length,
-                                    itemBuilder: (context, index) {return
-                                      Row(
-                                        children: <Widget>[
-                                          CircleAvatar(
+                                    child: ListView.builder(
+                                      physics: NeverScrollableScrollPhysics(),
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      itemCount: yearStats[widget.screen].bracket.length,
+                                      itemBuilder: (context, index) {return
+                                        Padding(
+                                          padding: EdgeInsets.fromLTRB(0,0,5,0),
+                                          child: CircleAvatar(
                                             backgroundImage: AssetImage('assets/${yearStats[widget.screen].bracket[index].image}'),
-                                            radius: 30,
+                                            radius: (width - 140)/yearStats[widget.screen].bracket.length>65 ? 30 : ((width - 140)/yearStats[widget.screen].bracket.length-5)/2,
                                           ),
-                                          SizedBox(width: 5),
-                                        ],
-                                      );
-                                    },
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ),
                               ],
@@ -199,14 +204,12 @@ class _YearPageState extends State<YearPage> {
                                     shrinkWrap: true,
                                     itemCount: yearStats[widget.screen].rounds.length,
                                     itemBuilder: (context, index) {return
-                                      Row(
-                                        children: <Widget>[
-                                          CircleAvatar(
-                                            backgroundImage: AssetImage('assets/${yearStats[widget.screen].rounds[index].image}'),
-                                            radius: 30,
-                                          ),
-                                          SizedBox(width: 5),
-                                        ],
+                                      Padding(
+                                        padding: EdgeInsets.fromLTRB(0,0,5,0),
+                                        child: CircleAvatar(
+                                          backgroundImage: AssetImage('assets/${yearStats[widget.screen].rounds[index].image}'),
+                                          radius: 30,
+                                        ),
                                       );
                                     },
                                   ),
