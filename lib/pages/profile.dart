@@ -76,182 +76,191 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
       backgroundColor: Colors.blue[200],
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(20, 25, 20, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Center(
-              child: InkWell(
-                onTap: () {showImage(context, 'assets/${profiles[widget.screen].image}');},
-                child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/${profiles[widget.screen].image}'),
-                  radius: 70,
-                ),
-              ),
-            ),
-            Divider(
-              thickness: 2,
-              height: 50,
-            ),
-            Row(
-              children: <Widget>[
-                SizedBox(width: 10),
-                Icon(MdiIcons.trophy, size: 40, color: Color(0xFFFFD700)),
-                SizedBox(width: 50),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'TORNEI BASCÉ VINTI',
-                      style: TextStyle(
-                        color: Colors.grey[700],
-                        letterSpacing: 2,
-                      ),
-                    ),
-                    Text(
-                      tournaments.length == 0 ? tournaments.length.toString() :
-                      '${tournaments.length}  (${tournaments.toString().substring(1, tournaments.toString().length-1)} TB)',
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: 25),
-            Row(
-              children: <Widget>[
-                SizedBox(width: 10),
-                Icon(MdiIcons.trophy, size: 40, color: Color(0xFFA9A9A9)),
-                SizedBox(width: 50),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'SECONDI POSTI',
-                      style: TextStyle(
-                        color: Colors.grey[700],
-                        letterSpacing: 2,
-                      ),
-                    ),
-                    Text(
-                      secondPlaces.length == 0 ? secondPlaces.length.toString() :
-                      '${secondPlaces.length}  (${secondPlaces.toString().substring(1,secondPlaces.toString().length-1)} TB)',
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: 25),
-            Row(
-              children: <Widget>[
-                SizedBox(width: 10),
-                Icon(MdiIcons.trophy, size: 40, color: Color(0xFFFCD7F32)),
-                SizedBox(width: 50),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'TERZI POSTI',
-                      style: TextStyle(
-                        color: Colors.grey[700],
-                        letterSpacing: 2,
-                      ),
-                    ),
-                    Text(
-                      thirdPlaces.length == 0 ? thirdPlaces.length.toString() :
-                      '${thirdPlaces.length}  (${thirdPlaces.toString().substring(1,thirdPlaces.toString().length-1)} TB)',
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: 25),
-            Row(
-              children: <Widget>[
-                Icon(MdiIcons.reorderHorizontal, size: 30),
-                Icon(MdiIcons.dragHorizontalVariant, size: 30),
-                SizedBox(width: 40),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'BRACKET VINTI',
-                      style: TextStyle(
-                        color: Colors.grey[700],
-                        letterSpacing: 2,
-                      ),
-                    ),
-                    Text(
-                      brackets.length == 0 ? brackets.length.toString() :
-                      '${brackets.length}  (${brackets.toString().substring(1,brackets.toString().length-1)} TB)',
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: 25),
-            Row(
-              children: <Widget>[
-                Icon(MdiIcons.numeric4Circle, size: 30),
-                Icon(MdiIcons.numeric2CircleOutline, size: 30),
-                SizedBox(width: 40),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'TURNI VINTI',
-                      style: TextStyle(
-                        color: Colors.grey[700],
-                        letterSpacing: 2,
-                      ),
-                    ),
-                    Text(
-                      rounds.length == 0 ? rounds.length.toString() :
-                      '${rounds.length}  (${rounds.toString().substring(1,rounds.toString().length-1)} TB)',
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomCenter,
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: DotsIndicator(
-                    dotsCount: profiles.length,
-                    position: widget.screen.toDouble(),
+                  padding: EdgeInsets.fromLTRB(20, 25, 20, 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Center(
+                        child: InkWell(
+                          onTap: () {showImage(context, 'assets/${profiles[widget.screen].image}');},
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage('assets/${profiles[widget.screen].image}'),
+                            radius: 70,
+                          ),
+                        ),
+                      ),
+                      Divider(
+                        thickness: 2,
+                        height: 50,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          SizedBox(width: 10),
+                          Icon(MdiIcons.trophy, size: 40, color: Color(0xFFFFD700)),
+                          SizedBox(width: 50),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                'TORNEI BASCÉ VINTI',
+                                style: TextStyle(
+                                  color: Colors.grey[700],
+                                  letterSpacing: 2,
+                                ),
+                              ),
+                              Text(
+                                tournaments.length == 0 ? tournaments.length.toString() :
+                                '${tournaments.length}  (${tournaments.toString().substring(1, tournaments.toString().length-1)} TB)',
+                                style: TextStyle(
+                                  color: Colors.grey[800],
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 25),
+                      Row(
+                        children: <Widget>[
+                          SizedBox(width: 10),
+                          Icon(MdiIcons.trophy, size: 40, color: Color(0xFFA9A9A9)),
+                          SizedBox(width: 50),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                'SECONDI POSTI',
+                                style: TextStyle(
+                                  color: Colors.grey[700],
+                                  letterSpacing: 2,
+                                ),
+                              ),
+                              Text(
+                                secondPlaces.length == 0 ? secondPlaces.length.toString() :
+                                '${secondPlaces.length}  (${secondPlaces.toString().substring(1,secondPlaces.toString().length-1)} TB)',
+                                style: TextStyle(
+                                  color: Colors.grey[800],
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 25),
+                      Row(
+                        children: <Widget>[
+                          SizedBox(width: 10),
+                          Icon(MdiIcons.trophy, size: 40, color: Color(0xFFFCD7F32)),
+                          SizedBox(width: 50),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                'TERZI POSTI',
+                                style: TextStyle(
+                                  color: Colors.grey[700],
+                                  letterSpacing: 2,
+                                ),
+                              ),
+                              Text(
+                                thirdPlaces.length == 0 ? thirdPlaces.length.toString() :
+                                '${thirdPlaces.length}  (${thirdPlaces.toString().substring(1,thirdPlaces.toString().length-1)} TB)',
+                                style: TextStyle(
+                                  color: Colors.grey[800],
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 25),
+                      Row(
+                        children: <Widget>[
+                          Icon(MdiIcons.reorderHorizontal, size: 30),
+                          Icon(MdiIcons.dragHorizontalVariant, size: 30),
+                          SizedBox(width: 40),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                'BRACKET VINTI',
+                                style: TextStyle(
+                                  color: Colors.grey[700],
+                                  letterSpacing: 2,
+                                ),
+                              ),
+                              Text(
+                                brackets.length == 0 ? brackets.length.toString() :
+                                '${brackets.length}  (${brackets.toString().substring(1,brackets.toString().length-1)} TB)',
+                                style: TextStyle(
+                                  color: Colors.grey[800],
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 25),
+                      Row(
+                        children: <Widget>[
+                          Icon(MdiIcons.numeric4Circle, size: 30),
+                          Icon(MdiIcons.numeric2CircleOutline, size: 30),
+                          SizedBox(width: 40),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                'TURNI VINTI',
+                                style: TextStyle(
+                                  color: Colors.grey[700],
+                                  letterSpacing: 2,
+                                ),
+                              ),
+                              Text(
+                                rounds.length == 0 ? rounds.length.toString() :
+                                '${rounds.length}  (${rounds.toString().substring(1,rounds.toString().length-1)} TB)',
+                                style: TextStyle(
+                                  color: Colors.grey[800],
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: DotsIndicator(
+                dotsCount: profiles.length,
+                position: widget.screen.toDouble(),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -16,24 +16,28 @@ class WorkInProgress extends StatelessWidget {
         ],
       ),
       backgroundColor: Colors.blue[200],
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            child: Text(
-              'Pensavi che questa pagina fosse già pronta?',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey[800],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 80, horizontal: 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Center(
+                child: Text(
+                  'Pensavi che questa pagina fosse già pronta?',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[800],
+                  ),
+                ),
               ),
-            ),
+              SizedBox(height: 40),
+              Image.asset('assets/thatsnottrue.jpeg'),
+            ],
           ),
-          SizedBox(height: 40),
-          Image.asset('assets/thatsnottrue.jpeg')
-        ],
+        ),
       ),
     );
   }

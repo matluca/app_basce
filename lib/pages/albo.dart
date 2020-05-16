@@ -30,50 +30,56 @@ class _AlboState extends State<Albo> {
         ],
       ),
       backgroundColor: Colors.blue[200],
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Image(image: AssetImage('assets/albo.png'), height: 150),
-          SizedBox(height: 30),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: yearStats.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
-                child: Card(
-                  child: ListTile(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/year_stats', arguments: index);
-                    },
-                    title: Center(
-                      child: Text(
-                        '${yearStats[index].label} Torneo Bascé (${yearStats[index].year.toString()})',
-                        style: TextStyle(
-                          color: Colors.grey[700],
-                          fontSize: 18,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(5,35,5,10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Image(image: AssetImage('assets/albo.png'), height: 150),
+              SizedBox(height: 30),
+              ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: yearStats.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                    child: Card(
+                      child: ListTile(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/year_stats', arguments: index);
+                        },
+                        title: Center(
+                          child: Text(
+                            '${yearStats[index].label} Torneo Bascé (${yearStats[index].year.toString()})',
+                            style: TextStyle(
+                              color: Colors.grey[700],
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                        leading: Icon(iconMap[yearStats[index]], size: 40),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            CircleAvatar(
+                              backgroundImage: AssetImage('assets/${yearStats[index].first[0].image}'),
+                            ),
+                            SizedBox(width: 5),
+                            Icon(Icons.play_arrow),
+                          ],
                         ),
                       ),
                     ),
-                    leading: Icon(iconMap[yearStats[index]], size: 40),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        CircleAvatar(
-                          backgroundImage: AssetImage('assets/${yearStats[index].first[0].image}'),
-                        ),
-                        SizedBox(width: 5),
-                        Icon(Icons.play_arrow),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
+                  );
+                },
+              ),
+              //SizedBox(height: 20),
+            ],
           ),
-          SizedBox(height: 20),
-        ],
+        ),
       ),
     );
   }

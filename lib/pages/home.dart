@@ -19,26 +19,29 @@ class _HomeState extends State<Home> {
       ),
       drawer: DrawerMenu(),
       backgroundColor: Colors.blue[200],
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            SizedBox(height: 60),
-            Text(
-              'Welcome Biatch!',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 40,
-                color: Colors.grey[800],
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic,
-              ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+          child: Center(
+            child: Column(
+              //mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Welcome Biatch!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 40,
+                    color: Colors.grey[800],
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+                SizedBox(height: 40),
+                Image.asset('assets/Logo.jpg'),
+              ],
             ),
-            SizedBox(height: 40),
-            Image.asset('assets/Logo.jpg'),
-          ],
+          ),
         ),
       ),
     );
@@ -154,9 +157,13 @@ showImage(BuildContext context, String image) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return AlertDialog(
-        contentPadding: EdgeInsets.all(0),
-        content: Image.asset(image),
+      return Center(
+        child: Container(
+          child: AlertDialog(
+            contentPadding: EdgeInsets.all(0),
+            content: Image.asset(image),
+          ),
+        ),
       );
     },
   );
