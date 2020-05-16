@@ -16,12 +16,17 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.blue[400],
         title: Text('App Bascé Home'),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.info_outline, color: Colors.white),
+            onPressed: () {alertDialog(context);},
+          ),
+        ],
       ),
-      drawer: DrawerMenu(),
       backgroundColor: Colors.blue[200],
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+          padding: EdgeInsets.fromLTRB(20,50,20,20),
           child: Center(
             child: Column(
               //mainAxisAlignment: MainAxisAlignment.start,
@@ -39,6 +44,8 @@ class _HomeState extends State<Home> {
                 ),
                 SizedBox(height: 40),
                 Image.asset('assets/Logo.jpg'),
+                SizedBox(height: 25),
+                Menu(),
               ],
             ),
           ),
@@ -48,85 +55,62 @@ class _HomeState extends State<Home> {
   }
 }
 
-class DrawerMenu extends StatelessWidget {
+class Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: Column(
-        children: <Widget>[
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue[400],
-            ),
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Center(
-                    child: InkWell(
-                      onTap: () {showImage(context, 'assets/naismith.jpg');},
-                      child: CircleAvatar(
-                        radius: 60,
-                        backgroundImage: AssetImage('assets/naismith.jpg'),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 20),
-          ),
-          ListTile(
+    return Column(
+      children: <Widget>[
+        Card(
+          child: ListTile(
             leading: Icon(Icons.people),
+            trailing: Icon(Icons.play_arrow),
             title: Text(
                 'Profili',
                 style: TextStyle(
                   color: Colors.grey[700],
-                  fontSize: 16,
+                  fontSize: 18,
                 )
             ),
             onTap: () {
               Navigator.pushNamed(context, '/profile_list');
             },
           ),
-          ListTile(
+        ),
+        Card(
+          child: ListTile(
             leading: Transform(
               alignment: Alignment.center,
               transform: Matrix4.rotationY(math.pi),
               child: Icon(MdiIcons.podium),
             ),
-            title: Text("Albo d'oro", style: TextStyle(color: Colors.grey[700], fontSize: 16)),
+            trailing: Icon(Icons.play_arrow),
+            title: Text(
+                "Albo d'oro",
+                style: TextStyle(
+                    color: Colors.grey[700],
+                    fontSize: 18)
+            ),
             onTap: () {
               Navigator.pushNamed(context, '/albo');
             },
           ),
-          ListTile(
+        ),
+        Card(
+          child: ListTile(
             leading: Icon(MdiIcons.basketball),
-            title: Text('Partecipa al Torneo Bascé', style: TextStyle(color: Colors.grey[700], fontSize: 16)),
+            trailing: Icon(Icons.play_arrow),
+            title: Text(
+              'Partecipa al Torneo Bascé',
+              style: TextStyle(
+              color: Colors.grey[700],
+              fontSize: 18,
+            ),),
             onTap: () {
               Navigator.pushNamed(context, '/wip');
             },
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Divider(thickness: 1),
-          ),
-          Expanded(
-            child: Align(
-              alignment: FractionalOffset.bottomCenter,
-              child: ListTile(
-                leading: Icon(Icons.info_outline),
-                title: Text('Info', style: TextStyle(color: Colors.grey[700], fontSize: 16)),
-                onTap: () {
-                  alertDialog(context);
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -142,7 +126,7 @@ alertDialog(BuildContext context) {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text('Versione: 1.0', style: TextStyle(color: Colors.grey[700])),
+            Text('Versione: 1.1', style: TextStyle(color: Colors.grey[700])),
             SizedBox(height: 10),
             Text('Creatore: Luca', style: TextStyle(color: Colors.grey[700]))
           ],
