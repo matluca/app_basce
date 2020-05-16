@@ -117,10 +117,10 @@ class _YearPageState extends State<YearPage> {
               ),
             ],
           ),
-          SizedBox(height: 190),
+          SizedBox(height: 180),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Divider(height: 50, thickness: 2),
+            child: Divider(height: 40, thickness: 2),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
@@ -209,10 +209,17 @@ class _YearPageState extends State<YearPage> {
               ],
             ),
           ),
-          SizedBox(height: 25),
-          DotsIndicator(
-            dotsCount: yearStats.length,
-            position: widget.screen.toDouble(),
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: DotsIndicator(
+                  dotsCount: yearStats.length,
+                  position: widget.screen.toDouble(),
+                ),
+              ),
+            ),
           ),
         ],
       ),

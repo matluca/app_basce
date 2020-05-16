@@ -77,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       backgroundColor: Colors.blue[200],
       body: Padding(
-        padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
+        padding: EdgeInsets.fromLTRB(20, 25, 20, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -238,11 +238,16 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
-            Center(
-              child: DotsIndicator(
-                dotsCount: profiles.length,
-                position: widget.screen.toDouble(),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: DotsIndicator(
+                    dotsCount: profiles.length,
+                    position: widget.screen.toDouble(),
+                  ),
+                ),
               ),
             ),
           ],
