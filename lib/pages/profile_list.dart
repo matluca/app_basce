@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:appbasce/classes/profile_class.dart';
 import 'package:appbasce/pages/home.dart';
+import 'package:flutter/widgets.dart';
 
 class ProfileList extends StatefulWidget {
   @override
@@ -10,6 +11,10 @@ class ProfileList extends StatefulWidget {
 class _ProfileListState extends State<ProfileList> {
   @override
   Widget build(BuildContext context) {
+    final orientation = MediaQuery.of(context).orientation;
+    final width = MediaQuery.of(context).size.width;
+    final columns = orientation == Orientation.portrait ? 2 : 3;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
@@ -33,7 +38,10 @@ class _ProfileListState extends State<ProfileList> {
                 child: Image(image: AssetImage('assets/wethebasce.jpeg'), width: 200)
               ),
               SizedBox(height: 15),
-              ListView.builder(
+              GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: (width-30)/columns/85,
+                    crossAxisCount: columns),
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: profiles.length,
@@ -58,7 +66,7 @@ class _ProfileListState extends State<ProfileList> {
                           backgroundImage: AssetImage('assets/${profiles[index].image}'),
                           radius: 23,
                         ),
-                        trailing: Icon(Icons.play_arrow),
+                        //trailing: Icon(Icons.play_arrow),
                       ),
                     ),
                   );
