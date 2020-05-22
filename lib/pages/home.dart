@@ -16,6 +16,12 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.blue[400],
         title: Text('App Bascé Home'),
         centerTitle: true,
+        leading: Padding(
+          padding: const EdgeInsets.all(10),
+          child: CircleAvatar(
+            backgroundImage: AssetImage('assets/launcher.png'),
+          ),
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.info_outline, color: Colors.white),
@@ -26,7 +32,7 @@ class _HomeState extends State<Home> {
       backgroundColor: Colors.blue[200],
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(20,50,20,20),
+          padding: EdgeInsets.fromLTRB(20,30,20,20),
           child: Center(
             child: Column(
               //mainAxisAlignment: MainAxisAlignment.start,
@@ -42,7 +48,7 @@ class _HomeState extends State<Home> {
                     fontStyle: FontStyle.italic,
                   ),
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: 30),
                 Image.asset('assets/Logo.jpg'),
                 SizedBox(height: 25),
                 Menu(),
