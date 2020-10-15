@@ -9,6 +9,7 @@ import 'package:appbasce/pages/year_stats.dart';
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     initialRoute: "/",
     routes: {
       '/': (context) => Home(),

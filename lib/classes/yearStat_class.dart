@@ -21,5 +21,7 @@ Stats iii = Stats(label: 'III', year: 2018, first: [ale], second: [magu], third:
     bracket: [ale, magu], rounds: [ale]);
 Stats iv = Stats(label: 'IV', year: 2019, first: [melo], second: [luca], third: [enrico],
     bracket: [luca], rounds: [melo]);
+Stats v = Stats(label: 'V', year: 2020, first: [teo], second: [ale], third: [magu],
+    bracket: [teo, ale], rounds: [nic]);
 
-List<Stats> yearStats = [i, ii, iii, iv];
+List<Stats> yearStats = [i, ii, iii, iv, v];

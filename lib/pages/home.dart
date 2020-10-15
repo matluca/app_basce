@@ -49,7 +49,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 SizedBox(height: 30),
-                Image.asset('assets/Logo.jpg'),
+                Image.asset('assets/profile2020.jpg'),
                 SizedBox(height: 25),
                 Menu(),
               ],
@@ -132,7 +132,7 @@ alertDialog(BuildContext context) {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text('Versione: 1.2', style: TextStyle(color: Colors.grey[700])),
+            Text('Versione: 1.3', style: TextStyle(color: Colors.grey[700])),
             SizedBox(height: 10),
             Text('Creatore: Luca', style: TextStyle(color: Colors.grey[700]))
           ],
