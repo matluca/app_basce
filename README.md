@@ -1,16 +1,33 @@
-# appbasce
+# App Bascé
 
-A new Flutter application.
+The App Bascé is the unofficial app for the Chattina Bascé.
+The App is developed as a Flutter application, and could be released for Android, iOS and as web
+application.
 
-## Getting Started
+### Build app for Android
 
-This project is a starting point for a Flutter application.
+For building the app and creating APK releases for Android, go to the project root and run
+```
+flutter build apk --split-per-abi
+```
+This procuced three APK files and stores them in `./build/app/outputs/apk/release`. In order to
+create a fat APK, remove the `--split-per-abi` flag. The right APK for a 64bit device is
+`app-arm64-v8a-release.apk`.
 
-A few resources to get you started if this is your first Flutter project:
+See [Build and release an Android app](https://flutter.dev/docs/deployment/android) for further
+details.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Build web app
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+For building the app for a web version release, go to the project root and run
+```
+flutter build web
+```
+This generates all the necessary files in `./build/web`. To test locally, launch a web server.
+For example, navigate to `./build/web` and run `python -m http.server 8080`, which makes the web
+version available under `localhost:8080`.
+
+See [Build and release a web app](https://flutter.dev/docs/deployment/web) for further
+details.
+
+The web version is also available at [matluca.github.io](https://matluca.github.io) at the moment.
