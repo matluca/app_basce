@@ -35,7 +35,6 @@ class _HomeState extends State<Home> {
           padding: EdgeInsets.fromLTRB(20,30,20,20),
           child: Center(
             child: Column(
-              //mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(

@@ -219,6 +219,23 @@ class _YearPageState extends State<YearPage> {
                           ],
                         ),
                       ),
+                      if (yearStats[widget.screen].profilePicture != '')
+                      Column(
+                        children: [
+                          SizedBox(height: 25),
+                          Text(
+                            'IMMAGINE PROFILO',
+                            style: TextStyle(
+                              color: Colors.grey[700],
+                              letterSpacing: 2,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+                            child: Image.asset(yearStats[widget.screen].profilePicture),
+                          )
+                        ],
+                      )
                     ],
                   ),
                 ),
