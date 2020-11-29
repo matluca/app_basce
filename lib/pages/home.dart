@@ -102,6 +102,21 @@ class Menu extends StatelessWidget {
         ),
         Card(
           child: ListTile(
+            leading: Icon(MdiIcons.playBoxMultiple),
+            trailing: Icon(Icons.play_arrow),
+            title: Text(
+              'Partecipa al Mini-TB per la RS',
+              style: TextStyle(
+                color: Colors.grey[700],
+                fontSize: 18,
+              ),),
+            onTap: () {
+              Navigator.pushNamed(context, '/mini_tb');
+            },
+          ),
+        ),
+        Card(
+          child: ListTile(
             leading: Icon(MdiIcons.basketball),
             trailing: Icon(Icons.play_arrow),
             title: Text(
