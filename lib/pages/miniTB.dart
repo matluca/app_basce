@@ -45,13 +45,13 @@ class MiniTB extends StatelessWidget {
                   leading: Icon(MdiIcons.messageTextOutline),
                   trailing: Icon(Icons.play_arrow),
                   title: Text(
-                      "Visualizza risultati",
+                      "Visualizza predizioni",
                       style: TextStyle(
                           color: Colors.grey[700],
                           fontSize: 18)
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/wip');
+                    Navigator.pushNamed(context, '/minitb_predictions');
                   },
                 ),
               ),

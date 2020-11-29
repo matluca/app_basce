@@ -29,10 +29,6 @@ class _MiniTBInsertPredictionState extends State<MiniTBInsertPrediction> {
   }
 }
 
-Future createNewDocument(int screen) async {
-  return await DatabaseService().updateEast(profiles[screen].name, new List<int>.filled(16,0));
-}
-
 class InsertPredictionPage extends StatefulWidget {
   final int screen;
   const InsertPredictionPage ({Key key, this.screen}): super(key: key);
@@ -44,7 +40,7 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
   @override
   Widget build(BuildContext context) {
 
-    DatabaseService().updateEast(profiles[widget.screen].name, new List<int>.filled(16,0));
+    DatabaseService().updatePredictions(profiles[widget.screen].name, new List<int>.filled(16,0), new List<int>.filled(16,0));
 
     return Scaffold(
       appBar: AppBar(

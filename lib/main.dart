@@ -9,6 +9,7 @@ import 'package:appbasce/pages/year_stats.dart';
 import 'package:appbasce/pages/miniTB.dart';
 import 'package:appbasce/pages/miniTB_insert_list.dart';
 import 'package:appbasce/pages/miniTB_insert.dart';
+import 'package:appbasce/pages/minitb_predictions.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -25,6 +26,7 @@ void main() {
       '/mini_tb': (context) => MiniTB(),
       '/minitb_insert_list': (context) => MiniTBInsertList(),
       '/minitb_insert': (context) => MiniTBInsertPrediction(),
+      '/minitb_predictions': (context) => MiniTBPredictions(),
     },
   ));
 }
