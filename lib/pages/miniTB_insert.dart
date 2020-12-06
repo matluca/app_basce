@@ -10,28 +10,14 @@ class MiniTBInsertPrediction extends StatefulWidget {
 class _MiniTBInsertPredictionState extends State<MiniTBInsertPrediction> {
   @override
   Widget build(BuildContext context) {
-    int screen = ModalRoute.of(context).settings.arguments;
-    final controller = PageController(
-      initialPage: screen,
-    );
-
-    //List<Widget> pages = List.generate(yearStats.length, (index) => Page(screen: index));
-    List<Widget> _createChildren() {
-      return new List<Widget>.generate(profiles.length, (int index) {
-        return InsertPredictionPage(screen: index);
-      });
-    }
-
-    return PageView(
-      controller: controller,
-      children: _createChildren(),
-    );
+    int index = ModalRoute.of(context).settings.arguments;
+    return InsertPredictionPage(index: index);
   }
 }
 
 class InsertPredictionPage extends StatefulWidget {
-  final int screen;
-  const InsertPredictionPage ({Key key, this.screen}): super(key: key);
+  final int index;
+  const InsertPredictionPage ({Key key, this.index}): super(key: key);
   @override
   _InsertPredictionPageState createState() => _InsertPredictionPageState();
 }
@@ -47,7 +33,7 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
-        title: Text('${profiles[widget.screen].name}, riordina le liste'),
+        title: Text('${profiles[widget.index].name}, riordina le liste'),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
@@ -95,7 +81,7 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
                   onPressed: () async {
                     print(westTeams);
                     print(westPred);
-                    DatabaseService().updatePredictionsFromOrderedList(profiles[widget.screen].name, eastPred, westPred);
+                    DatabaseService().updatePredictionsFromOrderedList(profiles[widget.index].name, eastPred, westPred);
                   },
                 ),
               ],
