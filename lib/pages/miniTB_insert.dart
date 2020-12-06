@@ -40,12 +40,14 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
   @override
   Widget build(BuildContext context) {
 
-    DatabaseService().updatePredictions(profiles[widget.screen].name, new List<int>.filled(16,0), new List<int>.filled(16,0));
+    //DatabaseService().updatePredictions(profiles[widget.screen].name, new List<int>.filled(16,0), new List<int>.filled(16,0));
 
+    var eastPred = ['ATL', 'BOS', 'BRK', 'CHI', 'CHO', 'CLE', 'DET', 'IND', 'MIA', 'MIL', 'NYK', 'ORL', 'PHI', 'TOR', 'WAS'];
+    var westPred = ['DAL', 'DEN', 'GSW', 'HOU', 'LAC', 'LAL', 'MEM', 'MIN', 'NOP', 'OKC', 'PHO', 'POR', 'SAC', 'SAS', 'UTA'];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
-        title: Text('Inserisci predizioni: ${profiles[widget.screen].name}'),
+        title: Text('${profiles[widget.screen].name}, riordina le liste'),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
@@ -55,21 +57,49 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
         ],
       ),
       backgroundColor: Colors.blue[200],
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(15,20,15,10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text('EAST'),
-              SizedBox(height: 15),
-              StandingForm(teams: eastTeams),
-              SizedBox(height: 30),
-              Text('WEST'),
-              SizedBox(height: 15),
-              StandingForm(teams: westTeams),
-            ],
+      body: Container(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(15,20,15,10),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text('EAST'),
+                        SizedBox(height: 15),
+                        StandingsList(teams: eastPred),
+                      ],
+                    ),
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text('WEST'),
+                          SizedBox(height: 15),
+                          StandingsList(teams: westPred),
+                        ]
+                    ),
+                  ],
+                ),
+                RaisedButton(
+                  color: Colors.red,
+                  child: Text(
+                    'Update',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () async {
+                    print(westTeams);
+                    print(westPred);
+                    DatabaseService().updatePredictionsFromOrderedList(profiles[widget.screen].name, eastPred, westPred);
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -77,57 +107,49 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
   }
 }
 
-class StandingForm extends StatefulWidget {
+class StandingsList extends StatefulWidget {
   final List<String> teams;
-  StandingForm({ Key key, this.teams }) : super(key: key);
+  StandingsList({ Key key, this.teams }) : super(key: key);
 
   @override
-  _StandingFormState createState() => _StandingFormState();
+  _StandingsListState createState() => _StandingsListState();
 }
 
-class _StandingFormState extends State<StandingForm> {
-  final _formKey = GlobalKey<FormState>();
-  final List<int> positions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-
-  // form values
-  List<String> _currentPred; // = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
+class _StandingsListState extends State<StandingsList> {
   @override
   Widget build(BuildContext context) {
     var teams = widget.teams;
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: teams.length,
-            itemBuilder: (context, index) {
-              var team = teams[index];
-              return TextFormField(
-                decoration: new InputDecoration(labelText: '$team'),
-                validator: (val) => val.isEmpty ? 'Please enter a prediction (1 - 15)' : null,
-                onChanged: (val) => setState(() => _currentPred[index] = val),
-              );
-            },
+    return Column(
+      children: [
+        Container(
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height,
+            maxWidth: 0.45 * MediaQuery.of(context).size.width,
           ),
-          RaisedButton(
-            color: Colors.red,
-            child: Text(
-              'Update',
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () async {
-              print(_currentPred);
+          child: ReorderableListView(
+            onReorder: (oldIndex, newIndex) {
+              setState(() {
+                if (newIndex > oldIndex) {
+                  newIndex -= 1;
+                }
+                final String item = teams.removeAt(oldIndex);
+                teams.insert(newIndex, item);
+              });
             },
+            children: List.generate(
+                teams.length, (index) {
+                  return ListTile(
+                    dense: true,
+                    key: Key('$index'),
+                    title: Container(
+                      height: 30,
+                      decoration: BoxDecoration(color: Colors.grey),
+                      child: Center(child: Text('${index+1}: ${teams[index]}'))),
+                  );
+            }),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
-
-
-
-

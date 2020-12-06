@@ -30,7 +30,7 @@ class MiniTBPredictions extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ListView.builder(
-                //physics: NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: profiles.length,
                 itemBuilder: (context, index) {

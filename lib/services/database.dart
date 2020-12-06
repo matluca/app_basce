@@ -48,6 +48,19 @@ class DatabaseService {
     });
   }
 
+  // update predictions
+  Future updatePredictionsFromOrderedList(String name, List<String> east, List<String> west) async {
+    Map<String, dynamic> data = {};
+    for (var i=0; i<east.length; i++) {
+      data[east[i]] = i+1;
+    }
+    for (var i=0; i<west.length; i++) {
+      data[west[i]] = i+1;
+    }
+    data['name'] = name;
+    return await predictions.document(name).setData(data);
+  }
+
   // get predictions
   Stream<List<MiniTBPred>> get preds {
     return predictions.snapshots().map(_predListFromSnapshot);
