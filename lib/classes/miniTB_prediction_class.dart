@@ -10,7 +10,7 @@ class MiniTBPred {
 
 Map buildStandings(Map predictions) {
   var standings = {};
-  for (int i=1; i<17; i++) {
+  for (int i=1; i<16; i++) {
     standings[i] = '';
   }
   predictions.forEach((key, value) { standings[value] = key; });

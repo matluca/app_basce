@@ -24,24 +24,26 @@ class MiniTBPredictions extends StatelessWidget {
         ),
         backgroundColor: Colors.blue[200],
         body: SingleChildScrollView(
-          padding: EdgeInsets.fromLTRB(5,35,5,10),
+          padding: EdgeInsets.fromLTRB(5,20,5,10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                //physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: profiles.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                    padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
                     child: Row(
                       children: [
-                        Text(profiles[index].name),
+                        CircleAvatar(
+                          backgroundImage: AssetImage('assets/${profiles[index].image}'),
+                          radius: 23,
+                        ),
                         SizedBox(width: 6),
                         Predictions(name: profiles[index].name),
-                        //WestPredictions(),
                       ],
                     ),
                   );
@@ -86,11 +88,20 @@ class _PredictionsState extends State<Predictions> {
     return Container(
         padding: const EdgeInsets.all(5),
         width: MediaQuery.of(context).size.width*0.8,
-        child: Column(
-          children: [
-            Text('$eastStandings'),
-            Text('$westStandings'),
-          ],
+        child: Card(
+          margin: EdgeInsets.fromLTRB(5, 2, 5, 2),
+          child: Column(
+            children: [
+              ListTile(
+                title: Text('East'),
+                subtitle: Text('$eastStandings'),
+              ),
+              ListTile(
+                title: Text('West'),
+                subtitle: Text('$westStandings'),
+              ),
+            ],
+          ),
         )
     );
   }

@@ -55,8 +55,79 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
         ],
       ),
       backgroundColor: Colors.blue[200],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(15,20,15,10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text('EAST'),
+              SizedBox(height: 15),
+              StandingForm(teams: eastTeams),
+              SizedBox(height: 30),
+              Text('WEST'),
+              SizedBox(height: 15),
+              StandingForm(teams: westTeams),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
+
+class StandingForm extends StatefulWidget {
+  final List<String> teams;
+  StandingForm({ Key key, this.teams }) : super(key: key);
+
+  @override
+  _StandingFormState createState() => _StandingFormState();
+}
+
+class _StandingFormState extends State<StandingForm> {
+  final _formKey = GlobalKey<FormState>();
+  final List<int> positions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+
+  // form values
+  List<String> _currentPred; // = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+  @override
+  Widget build(BuildContext context) {
+    var teams = widget.teams;
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: teams.length,
+            itemBuilder: (context, index) {
+              var team = teams[index];
+              return TextFormField(
+                decoration: new InputDecoration(labelText: '$team'),
+                validator: (val) => val.isEmpty ? 'Please enter a prediction (1 - 15)' : null,
+                onChanged: (val) => setState(() => _currentPred[index] = val),
+              );
+            },
+          ),
+          RaisedButton(
+            color: Colors.red,
+            child: Text(
+              'Update',
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: () async {
+              print(_currentPred);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
 
 
