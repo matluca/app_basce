@@ -1,4 +1,5 @@
 import 'package:appbasce/classes/profile_class.dart';
+import 'dart:math';
 
 DateTime deadline = DateTime.parse("2021-07-20 20:18:04Z");
 bool deadlineOn = false;
@@ -46,10 +47,14 @@ List<String> buildCurrentList(Map prediction) {
 int malus(MiniTBPred prediction, MiniTBPred reference) {
   int m = 0;
   prediction.east.keys.forEach((team) {
-    m = m + (prediction.east[team] - reference.east[team]).abs();
+    int p = min(prediction.east[team] as int, 11);
+    int r = min(reference.east[team] as int, 11);
+    m = m + (p-r).abs();
   });
   prediction.west.keys.forEach((team) {
-    m = m + (prediction.west[team] - reference.west[team]).abs();
+    int p = min(prediction.west[team] as int, 11);
+    int r = min(reference.west[team] as int, 11);
+    m = m + (p-r).abs();
   });
   return m;
 }
