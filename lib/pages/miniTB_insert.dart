@@ -63,6 +63,11 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
                   padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
                   child: Column(
                     children: [
+                      Text(
+                        'Tieni premuto per poter riordinare',
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -71,7 +76,7 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text('EAST'),
-                              SizedBox(height: 15),
+                              SizedBox(height: 10),
                               StandingsList(teams: eastPred),
                             ],
                           ),
@@ -80,23 +85,27 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text('WEST'),
-                                SizedBox(height: 15),
+                                SizedBox(height: 10),
                                 StandingsList(teams: westPred),
                               ]),
                         ],
                       ),
-                      RaisedButton(
-                        color: Colors.red,
-                        child: Text(
-                          'Update',
-                          style: TextStyle(color: Colors.white),
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: RaisedButton(
+                          color: Colors.red,
+                          child: Text(
+                            'Update and exit',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: () async {
+                            print(westTeams);
+                            print(westPred);
+                            DatabaseService().updatePredictionsFromOrderedList(
+                                profiles[widget.index].name, eastPred, westPred);
+                            Navigator.popUntil(context, ModalRoute.withName('/mini_tb'));
+                          },
                         ),
-                        onPressed: () async {
-                          print(westTeams);
-                          print(westPred);
-                          DatabaseService().updatePredictionsFromOrderedList(
-                              profiles[widget.index].name, eastPred, westPred);
-                        },
                       ),
                     ],
                   ),
@@ -129,7 +138,7 @@ class _StandingsListState extends State<StandingsList> {
       children: [
         Container(
           constraints: BoxConstraints(
-            maxHeight: 0.7 * MediaQuery.of(context).size.height,
+            maxHeight: MediaQuery.of(context).size.height - 215,
             maxWidth: 0.45 * MediaQuery.of(context).size.width,
           ),
           child: ReorderableListView(

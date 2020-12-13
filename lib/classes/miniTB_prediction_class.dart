@@ -29,3 +29,10 @@ List<String> buildCurrentList(Map prediction) {
   }
   return p;
 }
+
+class MiniTBPwd {
+  final String name;
+  final String pwd;
+
+  MiniTBPwd({this.name, this.pwd});
+}

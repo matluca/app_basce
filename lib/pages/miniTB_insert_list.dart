@@ -45,7 +45,7 @@ class _MiniTBInsertListState extends State<MiniTBInsertList> {
                     child: Card(
                       child: ListTile(
                         onTap: () {
-                          Navigator.pushNamed(context, '/minitb_insert', arguments: index);
+                          Navigator.pushNamed(context, '/minitb_pwd', arguments: index);
                         },
                         title: Center(
                           child: Text(

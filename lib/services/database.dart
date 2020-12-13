@@ -10,43 +10,7 @@ class DatabaseService {
 
   // collections reference
   final CollectionReference predictions = Firestore.instance.collection('predictions');
-
-  // update predictions
-  // Future updatePredictions(String name, List<int> east, List<int> west) async {
-  //   return await predictions.document(name).setData({
-  //     'name': name,
-  //     'ATL': east[0],
-  //     'BOS': east[1],
-  //     'BRK': east[2],
-  //     'CHI': east[3],
-  //     'CHO': east[4],
-  //     'CLE': east[5],
-  //     'DET': east[6],
-  //     'IND': east[7],
-  //     'MIA': east[8],
-  //     'MIL': east[9],
-  //     'NYK': east[10],
-  //     'ORL': east[11],
-  //     'PHI': east[12],
-  //     'TOR': east[13],
-  //     'WAS': east[14],
-  //     'DAL': west[0],
-  //     'DEN': west[1],
-  //     'GSW': west[2],
-  //     'HOU': west[3],
-  //     'LAC': west[4],
-  //     'LAL': west[5],
-  //     'MEM': west[6],
-  //     'MIN': west[7],
-  //     'NOP': west[8],
-  //     'OKC': west[9],
-  //     'PHO': west[10],
-  //     'POR': west[11],
-  //     'SAC': west[12],
-  //     'SAS': west[13],
-  //     'UTA': west[14],
-  //   });
-  // }
+  final CollectionReference passwords = Firestore.instance.collection('passwords');
 
   // update predictions
   Future updatePredictionsFromOrderedList(String name, List<String> east, List<String> west) async {
@@ -59,6 +23,14 @@ class DatabaseService {
     }
     data['name'] = name;
     return await predictions.document(name).setData(data);
+  }
+
+  // update password
+  Future updatePassword(String name, String pwd) async {
+    Map<String, dynamic> data = {};
+    data['name'] = name;
+    data['pwd'] = pwd;
+    return await passwords.document(name).setData(data);
   }
 
   // get predictions
@@ -82,6 +54,20 @@ class DatabaseService {
         name: doc.data['name'] ?? '',
         east: eastPred,
         west: westPred,
+      );
+    }).toList();
+  }
+
+  // get passwords
+  Stream<List<MiniTBPwd>> get pwds {
+    return passwords.snapshots().map(_pwdsFromSnapshot);
+  }
+
+  List<MiniTBPwd> _pwdsFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc){
+      return MiniTBPwd(
+        name: doc.data['name'] ?? '',
+        pwd: doc.data['pwd'] ?? '',
       );
     }).toList();
   }

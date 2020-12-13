@@ -10,6 +10,7 @@ import 'package:appbasce/pages/miniTB.dart';
 import 'package:appbasce/pages/miniTB_insert_list.dart';
 import 'package:appbasce/pages/miniTB_insert.dart';
 import 'package:appbasce/pages/minitb_predictions.dart';
+import 'package:appbasce/pages/miniTB_insert_pwd.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -27,6 +28,7 @@ void main() {
       '/minitb_insert_list': (context) => MiniTBInsertList(),
       '/minitb_insert': (context) => MiniTBInsertPrediction(),
       '/minitb_predictions': (context) => MiniTBPredictions(),
+      '/minitb_pwd': (context) => MiniTBInsertPassword(),
     },
   ));
 }
