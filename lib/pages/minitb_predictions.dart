@@ -36,9 +36,13 @@ class MiniTBPredictions extends StatelessWidget {
                     itemCount: miniTBParticipants.length,
                     itemBuilder: (context, index) {
                       MiniTBPred pred;
+                      MiniTBPred reference;
                       for (var i=0; i<preds.length; i++) {
                         if (preds[i].name == miniTBParticipants[index].name) {
                           pred = preds[i];
+                        }
+                        if (preds[i].name == "Admin") {
+                          reference = preds[i];
                         }
                       }
                       return Padding(
@@ -50,7 +54,7 @@ class MiniTBPredictions extends StatelessWidget {
                               radius: 23,
                             ),
                             SizedBox(width: 6),
-                            Predictions(prediction: pred),
+                            Predictions(prediction: pred, reference: reference),
                           ],
                         ),
                       );
@@ -70,8 +74,9 @@ class MiniTBPredictions extends StatelessWidget {
 
 class Predictions extends StatefulWidget {
   final MiniTBPred prediction;
+  final MiniTBPred reference;
 
-  Predictions({ Key key, this.prediction }) : super(key: key);
+  Predictions({ Key key, this.prediction, this.reference }) : super(key: key);
 
   @override
   _PredictionsState createState() => _PredictionsState();
@@ -83,6 +88,7 @@ class _PredictionsState extends State<Predictions> {
 
     var eastStandings = buildStandings(widget.prediction.east);
     var westStandings = buildStandings(widget.prediction.west);
+    var m = malus(widget.prediction, widget.reference);
 
     return Container(
         padding: const EdgeInsets.all(5),
@@ -98,6 +104,12 @@ class _PredictionsState extends State<Predictions> {
               ListTile(
                 title: Text('West'),
                 subtitle: Text('$westStandings'),
+              ),
+              ListTile(
+                title: Text(
+                  'Malus: $m',
+                  style: TextStyle(color: Colors.red),
+                ),
               ),
             ],
           ),

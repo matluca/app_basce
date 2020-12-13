@@ -4,6 +4,13 @@ DateTime deadline = DateTime.parse("2021-07-20 20:18:04Z");
 bool deadlineOn = false;
 List<Profile> miniTBParticipants = [ale, enrico, fabio, luca, magu, melo, nic, teo, admin];
 
+class MiniTBPwd {
+  final String name;
+  final String pwd;
+
+  MiniTBPwd({this.name, this.pwd});
+}
+
 class MiniTBPred {
   final String name;
   final Map east;
@@ -36,9 +43,13 @@ List<String> buildCurrentList(Map prediction) {
   return p;
 }
 
-class MiniTBPwd {
-  final String name;
-  final String pwd;
-
-  MiniTBPwd({this.name, this.pwd});
+int malus(MiniTBPred prediction, MiniTBPred reference) {
+  int m = 0;
+  prediction.east.keys.forEach((team) {
+    m = m + (prediction.east[team] - reference.east[team]).abs();
+  });
+  prediction.west.keys.forEach((team) {
+    m = m + (prediction.west[team] - reference.west[team]).abs();
+  });
+  return m;
 }
