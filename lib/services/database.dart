@@ -12,6 +12,7 @@ class DatabaseService {
   // collections reference
   final CollectionReference predictions = Firestore.instance.collection('predictions');
   final CollectionReference passwords = Firestore.instance.collection('passwords');
+  final CollectionReference deadline = Firestore.instance.collection('deadline');
 
   // update predictions
   Future updatePredictionsFromOrderedList(String name, List<String> east, List<String> west) async {
@@ -77,5 +78,18 @@ class DatabaseService {
         pwd: base32.decodeAsString(doc.data['pwd']),
       );
     }).toList();
+  }
+
+  // get passwords
+  Stream<DateTime> get ddl {
+    return deadline.snapshots().map(_ddlFromSnapshot);
+  }
+
+  DateTime _ddlFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      var timestamp = doc.data['deadline'];
+      var dd = timestamp.toDate();
+      return DateTime.parse(dd.toString());
+    }).toList()[0];
   }
 }

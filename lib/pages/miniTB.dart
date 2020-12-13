@@ -1,5 +1,7 @@
 import 'package:appbasce/classes/miniTB_prediction_class.dart';
+import 'package:appbasce/pages/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:appbasce/services/database.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:base32/base32.dart';
 
@@ -9,52 +11,73 @@ class MiniTB extends StatefulWidget {
 }
 
 class _MiniTBState extends State<MiniTB> {
-  var beforeDeadline = DateTime.now().isBefore(deadline);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue[400],
-        title: Text('Mini TB per la Regular Season'),
-        centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.home, color: Colors.white),
-            onPressed: () {Navigator.popUntil(context, ModalRoute.withName('/'));},
-          ),
-        ],
-      ),
-      backgroundColor: Colors.blue[200],
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(5,35,5,10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              (!deadlineOn || beforeDeadline) ? InserisciPredizioni() : InserisciPredizioniMock(),
-              SizedBox(height: 20),
-              (deadlineOn && beforeDeadline) ? VisualizzaPredizioniMock() : VisualizzaPredizioni(),
-              SizedBox(height: 20),
-              Card(
-                child: ListTile(
-                  leading: Icon(Icons.settings),
-                  trailing: Icon(Icons.play_arrow),
-                  title: Text(
-                      "Aggiorna classifiche NBA reali",
-                      style: TextStyle(
-                          color: Colors.grey[700],
-                          fontSize: 18)
-                  ),
-                  onTap: () {
-                    Navigator.pushNamed(context, '/minitb_insert', arguments: miniTBParticipants.length-1);
+    return StreamBuilder(
+      stream: DatabaseService().ddl,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          DateTime ddlFromDB = snapshot.data;
+          bool beforeDeadline = DateTime.now().isBefore(ddlFromDB);
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.blue[400],
+              title: Text('Mini TB per la Regular Season'),
+              centerTitle: true,
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.home, color: Colors.white),
+                  onPressed: () {
+                    Navigator.popUntil(context, ModalRoute.withName('/'));
                   },
                 ),
+              ],
+            ),
+            backgroundColor: Colors.blue[200],
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(5, 35, 5, 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    beforeDeadline
+                        ? InserisciPredizioni()
+                        : InserisciPredizioniMock(),
+                    SizedBox(height: 20),
+                    beforeDeadline
+                        ? VisualizzaPredizioniMock()
+                        : VisualizzaPredizioni(),
+                    SizedBox(height: 20),
+                    Card(
+                      child: ListTile(
+                        leading: Icon(Icons.settings),
+                        trailing: Icon(Icons.play_arrow),
+                        title: Text(
+                            "Aggiorna classifiche NBA reali",
+                            style: TextStyle(
+                                color: Colors.grey[700],
+                                fontSize: 18)
+                        ),
+                        onTap: () {
+                          Navigator.pushNamed(context, '/minitb_insert',
+                              arguments: miniTBParticipants.length - 1);
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 80),
+                    beforeDeadline
+                        ? Text('Deadline $ddlFromDB', style: TextStyle(color: Colors.grey[800]))
+                        : Container(),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
+          );
+        } else {
+          return Loading();
+        }
+      }
     );
   }
 }
