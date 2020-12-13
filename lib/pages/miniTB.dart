@@ -1,6 +1,7 @@
 import 'package:appbasce/classes/miniTB_prediction_class.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:base32/base32.dart';
 
 class MiniTB extends StatefulWidget {
   @override
@@ -9,7 +10,6 @@ class MiniTB extends StatefulWidget {
 
 class _MiniTBState extends State<MiniTB> {
   var beforeDeadline = DateTime.now().isBefore(deadline);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
