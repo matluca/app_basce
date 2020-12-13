@@ -1,6 +1,5 @@
 import 'package:appbasce/pages/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:appbasce/classes/profile_class.dart';
 import 'package:appbasce/services/database.dart';
 import 'package:appbasce/classes/miniTB_prediction_class.dart';
 
@@ -36,7 +35,7 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
           List<MiniTBPred> preds = snapshot.data;
           MiniTBPred pred;
           for (var i = 0; i < preds.length; i++) {
-            if (preds[i].name == profiles[widget.index].name) {
+            if (preds[i].name == miniTBParticipants[widget.index].name) {
               pred = preds[i];
             }
           }
@@ -45,7 +44,7 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.blue[400],
-              title: Text('${profiles[widget.index].name}, riordina le liste'),
+              title: Text('${miniTBParticipants[widget.index].name}, riordina le liste'),
               centerTitle: true,
               actions: <Widget>[
                 IconButton(
@@ -102,7 +101,7 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
                             print(westTeams);
                             print(westPred);
                             DatabaseService().updatePredictionsFromOrderedList(
-                                profiles[widget.index].name, eastPred, westPred);
+                                miniTBParticipants[widget.index].name, eastPred, westPred);
                             Navigator.popUntil(context, ModalRoute.withName('/mini_tb'));
                           },
                         ),

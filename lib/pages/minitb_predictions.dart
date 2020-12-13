@@ -1,6 +1,5 @@
 import 'package:appbasce/pages/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:appbasce/classes/profile_class.dart';
 import 'package:appbasce/services/database.dart';
 import 'package:appbasce/classes/miniTB_prediction_class.dart';
 
@@ -34,11 +33,11 @@ class MiniTBPredictions extends StatelessWidget {
                   ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: profiles.length,
+                    itemCount: miniTBParticipants.length,
                     itemBuilder: (context, index) {
                       MiniTBPred pred;
                       for (var i=0; i<preds.length; i++) {
-                        if (preds[i].name == profiles[index].name) {
+                        if (preds[i].name == miniTBParticipants[index].name) {
                           pred = preds[i];
                         }
                       }
@@ -47,7 +46,7 @@ class MiniTBPredictions extends StatelessWidget {
                         child: Row(
                           children: [
                             CircleAvatar(
-                              backgroundImage: AssetImage('assets/${profiles[index].image}'),
+                              backgroundImage: AssetImage('assets/${miniTBParticipants[index].image}'),
                               radius: 23,
                             ),
                             SizedBox(width: 6),

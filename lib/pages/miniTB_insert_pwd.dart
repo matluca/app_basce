@@ -1,6 +1,5 @@
 import 'package:appbasce/pages/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:appbasce/classes/profile_class.dart';
 import 'package:appbasce/services/database.dart';
 import 'package:appbasce/classes/miniTB_prediction_class.dart';
 
@@ -38,7 +37,7 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
           List<MiniTBPwd> pwds = snapshot.data;
           String oldPwd;
           for (var i = 0; i < pwds.length; i++) {
-            if (pwds[i].name == profiles[widget.index].name) {
+            if (pwds[i].name == miniTBParticipants[widget.index].name) {
               oldPwd = pwds[i].pwd;
             }
           }
@@ -51,7 +50,7 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.blue[400],
-              title: Text('${profiles[widget.index].name}, inserisci la tua password'),
+              title: Text('${miniTBParticipants[widget.index].name}, inserisci la tua password'),
               centerTitle: true,
               actions: <Widget>[
                 IconButton(
@@ -110,7 +109,7 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
                     onPressed: () async {
                       if (_formKey.currentState.validate()){
                         if (oldPwd == '') {
-                          DatabaseService().updatePassword(profiles[widget.index].name, pwd);
+                          DatabaseService().updatePassword(miniTBParticipants[widget.index].name, pwd);
                         }
                         Navigator.pushNamed(context, '/minitb_insert', arguments: widget.index);
                       }

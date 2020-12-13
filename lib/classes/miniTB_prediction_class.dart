@@ -1,3 +1,9 @@
+import 'package:appbasce/classes/profile_class.dart';
+
+DateTime deadline = DateTime.parse("2021-07-20 20:18:04Z");
+bool deadlineOn = false;
+List<Profile> miniTBParticipants = [ale, enrico, fabio, luca, magu, melo, nic, teo, admin];
+
 class MiniTBPred {
   final String name;
   final Map east;

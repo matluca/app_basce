@@ -1,5 +1,10 @@
 import 'package:appbasce/classes/miniTB_prediction_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:encrypt/encrypt.dart';
+//
+// final encryptKey = Key.fromBase64('b0WPIYebihiKKBPaJpfj0g==');
+// final iv = IV.fromLength(16);
+// final encrypter = Encrypter(AES(encryptKey));
 
 List<String> eastTeams = 
 ['ATL', 'BOS', 'BRK', 'CHI', 'CHO', 'CLE', 'DET', 'IND', 'MIA', 'MIL', 'NYK', 'ORL', 'PHI', 'TOR', 'WAS'];
@@ -29,7 +34,7 @@ class DatabaseService {
   Future updatePassword(String name, String pwd) async {
     Map<String, dynamic> data = {};
     data['name'] = name;
-    data['pwd'] = pwd;
+    data['pwd'] = pwd; //encrypter.encrypt(pwd, iv: iv).base64;
     return await passwords.document(name).setData(data);
   }
 

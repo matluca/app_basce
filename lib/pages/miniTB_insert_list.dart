@@ -1,5 +1,5 @@
+import 'package:appbasce/classes/miniTB_prediction_class.dart';
 import 'package:flutter/material.dart';
-import 'package:appbasce/classes/profile_class.dart';
 import 'package:flutter/widgets.dart';
 
 class MiniTBInsertList extends StatefulWidget {
@@ -38,7 +38,7 @@ class _MiniTBInsertListState extends State<MiniTBInsertList> {
                     crossAxisCount: columns),
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: profiles.length,
+                itemCount: miniTBParticipants.length-1,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
@@ -49,7 +49,7 @@ class _MiniTBInsertListState extends State<MiniTBInsertList> {
                         },
                         title: Center(
                           child: Text(
-                            '${profiles[index].name}',
+                            '${miniTBParticipants[index].name}',
                             style: TextStyle(
                               color: Colors.grey[700],
                               fontSize: 18,
@@ -57,7 +57,7 @@ class _MiniTBInsertListState extends State<MiniTBInsertList> {
                           ),
                         ),
                         leading: CircleAvatar(
-                          backgroundImage: AssetImage('assets/${profiles[index].image}'),
+                          backgroundImage: AssetImage('assets/${miniTBParticipants[index].image}'),
                           radius: 23,
                         ),
                         //trailing: Icon(Icons.play_arrow),
