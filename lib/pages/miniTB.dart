@@ -3,7 +3,6 @@ import 'package:appbasce/pages/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:appbasce/services/database.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:base32/base32.dart';
 
 class MiniTB extends StatefulWidget {
   @override

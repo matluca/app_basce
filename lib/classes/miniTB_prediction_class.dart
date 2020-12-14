@@ -1,7 +1,7 @@
 import 'package:appbasce/classes/profile_class.dart';
 import 'dart:math';
 
-List<Profile> miniTBParticipants = [ale, enrico, fabio, luca, magu, melo, nic, teo, admin];
+List<Profile> miniTBParticipants = [ale, enrico, luca, magu, melo, nic, teo, admin];
 
 class MiniTBPwd {
   final String name;
@@ -42,17 +42,18 @@ List<String> buildCurrentList(Map prediction) {
   return p;
 }
 
-int malus(MiniTBPred prediction, MiniTBPred reference) {
-  int m = 0;
+List<int> malus(MiniTBPred prediction, MiniTBPred reference) {
+  int mEast = 0;
   prediction.east.keys.forEach((team) {
     int p = min(prediction.east[team] as int, 11);
     int r = min(reference.east[team] as int, 11);
-    m = m + (p-r).abs();
+    mEast = mEast + (p-r).abs();
   });
+  int mWest = 0;
   prediction.west.keys.forEach((team) {
     int p = min(prediction.west[team] as int, 11);
     int r = min(reference.west[team] as int, 11);
-    m = m + (p-r).abs();
+    mWest = mWest + (p-r).abs();
   });
-  return m;
+  return [mEast, mWest];
 }
