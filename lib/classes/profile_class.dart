@@ -30,4 +30,6 @@ Profile teo = Profile(name: 'Teo', image: 'teo.jpg', tournamentYears: [2020], se
 Profile yiwei = Profile(name: 'Yiwei', image: 'yiwei.jpg', tournamentYears: [], secondYears: [],
     thirdYears: [], bracketYears: [], roundsYears: []);
 
+Profile admin = Profile(name: 'Admin', image: 'nba.jpg');
+
 List<Profile> profiles = [ale, enrico, fabio, luca, magu, melo, nic, teo, yiwei];

@@ -20,10 +20,7 @@ class PersonalProfile extends StatefulWidget {
 class _PersonalProfileState extends State<PersonalProfile> {
   @override
   Widget build(BuildContext context) {
-    int screen = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
+    int screen = ModalRoute.of(context).settings.arguments;
     final controller = PageController(
       initialPage: screen,
     );
