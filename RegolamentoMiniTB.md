@@ -29,7 +29,7 @@ effetto. Il partecipante con il minor malus totale è dichiarato vincitore del M
 ### Tiebreakers
 Qualora ci sia un pareggio tra due o più partecipanti, valgono i seguenti tiebreakers in ordine:
 * maggior numero di seed 1 predetti correttamente
-* maggior numero di seed predetti correttamente
+* maggior numero di seed 2 predetti correttamente
 * ...
 * maggior numero di seed 15 predetti correttamente
 * sorteggio
