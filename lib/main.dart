@@ -6,29 +6,90 @@ import 'package:appbasce/pages/profile_list.dart';
 import 'package:appbasce/pages/profile.dart';
 import 'package:appbasce/pages/albo.dart';
 import 'package:appbasce/pages/year_stats.dart';
-import 'package:appbasce/pages/miniTB.dart';
-import 'package:appbasce/pages/miniTB_insert_list.dart';
-import 'package:appbasce/pages/miniTB_insert.dart';
-import 'package:appbasce/pages/minitb_predictions.dart';
-import 'package:appbasce/pages/miniTB_insert_pwd.dart';
+import 'package:appbasce/pages/miniTB/miniTB.dart';
+import 'package:appbasce/pages/miniTB/miniTB_insert_list.dart';
+import 'package:appbasce/pages/miniTB/miniTB_insert.dart';
+import 'package:appbasce/pages/miniTB/minitb_predictions.dart';
+import 'package:appbasce/pages/miniTB/miniTB_insert_pwd.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    initialRoute: "/",
-    routes: {
-      '/': (context) => Home(),
-      '/loading': (context) => Loading(),
-      '/wip': (context) => WorkInProgress(),
-      '/profile_list': (context) => ProfileList(),
-      '/profile': (context) => PersonalProfile(),
-      '/albo': (context) => Albo(),
-      '/year_stats': (context) => YearStats(),
-      '/mini_tb': (context) => MiniTB(),
-      '/minitb_insert_list': (context) => MiniTBInsertList(),
-      '/minitb_insert': (context) => MiniTBInsertPrediction(),
-      '/minitb_predictions': (context) => MiniTBPredictions(),
-      '/minitb_pwd': (context) => MiniTBInsertPassword(),
-    },
-  ));
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(App());
 }
+
+class App extends StatelessWidget {
+  // Create the initialization Future outside of `build`:
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      // Initialize FlutterFire:
+      future: _initialization,
+      builder: (context, snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {
+          return Text(snapshot.error.toString());
+        }
+
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          return AppBasce();
+        }
+
+        // Otherwise, show something whilst waiting for initialization to complete
+        return CircularProgressIndicator();
+      },
+    );
+  }
+}
+
+
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp();
+//   runApp(MaterialApp(
+//     debugShowCheckedModeBanner: false,
+//     initialRoute: "/",
+//     routes: {
+//       '/': (context) => Home(),
+//       '/loading': (context) => Loading(),
+//       '/wip': (context) => WorkInProgress(),
+//       '/profile_list': (context) => ProfileList(),
+//       '/profile': (context) => PersonalProfile(),
+//       '/albo': (context) => Albo(),
+//       '/year_stats': (context) => YearStats(),
+//       '/mini_tb': (context) => MiniTB(),
+//       '/minitb_insert_list': (context) => MiniTBInsertList(),
+//       '/minitb_insert': (context) => MiniTBInsertPrediction(),
+//       '/minitb_predictions': (context) => MiniTBPredictions(),
+//       '/minitb_pwd': (context) => MiniTBInsertPassword(),
+//     },
+//   ));
+// }
+
+class AppBasce extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: "/",
+      routes: {
+        '/': (context) => Home(),
+        '/loading': (context) => Loading(),
+        '/wip': (context) => WorkInProgress(),
+        '/profile_list': (context) => ProfileList(),
+        '/profile': (context) => PersonalProfile(),
+        '/albo': (context) => Albo(),
+        '/year_stats': (context) => YearStats(),
+        '/mini_tb': (context) => MiniTB(),
+        '/minitb_insert_list': (context) => MiniTBInsertList(),
+        '/minitb_insert': (context) => MiniTBInsertPrediction(),
+        '/minitb_predictions': (context) => MiniTBPredictions(),
+        '/minitb_pwd': (context) => MiniTBInsertPassword(),
+      },
+    );
+  }
+}
+
