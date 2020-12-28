@@ -41,7 +41,11 @@ class App extends StatelessWidget {
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        return CircularProgressIndicator();
+        return Center(child: Container(
+            width: 50,
+            height: 50,
+            child: CircularProgressIndicator(),
+        ));
       },
     );
   }
@@ -68,7 +72,11 @@ class AppBasceLogin extends StatelessWidget {
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        return CircularProgressIndicator();
+        return Center(child: Container(
+            width: 50,
+            height: 50,
+            child: CircularProgressIndicator(),
+        ));
       },
     );
   }
