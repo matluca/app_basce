@@ -10,9 +10,9 @@ List<String> westTeams =
 class DatabaseService {
 
   // collections reference
-  final CollectionReference predictions = Firestore.instance.collection('predictions');
-  final CollectionReference passwords = Firestore.instance.collection('passwords');
-  final CollectionReference deadline = Firestore.instance.collection('deadline');
+  final CollectionReference predictions = FirebaseFirestore.instance.collection('predictions');
+  final CollectionReference passwords = FirebaseFirestore.instance.collection('passwords');
+  final CollectionReference deadline = FirebaseFirestore.instance.collection('deadline');
 
   // update predictions
   Future updatePredictionsFromOrderedList(String name, List<String> east, List<String> west) async {
@@ -24,7 +24,7 @@ class DatabaseService {
       data[west[i]] = i+1;
     }
     data['name'] = name;
-    return await predictions.document(name).setData(data);
+    return await predictions.doc(name).set(data);
   }
 
   // update password
@@ -32,7 +32,7 @@ class DatabaseService {
     Map<String, dynamic> data = {};
     data['name'] = name;
     data['pwd'] = base32.encodeString(pwd);
-    return await passwords.document(name).setData(data);
+    return await passwords.doc(name).set(data);
   }
 
   // get predictions
@@ -42,18 +42,18 @@ class DatabaseService {
 
   // predictions from snapshot
   List<MiniTBPred> _predListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc){
+    return snapshot.docs.map((doc){
       var eastPred = {};
       for (var team=0; team <eastTeams.length; team++){
-        eastPred[eastTeams[team]] = doc.data[eastTeams[team]] ?? -1;
+        eastPred[eastTeams[team]] = doc.data()[eastTeams[team]] ?? -1;
       }
       var westPred = {};
       for (var team=0; team <westTeams.length; team++){
-        westPred[westTeams[team]] = doc.data[westTeams[team]] ?? -1;
+        westPred[westTeams[team]] = doc.data()[westTeams[team]] ?? -1;
       }
       
       return MiniTBPred(
-        name: doc.data['name'] ?? '',
+        name: doc.data()['name'] ?? '',
         east: eastPred,
         west: westPred,
       );
@@ -66,16 +66,16 @@ class DatabaseService {
   }
 
   List<MiniTBPwd> _pwdsFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc){
-      if (doc.data['pwd'] == '') {
+    return snapshot.docs.map((doc){
+      if (doc.data()['pwd'] == '') {
         return MiniTBPwd(
-          name: doc.data['name'] ?? '',
+          name: doc.data()['name'] ?? '',
           pwd: '',
         );
       }
       return MiniTBPwd(
-        name: doc.data['name'] ?? '',
-        pwd: base32.decodeAsString(doc.data['pwd']),
+        name: doc.data()['name'] ?? '',
+        pwd: base32.decodeAsString(doc.data()['pwd']),
       );
     }).toList();
   }
@@ -86,8 +86,8 @@ class DatabaseService {
   }
 
   DateTime _ddlFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc) {
-      var timestamp = doc.data['deadline'];
+    return snapshot.docs.map((doc) {
+      var timestamp = doc.data()['deadline'];
       var dd = timestamp.toDate();
       return DateTime.parse(dd.toString());
     }).toList()[0];

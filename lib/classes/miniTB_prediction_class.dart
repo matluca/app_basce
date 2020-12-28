@@ -30,7 +30,7 @@ Map buildStandings(Map predictions) {
 }
 
 List<String> buildCurrentList(Map prediction) {
-  List<String> p = new List(15);
+  List<String> p = new List.filled(15, '');
   for (int i = 1; i < 16; i++) {
     for (MapEntry<dynamic, dynamic> entry in prediction.entries) {
       if (entry.value == i) {
