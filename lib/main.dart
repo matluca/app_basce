@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:appbasce/services/auth.dart';
 import 'package:appbasce/pages/loading.dart';
 import 'package:appbasce/pages/home.dart';
 import 'package:appbasce/pages/wip.dart';
@@ -35,6 +37,33 @@ class App extends StatelessWidget {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
+          return AppBasceLogin();
+        }
+
+        // Otherwise, show something whilst waiting for initialization to complete
+        return CircularProgressIndicator();
+      },
+    );
+  }
+}
+
+class AppBasceLogin extends StatelessWidget {
+  // Create the initialization Future outside of `build`:
+  final Future<UserCredential> _login = AuthService().signInWithEmailAndPassword();
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      // Initialize FlutterFire:
+      future: _login,
+      builder: (context, snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {
+          return Text(snapshot.error.toString());
+        }
+
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
           return AppBasce();
         }
 
@@ -45,29 +74,6 @@ class App extends StatelessWidget {
   }
 }
 
-
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp();
-//   runApp(MaterialApp(
-//     debugShowCheckedModeBanner: false,
-//     initialRoute: "/",
-//     routes: {
-//       '/': (context) => Home(),
-//       '/loading': (context) => Loading(),
-//       '/wip': (context) => WorkInProgress(),
-//       '/profile_list': (context) => ProfileList(),
-//       '/profile': (context) => PersonalProfile(),
-//       '/albo': (context) => Albo(),
-//       '/year_stats': (context) => YearStats(),
-//       '/mini_tb': (context) => MiniTB(),
-//       '/minitb_insert_list': (context) => MiniTBInsertList(),
-//       '/minitb_insert': (context) => MiniTBInsertPrediction(),
-//       '/minitb_predictions': (context) => MiniTBPredictions(),
-//       '/minitb_pwd': (context) => MiniTBInsertPassword(),
-//     },
-//   ));
-// }
 
 class AppBasce extends StatelessWidget {
   @override
