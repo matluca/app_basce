@@ -1,5 +1,6 @@
 import 'package:appbasce/classes/profile_class.dart';
 import 'dart:math';
+import 'dart:collection';
 
 List<Profile> miniTBParticipants = [ale, enrico, luca, magu, melo, nic, teo, admin];
 
@@ -56,4 +57,28 @@ List<int> malus(MiniTBPred prediction, MiniTBPred reference) {
     mWest = mWest + (p-r).abs();
   });
   return [mEast, mWest];
+}
+
+String miniTBStandings(List<MiniTBPred> preds) {
+  MiniTBPred reference;
+  for (var i=0; i<preds.length; i++) {
+    if (preds[i].name == "Admin") {
+      reference = preds[i];
+    }
+  }
+  var standings= {};
+  for (int i=0; i<preds.length; i++) {
+    if (preds[i].name != "Admin") {
+      int totMalus = malus(preds[i], reference)[0] + malus(preds[i], reference)[1];
+      standings[preds[i].name] = totMalus;
+    }
+  }
+  var sortedKeys = standings.keys.toList(growable:false)
+    ..sort((k1, k2) => standings[k1].compareTo(standings[k2]));
+  LinkedHashMap sortedStandings = new LinkedHashMap
+      .fromIterable(sortedKeys, key: (k) => k, value: (k) => standings[k]);
+  var msg = sortedStandings.toString();
+  msg = msg.substring(1, msg.length-1);
+  msg = msg.replaceAll(", ", "\n");
+  return msg;
 }

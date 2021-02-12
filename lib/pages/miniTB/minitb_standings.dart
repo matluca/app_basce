@@ -7,7 +7,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MiniTBPredictions extends StatelessWidget {
+class MiniTBStandings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -24,7 +24,7 @@ class MiniTBPredictions extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.blue[400],
-              title: Text('Mini TB - Predizioni'),
+              title: Text('Mini TB - Classifica'),
               centerTitle: true,
               actions: <Widget>[
                 IconButton(
@@ -37,52 +37,56 @@ class MiniTBPredictions extends StatelessWidget {
             body: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 9),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: AssetImage('assets/${admin.image}'),
-                        radius: 23,
-                      ),
-                      SizedBox(width: 6),
-                      Predictions(prediction: reference, reference: reference, showMalus: false),
-                    ],
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  child: Text(
+                    "MiniTB Standings of the Day",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.grey[900],
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-                Flexible(
-                  child: SingleChildScrollView(
-                    padding: EdgeInsets.fromLTRB(5,0,5,10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: miniTBParticipants.length-1,
-                          itemBuilder: (context, index) {
-                            MiniTBPred pred;
-                            for (var i=0; i<preds.length; i++) {
-                              if (preds[i].name == miniTBParticipants[index].name) {
-                                pred = preds[i];
-                              }
-                            }
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
-                              child: Row(
-                                children: [
-                                  CircleAvatar(
-                                    backgroundImage: AssetImage('assets/${miniTBParticipants[index].image}'),
-                                    radius: 23,
-                                  ),
-                                  SizedBox(width: 6),
-                                  Predictions(prediction: pred, reference: reference, showMalus: true),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      ],
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 20, 20, 10),
+                  child: Text(
+                    "Presented by Chick-fil-a",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                      fontSize: 15,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                  child: SelectableText(
+                    miniTBStandings(preds),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.grey[800],
+                        fontSize: 18),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(9, 10, 9, 0),
+                  child: Card(
+                    child: ListTile(
+                      leading: Icon(MdiIcons.whatsapp),
+                      trailing: Icon(Icons.send),
+                      title: Text(
+                          "Manda classifica alla CB",
+                          style: TextStyle(
+                              color: Colors.grey[700],
+                              fontSize: 18)
+                      ),
+                      onTap: () async => await launch(
+                        WhatsAppUnilink(
+                          text: "*MiniTB Standings of the Day*\n_Presented by Chick-fil-a_\n\n" + miniTBStandings(preds),
+                        ).toString(),
+                      ),
                     ),
                   ),
                 ),
