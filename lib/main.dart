@@ -12,6 +12,7 @@ import 'package:appbasce/pages/miniTB/miniTB.dart';
 import 'package:appbasce/pages/miniTB/miniTB_insert_list.dart';
 import 'package:appbasce/pages/miniTB/miniTB_insert.dart';
 import 'package:appbasce/pages/miniTB/minitb_predictions.dart';
+import 'package:appbasce/pages/miniTB/minitb_standings.dart';
 import 'package:appbasce/pages/miniTB/miniTB_insert_pwd.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -101,6 +102,7 @@ class AppBasce extends StatelessWidget {
         '/minitb_insert_list': (context) => MiniTBInsertList(),
         '/minitb_insert': (context) => MiniTBInsertPrediction(),
         '/minitb_predictions': (context) => MiniTBPredictions(),
+        '/minitb_standings': (context) => MiniTBStandings(),
         '/minitb_pwd': (context) => MiniTBInsertPassword(),
       },
     );

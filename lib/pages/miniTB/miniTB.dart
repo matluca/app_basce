@@ -3,6 +3,7 @@ import 'package:appbasce/pages/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:appbasce/services/database.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'dart:math' as math;
 
 class MiniTB extends StatefulWidget {
   @override
@@ -43,11 +44,15 @@ class _MiniTBState extends State<MiniTB> {
                     beforeDeadline
                         ? InserisciPredizioni()
                         : InserisciPredizioniMock(),
-                    SizedBox(height: 20),
+                    SizedBox(height: 15),
+                    beforeDeadline
+                        ? VisualizzaClassificaMock()
+                        : VisualizzaClassifica(),
+                    SizedBox(height: 15),
                     beforeDeadline
                         ? VisualizzaPredizioniMock()
                         : VisualizzaPredizioni(),
-                    SizedBox(height: 20),
+                    SizedBox(height: 15),
                     Card(
                       child: ListTile(
                         leading: Icon(Icons.settings),
@@ -163,3 +168,51 @@ class VisualizzaPredizioniMock extends StatelessWidget {
   }
 }
 
+class VisualizzaClassifica extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        leading: Transform(
+          alignment: Alignment.center,
+          transform: Matrix4.rotationY(math.pi),
+          child: Icon(MdiIcons.podium),
+        ),
+        trailing: Icon(Icons.play_arrow),
+        title: Text(
+            "Visualizza classifica",
+            style: TextStyle(
+                color: Colors.grey[700],
+                fontSize: 18)
+        ),
+        onTap: () {
+          Navigator.pushNamed(context, '/minitb_standings');
+        },
+      ),
+    );
+  }
+}
+
+class VisualizzaClassificaMock extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.grey,
+      elevation: 0,
+      child: ListTile(
+        leading: Transform(
+          alignment: Alignment.center,
+          transform: Matrix4.rotationY(math.pi),
+          child: Icon(MdiIcons.podium),
+        ),
+        trailing: Icon(Icons.play_arrow),
+        title: Text(
+            "Visualizza classifica",
+            style: TextStyle(
+                color: Colors.grey[700],
+                fontSize: 18)
+        ),
+      ),
+    );
+  }
+}

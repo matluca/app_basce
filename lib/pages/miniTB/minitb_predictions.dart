@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:appbasce/services/database.dart';
 import 'package:appbasce/classes/miniTB_prediction_class.dart';
 import 'package:appbasce/classes/profile_class.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:whatsapp_unilink/whatsapp_unilink.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MiniTBPredictions extends StatelessWidget {
   @override
