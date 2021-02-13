@@ -98,8 +98,6 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
                             style: TextStyle(color: Colors.white),
                           ),
                           onPressed: () async {
-                            print(westTeams);
-                            print(westPred);
                             DatabaseService().updatePredictionsFromOrderedList(
                                 miniTBParticipants[widget.index].name, eastPred, westPred);
                             Navigator.popUntil(context, ModalRoute.withName('/mini_tb'));
