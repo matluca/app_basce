@@ -44,21 +44,34 @@ class _MiniTBState extends State<MiniTB> {
                     beforeDeadline
                         ? InserisciPredizioni()
                         : InserisciPredizioniMock(),
-                    SizedBox(height: 15),
                     beforeDeadline
                         ? VisualizzaClassificaMock()
                         : VisualizzaClassifica(),
-                    SizedBox(height: 15),
                     beforeDeadline
                         ? VisualizzaPredizioniMock()
                         : VisualizzaPredizioni(),
-                    SizedBox(height: 15),
+                    Card(
+                      child: ListTile(
+                        leading: Icon(Icons.cloud_download),
+                        trailing: Icon(Icons.play_arrow),
+                        title: Text(
+                            "Aggiorna classifiche NBA reali automaticamente",
+                            style: TextStyle(
+                                color: Colors.grey[700],
+                                fontSize: 18)
+                        ),
+                        onTap: () {
+                          Navigator.pushNamed(context, '/minitb_update');
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 40),
                     Card(
                       child: ListTile(
                         leading: Icon(Icons.settings),
                         trailing: Icon(Icons.play_arrow),
                         title: Text(
-                            "Aggiorna classifiche NBA reali",
+                            "Aggiorna classifiche NBA reali manualmente",
                             style: TextStyle(
                                 color: Colors.grey[700],
                                 fontSize: 18)
