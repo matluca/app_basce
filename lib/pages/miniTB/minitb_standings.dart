@@ -15,12 +15,7 @@ class MiniTBStandings extends StatelessWidget {
       builder: (context, snapshot){
         if (snapshot.hasData) {
           List<MiniTBPred> preds = snapshot.data;
-          MiniTBPred reference;
-          for (var i=0; i<preds.length; i++) {
-            if (preds[i].name == "Admin") {
-              reference = preds[i];
-            }
-          }
+          String sponsor = sponsors[DateTime.now().weekday-1];
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.blue[400],
@@ -51,7 +46,7 @@ class MiniTBStandings extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 20, 20, 10),
                   child: Text(
-                    "Presented by Chick-fil-a",
+                    "Presented by $sponsor",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.grey[700],
@@ -84,7 +79,7 @@ class MiniTBStandings extends StatelessWidget {
                       ),
                       onTap: () async => await launch(
                         WhatsAppUnilink(
-                          text: "*MiniTB Standings of the Day*\n_Presented by Chick-fil-a_\n\n" + miniTBStandings(preds),
+                          text: "*MiniTB Standings of the Day*\n_Presented by ${sponsor}_\n\n" + miniTBStandings(preds),
                         ).toString(),
                       ),
                     ),

@@ -4,6 +4,8 @@ import 'dart:collection';
 
 List<Profile> miniTBParticipants = [ale, enrico, luca, magu, melo, nic, teo, admin];
 
+List<String> sponsors = ["AT&T", "Taco Bell", "KIA", "Little Caesars", "Vance Refrigeration", "Wendy's", "Chick-fil-a"];
+
 class MiniTBPwd {
   final String name;
   final String pwd;
