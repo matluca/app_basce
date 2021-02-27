@@ -93,7 +93,10 @@ String miniTBStandings(List<MiniTBPred> preds) {
   for (int i=0; i<sortedKeys.length; i++) {
     msg = msg + sortedKeys[i] + ": " + sortedStandings.values.toList()[i].toString()
         + "  (E: " + sortedEastStandings.values.toList()[i].toString()
-        + ", W: " + sortedWestStandings.values.toList()[i].toString() + ")\n";
+        + ", W: " + sortedWestStandings.values.toList()[i].toString() + ")";
+    if (i != sortedKeys.length-1) {
+      msg = msg + "\n";
+    }
   }
   return msg;
 }
