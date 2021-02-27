@@ -69,18 +69,31 @@ String miniTBStandings(List<MiniTBPred> preds) {
     }
   }
   var standings= {};
+  var eastStandings = {};
+  var westStandings = {};
   for (int i=0; i<preds.length; i++) {
     if (preds[i].name != "Admin") {
-      int totMalus = malus(preds[i], reference)[0] + malus(preds[i], reference)[1];
-      standings[preds[i].name] = totMalus;
+      int east = malus(preds[i], reference)[0];
+      int west = malus(preds[i], reference)[1];
+      standings[preds[i].name] = east+west;
+      eastStandings[preds[i].name] = east;
+      westStandings[preds[i].name] = west;
     }
   }
   var sortedKeys = standings.keys.toList(growable:false)
     ..sort((k1, k2) => standings[k1].compareTo(standings[k2]));
   LinkedHashMap sortedStandings = new LinkedHashMap
       .fromIterable(sortedKeys, key: (k) => k, value: (k) => standings[k]);
-  var msg = sortedStandings.toString();
-  msg = msg.substring(1, msg.length-1);
-  msg = msg.replaceAll(", ", "\n");
+  LinkedHashMap sortedEastStandings = new LinkedHashMap
+      .fromIterable(sortedKeys, key: (k) => k, value: (k) => eastStandings[k]);
+  LinkedHashMap sortedWestStandings = new LinkedHashMap
+      .fromIterable(sortedKeys, key: (k) => k, value: (k) => westStandings[k]);
+
+  var msg = "";
+  for (int i=0; i<sortedKeys.length; i++) {
+    msg = msg + sortedKeys[i] + ": " + sortedStandings.values.toList()[i].toString()
+        + "  (E: " + sortedEastStandings.values.toList()[i].toString()
+        + ", W: " + sortedWestStandings.values.toList()[i].toString() + ")\n";
+  }
   return msg;
 }
