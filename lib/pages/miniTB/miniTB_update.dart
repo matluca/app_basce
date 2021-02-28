@@ -27,7 +27,7 @@ class _MiniTBUpdateState extends State<MiniTBUpdate> {
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.blue[400],
-                title: Text('Classifiche dal sito nba.com'),
+                title: Text('Classifiche da nba.com'),
                 centerTitle: true,
                 actions: <Widget>[
                   IconButton(

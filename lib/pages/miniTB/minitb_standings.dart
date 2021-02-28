@@ -29,63 +29,68 @@ class MiniTBStandings extends StatelessWidget {
               ],
             ),
             backgroundColor: Colors.blue[200],
-            body: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                  child: Text(
-                    "MiniTB Standings of the Day",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.grey[900],
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 20, 20, 10),
-                  child: Text(
-                    "Presented by $sponsor",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.grey[700],
-                      fontSize: 15,
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                  child: SelectableText(
-                    miniTBStandings(preds),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.grey[800],
-                        fontSize: 18),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(9, 10, 9, 0),
-                  child: Card(
-                    child: ListTile(
-                      leading: Icon(MdiIcons.whatsapp),
-                      trailing: Icon(Icons.send),
-                      title: Text(
-                          "Manda classifica alla CB",
-                          style: TextStyle(
-                              color: Colors.grey[700],
-                              fontSize: 18)
-                      ),
-                      onTap: () async => await launch(
-                        WhatsAppUnilink(
-                          text: "*MiniTB Standings of the Day*\n_Presented by ${sponsor}_\n\n" + miniTBStandings(preds),
-                        ).toString(),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: Text(
+                        "MiniTB Standings of the Day",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.grey[900],
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 20, 20, 10),
+                      child: Text(
+                        "Presented by $sponsor",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.grey[700],
+                          fontSize: 15,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                      child: SelectableText(
+                        miniTBStandings(preds),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.grey[800],
+                            fontSize: 18),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(9, 10, 9, 0),
+                      child: Card(
+                        child: ListTile(
+                          leading: Icon(MdiIcons.whatsapp),
+                          trailing: Icon(Icons.send),
+                          title: Text(
+                              "Manda classifica alla CB",
+                              style: TextStyle(
+                                  color: Colors.grey[700],
+                                  fontSize: 18)
+                          ),
+                          onTap: () async => await launch(
+                            WhatsAppUnilink(
+                              text: "*MiniTB Standings of the Day*\n_Presented by ${sponsor}_\n\n" + miniTBStandings(preds),
+                            ).toString(),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           );
         } else {

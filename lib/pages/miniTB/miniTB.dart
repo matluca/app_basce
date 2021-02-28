@@ -22,7 +22,7 @@ class _MiniTBState extends State<MiniTB> {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.blue[400],
-              title: Text('Mini TB per la Regular Season'),
+              title: Text('Mini TB per la RS'),
               centerTitle: true,
               actions: <Widget>[
                 IconButton(
