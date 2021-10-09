@@ -165,7 +165,7 @@ alertDialog(BuildContext context) {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text('Versione: 2.4.0', style: TextStyle(color: Colors.grey[700])),
+            Text('Versione: 3.0.0', style: TextStyle(color: Colors.grey[700])),
             SizedBox(height: 10),
             Text('Creatore: Luca', style: TextStyle(color: Colors.grey[700]))
           ],
