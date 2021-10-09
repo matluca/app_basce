@@ -219,21 +219,28 @@ class _YearPageState extends State<YearPage> {
                           ],
                         ),
                       ),
-                      if (yearStats[widget.screen].profilePicture != '')
+                      if ((yearStats[widget.screen].profilePictures).length > 0)
                       Column(
                         children: [
                           SizedBox(height: 25),
                           Text(
-                            'IMMAGINE PROFILO',
+                            'IMMAGINI PROFILO',
                             style: TextStyle(
                               color: Colors.grey[700],
                               letterSpacing: 2,
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
-                            child: Image.asset(yearStats[widget.screen].profilePicture),
-                          )
+                          ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: (yearStats[widget.screen].profilePictures).length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+                                child: Image.asset(yearStats[widget.screen].profilePictures[index]),
+                              );
+                            },
+                          ),
                         ],
                       )
                     ],

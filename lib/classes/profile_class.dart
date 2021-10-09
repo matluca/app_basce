@@ -16,17 +16,17 @@ Profile ale = Profile(name: 'Ale', image: 'ale.jpg', tournamentYears: [2018], se
 Profile enrico = Profile(name: 'Enrico', image: 'enrico.jpg', tournamentYears: [], secondYears: [],
     thirdYears: [2019], bracketYears: [], roundsYears: []);
 Profile fabio = Profile(name: 'Fabio', image: 'fabio.jpg', tournamentYears: [], secondYears: [],
-    thirdYears: [2017], bracketYears: [2017], roundsYears: []);
-Profile luca = Profile(name: 'Luca', image: 'luca.jpg', tournamentYears: [], secondYears: [2019],
+    thirdYears: [2017, 2021], bracketYears: [2017, 2021], roundsYears: []);
+Profile luca = Profile(name: 'Luca', image: 'luca.jpg', tournamentYears: [2021], secondYears: [2019],
     thirdYears: [], bracketYears: [2019], roundsYears: []);
 Profile magu = Profile(name: 'Magu', image: 'gianluca.jpg', tournamentYears: [2016], secondYears: [2018],
     thirdYears: [2020], bracketYears: [2016,2017,2018], roundsYears: []);
 Profile melo = Profile(name: 'Melo', image: 'melo.jpg', tournamentYears: [2017, 2019], secondYears: [],
-    thirdYears: [2018], bracketYears: [2017], roundsYears: [2017,2019]);
+    thirdYears: [2018], bracketYears: [2017, 2021], roundsYears: [2017,2019]);
 Profile nic = Profile(name: 'Nic', image: 'nic.jpg', tournamentYears: [], secondYears: [2016],
     thirdYears: [], bracketYears: [], roundsYears: [2016,2020]);
-Profile teo = Profile(name: 'Teo', image: 'teo.jpg', tournamentYears: [2020], secondYears: [2016],
-    thirdYears: [], bracketYears: [2020], roundsYears: []);
+Profile teo = Profile(name: 'Teo', image: 'teo.jpg', tournamentYears: [2020], secondYears: [2016, 2021],
+    thirdYears: [], bracketYears: [2020], roundsYears: [2021]);
 Profile yiwei = Profile(name: 'Yiwei', image: 'yiwei.jpg', tournamentYears: [], secondYears: [],
     thirdYears: [], bracketYears: [], roundsYears: []);
 
