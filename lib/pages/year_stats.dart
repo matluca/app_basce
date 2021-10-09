@@ -17,7 +17,6 @@ class _YearStatsState extends State<YearStats> {
       initialPage: screen,
     );
 
-    //List<Widget> pages = List.generate(yearStats.length, (index) => Page(screen: index));
     List<Widget> _createChildren() {
       return new List<Widget>.generate(yearStats.length, (int index) {
         return YearPage(screen: index);

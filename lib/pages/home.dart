@@ -102,6 +102,25 @@ class Menu extends StatelessWidget {
         ),
         Card(
           child: ListTile(
+            leading: Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.rotationY(math.pi),
+              child: Icon(MdiIcons.podium),
+            ),
+            trailing: Icon(Icons.play_arrow),
+            title: Text(
+                "Albo d'oro MiniTB",
+                style: TextStyle(
+                    color: Colors.grey[700],
+                    fontSize: 18)
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/albo_mini');
+            },
+          ),
+        ),
+        Card(
+          child: ListTile(
             leading: Icon(MdiIcons.playBoxMultiple),
             trailing: Icon(Icons.play_arrow),
             title: Text(

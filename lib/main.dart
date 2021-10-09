@@ -7,7 +7,9 @@ import 'package:appbasce/pages/wip.dart';
 import 'package:appbasce/pages/profile_list.dart';
 import 'package:appbasce/pages/profile.dart';
 import 'package:appbasce/pages/albo.dart';
+import 'package:appbasce/pages/albo_mini.dart';
 import 'package:appbasce/pages/year_stats.dart';
+import 'package:appbasce/pages/year_stats_mini.dart';
 import 'package:appbasce/pages/miniTB/miniTB.dart';
 import 'package:appbasce/pages/miniTB/miniTB_insert_list.dart';
 import 'package:appbasce/pages/miniTB/miniTB_insert.dart';
@@ -98,7 +100,9 @@ class AppBasce extends StatelessWidget {
         '/profile_list': (context) => ProfileList(),
         '/profile': (context) => PersonalProfile(),
         '/albo': (context) => Albo(),
+        '/albo_mini': (context) => AlboMini(),
         '/year_stats': (context) => YearStats(),
+        '/year_stats_mini': (context) => YearStatsMini(),
         '/mini_tb': (context) => MiniTB(),
         '/minitb_insert_list': (context) => MiniTBInsertList(),
         '/minitb_insert': (context) => MiniTBInsertPrediction(),
