@@ -136,7 +136,7 @@ class _YearPageMiniState extends State<YearPageMini> {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
               child: DotsIndicator(
-                dotsCount: yearStats.length,
+                dotsCount: miniTBStats.length,
                 position: widget.screen.toDouble(),
               ),
             ),
