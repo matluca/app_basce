@@ -11,15 +11,15 @@ class MiniTBInsertPrediction extends StatefulWidget {
 class _MiniTBInsertPredictionState extends State<MiniTBInsertPrediction> {
   @override
   Widget build(BuildContext context) {
-    int index = ModalRoute.of(context).settings.arguments;
-    return InsertPredictionPage(index: index);
+    int index = ModalRoute.of(context)!.settings.arguments as int;
+    return InsertPredictionPage(key: const Key("InsertPredictionPage"), index: index);
   }
 }
 
 class InsertPredictionPage extends StatefulWidget {
   final int index;
 
-  const InsertPredictionPage({Key key, this.index}) : super(key: key);
+  const InsertPredictionPage({required Key key, required this.index}) : super(key: key);
 
   @override
   _InsertPredictionPageState createState() => _InsertPredictionPageState();
@@ -32,15 +32,15 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
       stream: DatabaseService().preds,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          List<MiniTBPred> preds = snapshot.data;
-          MiniTBPred pred;
+          List<MiniTBPred> preds = snapshot.data as List<MiniTBPred>;
+          MiniTBPred pred = MiniTBPred("", {}, {});
           for (var i = 0; i < preds.length; i++) {
             if (preds[i].name == miniTBParticipants[widget.index].name) {
               pred = preds[i];
             }
           }
-          var eastPred = new List<String>.from(buildCurrentList(pred.east));
-          var westPred = new List<String>.from(buildCurrentList(pred.west));
+          var eastPred = List<String>.from(buildCurrentList(pred.east));
+          var westPred = List<String>.from(buildCurrentList(pred.west));
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.blue[400],
@@ -48,7 +48,7 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
               centerTitle: true,
               actions: <Widget>[
                 IconButton(
-                  icon: Icon(Icons.home, color: Colors.white),
+                  icon: const Icon(Icons.home, color: Colors.white),
                   onPressed: () {
                     Navigator.popUntil(context, ModalRoute.withName('/'));
                   },
@@ -62,11 +62,11 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
                   padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
                   child: Column(
                     children: [
-                      Text(
+                      const Text(
                         'Tieni premuto per poter riordinare',
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -74,26 +74,26 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text('EAST'),
-                              SizedBox(height: 10),
-                              StandingsList(teams: eastPred),
+                              const Text('EAST'),
+                              const SizedBox(height: 10),
+                              StandingsList(key: const Key("StandingsList"), teams: eastPred),
                             ],
                           ),
                           Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text('WEST'),
-                                SizedBox(height: 10),
-                                StandingsList(teams: westPred),
+                                const Text('WEST'),
+                                const SizedBox(height: 10),
+                                StandingsList(key: const Key("StandingsList"), teams: westPred),
                               ]),
                         ],
                       ),
                       Padding(
                         padding: const EdgeInsets.all(5),
-                        child: RaisedButton(
-                          color: Colors.red,
-                          child: Text(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(primary: Colors.red),
+                          child: const Text(
                             'Update and exit',
                             style: TextStyle(color: Colors.white),
                           ),
@@ -121,7 +121,7 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
 class StandingsList extends StatefulWidget {
   final List<String> teams;
 
-  StandingsList({Key key, this.teams}) : super(key: key);
+  StandingsList({required Key key, required this.teams}) : super(key: key);
 
   @override
   _StandingsListState createState() => _StandingsListState();
@@ -154,7 +154,7 @@ class _StandingsListState extends State<StandingsList> {
                 key: Key('$index'),
                 title: Container(
                     height: 30,
-                    decoration: BoxDecoration(color: Colors.grey),
+                    decoration: const BoxDecoration(color: Colors.grey),
                     child:
                         Center(child: Text('${index + 1}: ${teams[index]}'))),
               );

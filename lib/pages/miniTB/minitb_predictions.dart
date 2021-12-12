@@ -11,8 +11,8 @@ class MiniTBPredictions extends StatelessWidget {
       stream: DatabaseService().preds,
       builder: (context, snapshot){
         if (snapshot.hasData) {
-          List<MiniTBPred> preds = snapshot.data;
-          MiniTBPred reference;
+          List<MiniTBPred> preds = snapshot.data as List<MiniTBPred>;
+          MiniTBPred reference = MiniTBPred("", {}, {});
           for (var i=0; i<preds.length; i++) {
             if (preds[i].name == "Admin") {
               reference = preds[i];
@@ -21,11 +21,11 @@ class MiniTBPredictions extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.blue[400],
-              title: Text('Mini TB - Predizioni'),
+              title: const Text('Mini TB - Predizioni'),
               centerTitle: true,
               actions: <Widget>[
                 IconButton(
-                  icon: Icon(Icons.home, color: Colors.white),
+                  icon: const Icon(Icons.home, color: Colors.white),
                   onPressed: () {Navigator.popUntil(context, ModalRoute.withName('/'));},
                 ),
               ],
@@ -41,24 +41,24 @@ class MiniTBPredictions extends StatelessWidget {
                         backgroundImage: AssetImage('assets/${admin.image}'),
                         radius: 23,
                       ),
-                      SizedBox(width: 6),
-                      Predictions(prediction: reference, reference: reference, showMalus: false),
+                      const SizedBox(width: 6),
+                      Predictions(key: key!, prediction: reference, reference: reference, showMalus: false),
                     ],
                   ),
                 ),
                 Flexible(
                   child: SingleChildScrollView(
-                    padding: EdgeInsets.fromLTRB(5,0,5,10),
+                    padding: const EdgeInsets.fromLTRB(5,0,5,10),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: miniTBParticipants.length-1,
                           itemBuilder: (context, index) {
-                            MiniTBPred pred;
+                            MiniTBPred pred = MiniTBPred("", {}, {});
                             for (var i=0; i<preds.length; i++) {
                               if (preds[i].name == miniTBParticipants[index].name) {
                                 pred = preds[i];
@@ -72,8 +72,8 @@ class MiniTBPredictions extends StatelessWidget {
                                     backgroundImage: AssetImage('assets/${miniTBParticipants[index].image}'),
                                     radius: 23,
                                   ),
-                                  SizedBox(width: 6),
-                                  Predictions(prediction: pred, reference: reference, showMalus: true),
+                                  const SizedBox(width: 6),
+                                  Predictions(key: key!, prediction: pred, reference: reference, showMalus: true),
                                 ],
                               ),
                             );
@@ -99,7 +99,7 @@ class Predictions extends StatefulWidget {
   final MiniTBPred reference;
   final bool showMalus;
 
-  Predictions({ Key key, this.prediction, this.reference, this.showMalus }) : super(key: key);
+  Predictions({required Key key, required this.prediction, required this.reference, required this.showMalus }) : super(key: key);
 
   @override
   _PredictionsState createState() => _PredictionsState();
@@ -120,16 +120,16 @@ class _PredictionsState extends State<Predictions> {
         padding: const EdgeInsets.all(5),
         width: MediaQuery.of(context).size.width*0.8,
         child: Card(
-          margin: EdgeInsets.fromLTRB(5, 2, 5, 2),
+          margin: const EdgeInsets.fromLTRB(5, 2, 5, 2),
           child: Column(
             children: [
               ListTile(
-                title: Text('East'),
-                subtitle: Text('$eastStandings'),
+                title: const Text('East'),
+                subtitle: Text(eastStandings),
               ),
               ListTile(
-                title: Text('West'),
-                subtitle: Text('$westStandings'),
+                title: const Text('West'),
+                subtitle: Text(westStandings),
               ),
               showMalus ? Padding(
                 padding: const EdgeInsets.all(8.0),

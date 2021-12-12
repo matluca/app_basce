@@ -45,7 +45,7 @@ class App extends StatelessWidget {
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        return Center(child: Container(
+        return const Center(child: SizedBox(
             width: 50,
             height: 50,
             child: CircularProgressIndicator(),
@@ -57,7 +57,7 @@ class App extends StatelessWidget {
 
 class AppBasceLogin extends StatelessWidget {
   // Create the initialization Future outside of `build`:
-  final Future<UserCredential> _login = AuthService().signInWithEmailAndPassword();
+  final Future<UserCredential?> _login = AuthService().signInWithEmailAndPassword();
 
   @override
   Widget build(BuildContext context) {

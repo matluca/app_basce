@@ -10,21 +10,21 @@ class Stats {
   List<Profile> rounds; // winner(s) of the 'rounds'
   List<String> profilePictures;
 
-  Stats({this.label, this.year, this.first, this.second, this.third,
-    this.bracket, this.rounds, this.profilePictures});
+  Stats(this.label, this.year, this.first, this.second, this.third,
+    this.bracket, this.rounds, this.profilePictures);
 }
 
-Stats i = Stats(label: 'I', year: 2016, first: [magu], second: [nic, teo], third: [],
-    bracket: [magu], rounds: [nic], profilePictures: []);
-Stats ii = Stats(label: 'II', year: 2017, first: [melo], second: [ale], third: [fabio],
-    bracket: [ale, fabio, magu, melo], rounds: [melo], profilePictures: ['assets/profile2017.jpg']);
-Stats iii = Stats(label: 'III', year: 2018, first: [ale], second: [magu], third: [melo],
-    bracket: [ale, magu], rounds: [ale], profilePictures: ['assets/profile2018.jpg']);
-Stats iv = Stats(label: 'IV', year: 2019, first: [melo], second: [luca], third: [enrico],
-    bracket: [luca], rounds: [melo], profilePictures: ['assets/profile2019.jpg']);
-Stats v = Stats(label: 'V', year: 2020, first: [teo], second: [ale], third: [magu],
-    bracket: [teo, ale], rounds: [nic], profilePictures: ['assets/profile2020.jpg', 'assets/profile2020-bis.jpg']);
-Stats vi = Stats(label: 'VI', year: 2021, first: [luca], second: [teo], third: [fabio],
-    bracket: [fabio, melo], rounds: [teo], profilePictures: ['assets/profile2021.jpg']);
+Stats i = Stats('I', 2016, [magu], [nic, teo], [],
+    [magu], [nic], []);
+Stats ii = Stats('II', 2017, [melo], [ale], [fabio],
+    [ale, fabio, magu, melo], [melo], ['assets/profile2017.jpg']);
+Stats iii = Stats('III', 2018, [ale], [magu], [melo],
+    [ale, magu], [ale], ['assets/profile2018.jpg']);
+Stats iv = Stats('IV', 2019, [melo], [luca], [enrico],
+    [luca], [melo], ['assets/profile2019.jpg']);
+Stats v = Stats('V', 2020, [teo], [ale], [magu],
+    [teo, ale], [nic], ['assets/profile2020.jpg', 'assets/profile2020-bis.jpg']);
+Stats vi = Stats('VI', 2021, [luca], [teo], [fabio],
+    [fabio, melo], [teo], ['assets/profile2021.jpg']);
 
 List<Stats> yearStats = [i, ii, iii, iv, v, vi];

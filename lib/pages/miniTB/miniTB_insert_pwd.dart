@@ -11,15 +11,15 @@ class MiniTBInsertPassword extends StatefulWidget {
 class _MiniTBInsertPasswordState extends State<MiniTBInsertPassword> {
   @override
   Widget build(BuildContext context) {
-    int index = ModalRoute.of(context).settings.arguments;
-    return InsertPasswordPage(index: index);
+    int index = ModalRoute.of(context)!.settings.arguments as int;
+    return InsertPasswordPage(key: const Key("InsertPasswordPage"), index: index);
   }
 }
 
 class InsertPasswordPage extends StatefulWidget {
   final int index;
 
-  const InsertPasswordPage({Key key, this.index}) : super(key: key);
+  const InsertPasswordPage({required Key key, required this.index}) : super(key: key);
 
   @override
   _InsertPasswordPageState createState() => _InsertPasswordPageState();
@@ -34,8 +34,8 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
       stream: DatabaseService().pwds,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          List<MiniTBPwd> pwds = snapshot.data;
-          String oldPwd;
+          List<MiniTBPwd> pwds = snapshot.data as List<MiniTBPwd>;
+          String oldPwd = "";
           for (var i = 0; i < pwds.length; i++) {
             if (pwds[i].name == miniTBParticipants[widget.index].name) {
               oldPwd = pwds[i].pwd;
@@ -54,7 +54,7 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
               centerTitle: true,
               actions: <Widget>[
                 IconButton(
-                  icon: Icon(Icons.home, color: Colors.white),
+                  icon: const Icon(Icons.home, color: Colors.white),
                   onPressed: () {
                     Navigator.popUntil(context, ModalRoute.withName('/'));
                   },
@@ -88,7 +88,7 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
                           }
                           return null;
                         },
-                        decoration: new InputDecoration(
+                        decoration: const InputDecoration(
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.white, width: 5.0),
                           ),
@@ -100,14 +100,14 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
                       ),
                     ),
                   ),
-                  RaisedButton(
-                    color: Colors.red,
-                    child: Text(
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.red),
+                    child: const Text(
                       'Confirm',
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () async {
-                      if (_formKey.currentState.validate()){
+                      if (_formKey.currentState!.validate()){
                         if (oldPwd == '') {
                           DatabaseService().updatePassword(miniTBParticipants[widget.index].name, pwd);
                         }

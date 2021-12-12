@@ -7,9 +7,9 @@ class MiniTBStats {
   List<Profile> second; // second place
   List<Profile> third; // third place
 
-  MiniTBStats({this.label, this.year, this.first, this.second, this.third});
+  MiniTBStats(this.label, this.year, this.first, this.second, this.third);
 }
 
-MiniTBStats iMini = MiniTBStats(label: 'I', year: 2020, first: [luca], second: [ale], third: [nic]);
+MiniTBStats iMini = MiniTBStats('I', 2020, [luca], [ale], [nic]);
 
 List<MiniTBStats> miniTBStats = [iMini];

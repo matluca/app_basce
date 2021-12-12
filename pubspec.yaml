@@ -1,8 +1,8 @@
 name: appbasce
-description: A new Flutter application.
+description: App Bascé
 
 # The following line prevents the package from being accidentally published to
-# pub.dev using `pub publish`. This is preferred for private packages.
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
@@ -18,36 +18,42 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 3.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.16.0-85.0.dev <3.0.0"
 
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
     sdk: flutter
-  http: ^0.12.2
-  flutter_spinkit: ^4.1.2+1
-  material_design_icons_flutter: ^4.0.5145
-  dots_indicator: ^1.1.0
-  flutter_launcher_icons: ^0.7.5
-  firebase_core: ^0.5.3
-  firebase_auth: ^0.18.4+1
-  url_launcher: ^5.7.6
-  whatsapp_unilink: ^1.0.0+1
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.3
-  cloud_firestore: ^0.14.4
-  base32: 1.1.1
+  cupertino_icons: ^1.0.2
+  material_design_icons_flutter: ^5.0.6595
+  whatsapp_unilink: ^2.0.0
+  url_launcher: ^6.0.17
+  http: ^0.13.4
+  dots_indicator: ^2.0.0
+  flutter_spinkit: ^5.1.0
+  firebase_auth: ^3.3.3
+  cloud_firestore: ^3.1.4
+  base32: ^2.1.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-flutter_icons:
-  image_path_android: "assets/launcher.png"
-  image_path_ios: "assets/launcher.png"
-  android: true # can specify file name here e.g. "ic_launcher"
-  ios: true # can specify file name here e.g. "My-Launcher-Icon"
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^1.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -62,7 +68,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-   - assets/
+    - assets/
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

@@ -21,15 +21,15 @@ class PersonalProfile extends StatefulWidget {
 class _PersonalProfileState extends State<PersonalProfile> {
   @override
   Widget build(BuildContext context) {
-    int screen = ModalRoute.of(context).settings.arguments;
+    int screen = ModalRoute.of(context)!.settings.arguments as int;
     final controller = PageController(
       initialPage: screen,
     );
 
     //List<Widget> pages = List.generate(yearStats.length, (index) => Page(screen: index));
     List<Widget> _createChildren() {
-      return new List<Widget>.generate(profiles.length, (int index) {
-        return ProfilePage(screen: index);
+      return List<Widget>.generate(profiles.length, (int index) {
+        return ProfilePage(key: const Key("ProfilePage"), screen: index);
       });
     }
 
@@ -42,7 +42,7 @@ class _PersonalProfileState extends State<PersonalProfile> {
 
 class ProfilePage extends StatefulWidget {
   final int screen;
-  const ProfilePage ({Key key, this.screen}): super(key: key);
+  const ProfilePage ({required Key key, required this.screen}): super(key: key);
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -65,11 +65,11 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
-        title: Text('${profiles[widget.screen].name}'),
+        title: Text(profiles[widget.screen].name),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.home, color: Colors.white),
+            icon: const Icon(Icons.home, color: Colors.white),
             onPressed: () {Navigator.popUntil(context, ModalRoute.withName('/'));},
           ),
         ],
@@ -82,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
               alignment: Alignment.topCenter,
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(20, 25, 20, 10),
+                  padding: const EdgeInsets.fromLTRB(20, 25, 20, 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -95,15 +95,15 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 2,
                         height: 50,
                       ),
                       Row(
                         children: <Widget>[
-                          SizedBox(width: 10),
-                          Icon(MdiIcons.trophy, size: 40, color: Color(0xFFFFD700)),
-                          SizedBox(width: 50),
+                          const  SizedBox(width: 10),
+                          const  Icon(MdiIcons.trophy, size: 40, color: Color(0xFFFFD700)),
+                          const SizedBox(width: 50),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
@@ -115,7 +115,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               Text(
-                                tournaments.length == 0 ? tournaments.length.toString() :
+                                tournaments.isEmpty ? tournaments.length.toString() :
                                 '${tournaments.length}  (${tournaments.toString().substring(1, tournaments.toString().length-1)} TB)',
                                 style: TextStyle(
                                   color: Colors.grey[800],
@@ -127,12 +127,12 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
                       Row(
                         children: <Widget>[
-                          SizedBox(width: 10),
-                          Icon(MdiIcons.trophy, size: 40, color: Color(0xFFA9A9A9)),
-                          SizedBox(width: 50),
+                          const SizedBox(width: 10),
+                          const Icon(MdiIcons.trophy, size: 40, color: Color(0xFFA9A9A9)),
+                          const SizedBox(width: 50),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
@@ -144,7 +144,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               Text(
-                                secondPlaces.length == 0 ? secondPlaces.length.toString() :
+                                secondPlaces.isEmpty ? secondPlaces.length.toString() :
                                 '${secondPlaces.length}  (${secondPlaces.toString().substring(1,secondPlaces.toString().length-1)} TB)',
                                 style: TextStyle(
                                   color: Colors.grey[800],
@@ -156,12 +156,12 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
                       Row(
                         children: <Widget>[
-                          SizedBox(width: 10),
-                          Icon(MdiIcons.trophy, size: 40, color: Color(0xFFFCD7F32)),
-                          SizedBox(width: 50),
+                          const SizedBox(width: 10),
+                          const Icon(MdiIcons.trophy, size: 40, color: Color(0xFFFCD7F32)),
+                          const SizedBox(width: 50),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
@@ -173,7 +173,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               Text(
-                                thirdPlaces.length == 0 ? thirdPlaces.length.toString() :
+                                thirdPlaces.isEmpty ? thirdPlaces.length.toString() :
                                 '${thirdPlaces.length}  (${thirdPlaces.toString().substring(1,thirdPlaces.toString().length-1)} TB)',
                                 style: TextStyle(
                                   color: Colors.grey[800],
@@ -185,12 +185,12 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
                       Row(
                         children: <Widget>[
-                          Icon(MdiIcons.reorderHorizontal, size: 30),
-                          Icon(MdiIcons.dragHorizontalVariant, size: 30),
-                          SizedBox(width: 40),
+                          const Icon(MdiIcons.reorderHorizontal, size: 30),
+                          const Icon(MdiIcons.dragHorizontalVariant, size: 30),
+                          const SizedBox(width: 40),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
@@ -202,7 +202,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               Text(
-                                brackets.length == 0 ? brackets.length.toString() :
+                                brackets.isEmpty ? brackets.length.toString() :
                                 '${brackets.length}  (${brackets.toString().substring(1,brackets.toString().length-1)} TB)',
                                 style: TextStyle(
                                   color: Colors.grey[800],
@@ -214,12 +214,12 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
                       Row(
                         children: <Widget>[
-                          Icon(MdiIcons.numeric4Circle, size: 30),
-                          Icon(MdiIcons.numeric2CircleOutline, size: 30),
-                          SizedBox(width: 40),
+                          const Icon(MdiIcons.numeric4Circle, size: 30),
+                          const Icon(MdiIcons.numeric2CircleOutline, size: 30),
+                          const SizedBox(width: 40),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
@@ -231,7 +231,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               Text(
-                                rounds.length == 0 ? rounds.length.toString() :
+                                rounds.isEmpty ? rounds.length.toString() :
                                 '${rounds.length}  (${rounds.toString().substring(1,rounds.toString().length-1)} TB)',
                                 style: TextStyle(
                                   color: Colors.grey[800],
@@ -252,7 +252,7 @@ class _ProfilePageState extends State<ProfilePage> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: DotsIndicator(
                 dotsCount: profiles.length,
                 position: widget.screen.toDouble(),

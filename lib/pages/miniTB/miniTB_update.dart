@@ -10,28 +10,29 @@ class MiniTBUpdate extends StatefulWidget {
 }
 
 class _MiniTBUpdateState extends State<MiniTBUpdate> {
-  Future<NBAStandings> futureNBAStandings;
+  late Future<NBAStandings> futureNBAStandings;
   @override
   void initState() {
     super.initState();
     futureNBAStandings = getStandings();
   }
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: FutureBuilder<NBAStandings>(
         future: futureNBAStandings,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            var eastStandings = snapshot.data.eastStandings;
-            var westStandings = snapshot.data.westStandings;
+            var eastStandings = snapshot.data?.eastStandings;
+            var westStandings = snapshot.data?.westStandings;
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.blue[400],
-                title: Text('Classifiche da nba.com'),
+                title: const Text('Classifiche da nba.com'),
                 centerTitle: true,
                 actions: <Widget>[
                   IconButton(
-                    icon: Icon(Icons.home, color: Colors.white),
+                    icon: const Icon(Icons.home, color: Colors.white),
                     onPressed: () {
                       Navigator.popUntil(context, ModalRoute.withName('/'));
                     },
@@ -46,12 +47,12 @@ class _MiniTBUpdateState extends State<MiniTBUpdate> {
                     child: Center(
                       child: Column(
                         children: [
-                          Standings(east: eastStandings, west: westStandings),
+                          Standings(key: const Key("Standings"), east: eastStandings!, west: westStandings!),
                           Padding(
                             padding: const EdgeInsets.all(5),
-                            child: RaisedButton(
-                              color: Colors.red,
-                              child: Text(
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(primary: Colors.red),
+                              child: const Text(
                                 'Update and exit',
                                 style: TextStyle(color: Colors.white),
                               ),
@@ -69,7 +70,6 @@ class _MiniTBUpdateState extends State<MiniTBUpdate> {
                 ),
               ),
             );
-            return Text(snapshot.data.eastStandings.toString());
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           } else {
@@ -94,7 +94,7 @@ class NBAStandings {
   final List<String> eastStandings;
   final List<String> westStandings;
 
-  NBAStandings({this.eastStandings, this.westStandings});
+  NBAStandings({required this.eastStandings, required this.westStandings});
 
   factory NBAStandings.fromJSON(Map<String, dynamic> json) {
     var east = json['league']['standard']['conference']['east'];
@@ -128,7 +128,7 @@ class Standings extends StatefulWidget {
   final List<String> east;
   final List<String> west;
 
-  Standings({ Key key, this.east, this.west}) : super(key: key);
+  Standings({required Key key, required this.east, required this.west}) : super(key: key);
 
   @override
   _StandingsState createState() => _StandingsState();
@@ -147,16 +147,16 @@ class _StandingsState extends State<Standings> {
         padding: const EdgeInsets.all(5),
         width: MediaQuery.of(context).size.width*0.8,
         child: Card(
-          margin: EdgeInsets.fromLTRB(5, 2, 5, 2),
+          margin: const EdgeInsets.fromLTRB(5, 2, 5, 2),
           child: Column(
             children: [
               ListTile(
-                title: Text('East'),
-                subtitle: Text('$eastStandings'),
+                title: const Text('East'),
+                subtitle: Text(eastStandings),
               ),
               ListTile(
-                title: Text('West'),
-                subtitle: Text('$westStandings'),
+                title: const Text('West'),
+                subtitle: Text(westStandings),
               ),
             ],
           ),

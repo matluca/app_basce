@@ -1,6 +1,5 @@
 import 'package:appbasce/classes/miniTB_prediction_class.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class MiniTBInsertList extends StatefulWidget {
   @override
@@ -17,11 +16,11 @@ class _MiniTBInsertListState extends State<MiniTBInsertList> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
-        title: Text('Chi sei?'),
+        title: const Text('Chi sei?'),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.home, color: Colors.white),
+            icon: const Icon(Icons.home, color: Colors.white),
             onPressed: () {Navigator.popUntil(context, ModalRoute.withName('/'));},
           ),
         ],
@@ -29,14 +28,14 @@ class _MiniTBInsertListState extends State<MiniTBInsertList> {
       backgroundColor: Colors.blue[200],
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(5,25,5,10),
+          padding: const EdgeInsets.fromLTRB(5,25,5,10),
           child: Column(
             children: <Widget>[
               GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     childAspectRatio: (width-30)/columns/85,
                     crossAxisCount: columns),
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: miniTBParticipants.length-1,
                 itemBuilder: (context, index) {
@@ -49,7 +48,7 @@ class _MiniTBInsertListState extends State<MiniTBInsertList> {
                         },
                         title: Center(
                           child: Text(
-                            '${miniTBParticipants[index].name}',
+                            miniTBParticipants[index].name,
                             style: TextStyle(
                               color: Colors.grey[700],
                               fontSize: 18,

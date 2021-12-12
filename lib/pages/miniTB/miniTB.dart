@@ -17,16 +17,16 @@ class _MiniTBState extends State<MiniTB> {
       stream: DatabaseService().ddl,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          DateTime ddlFromDB = snapshot.data;
+          DateTime ddlFromDB = snapshot.data as DateTime;
           bool beforeDeadline = DateTime.now().isBefore(ddlFromDB);
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.blue[400],
-              title: Text('Mini TB per la RS'),
+              title: const Text('Mini TB per la RS'),
               centerTitle: true,
               actions: <Widget>[
                 IconButton(
-                  icon: Icon(Icons.home, color: Colors.white),
+                  icon: const Icon(Icons.home, color: Colors.white),
                   onPressed: () {
                     Navigator.popUntil(context, ModalRoute.withName('/'));
                   },
@@ -36,7 +36,7 @@ class _MiniTBState extends State<MiniTB> {
             backgroundColor: Colors.blue[200],
             body: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(5, 35, 5, 10),
+                padding: const EdgeInsets.fromLTRB(5, 35, 5, 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,8 +52,8 @@ class _MiniTBState extends State<MiniTB> {
                         : VisualizzaPredizioni(),
                     Card(
                       child: ListTile(
-                        leading: Icon(Icons.cloud_download),
-                        trailing: Icon(Icons.play_arrow),
+                        leading: const Icon(Icons.cloud_download),
+                        trailing: const Icon(Icons.play_arrow),
                         title: Text(
                             "Aggiorna classifiche NBA reali automaticamente",
                             style: TextStyle(
@@ -65,7 +65,7 @@ class _MiniTBState extends State<MiniTB> {
                         },
                       ),
                     ),
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                     Card(
                       child: ListTile(
                         leading: Icon(Icons.settings),
@@ -82,7 +82,7 @@ class _MiniTBState extends State<MiniTB> {
                         },
                       ),
                     ),
-                    SizedBox(height: 80),
+                    const SizedBox(height: 80),
                     beforeDeadline
                         ? Text('Deadline $ddlFromDB', style: TextStyle(color: Colors.grey[800]))
                         : Container(),
@@ -104,8 +104,8 @@ class InserisciPredizioni extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        leading: Icon(MdiIcons.pencil),
-        trailing: Icon(Icons.play_arrow),
+        leading: const Icon(MdiIcons.pencil),
+        trailing: const Icon(Icons.play_arrow),
         title: Text(
             "Inserisci/Aggiorna predizione",
             style: TextStyle(
@@ -127,8 +127,8 @@ class InserisciPredizioniMock extends StatelessWidget {
       color: Colors.grey,
       elevation: 0,
       child: ListTile(
-        leading: Icon(MdiIcons.pencil),
-        trailing: Icon(Icons.play_arrow),
+        leading: const Icon(MdiIcons.pencil),
+        trailing: const Icon(Icons.play_arrow),
         title: Text(
             "Inserisci/Aggiorna predizione",
             style: TextStyle(
@@ -145,8 +145,8 @@ class VisualizzaPredizioni extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        leading: Icon(MdiIcons.messageTextOutline),
-        trailing: Icon(Icons.play_arrow),
+        leading: const Icon(MdiIcons.messageTextOutline),
+        trailing: const Icon(Icons.play_arrow),
         title: Text(
             "Visualizza predizioni",
             style: TextStyle(
@@ -168,8 +168,8 @@ class VisualizzaPredizioniMock extends StatelessWidget {
       color: Colors.grey,
       elevation: 0,
       child: ListTile(
-        leading: Icon(MdiIcons.messageTextOutline),
-        trailing: Icon(Icons.play_arrow),
+        leading: const Icon(MdiIcons.messageTextOutline),
+        trailing: const Icon(Icons.play_arrow),
         title: Text(
             "Visualizza predizioni",
             style: TextStyle(
@@ -189,9 +189,9 @@ class VisualizzaClassifica extends StatelessWidget {
         leading: Transform(
           alignment: Alignment.center,
           transform: Matrix4.rotationY(math.pi),
-          child: Icon(MdiIcons.podium),
+          child: const Icon(MdiIcons.podium),
         ),
-        trailing: Icon(Icons.play_arrow),
+        trailing: const Icon(Icons.play_arrow),
         title: Text(
             "Visualizza classifica",
             style: TextStyle(
@@ -216,9 +216,9 @@ class VisualizzaClassificaMock extends StatelessWidget {
         leading: Transform(
           alignment: Alignment.center,
           transform: Matrix4.rotationY(math.pi),
-          child: Icon(MdiIcons.podium),
+          child: const Icon(MdiIcons.podium),
         ),
-        trailing: Icon(Icons.play_arrow),
+        trailing: const Icon(Icons.play_arrow),
         title: Text(
             "Visualizza classifica",
             style: TextStyle(

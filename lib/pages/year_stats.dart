@@ -12,14 +12,14 @@ class _YearStatsState extends State<YearStats> {
   @override
   Widget build(BuildContext context) {
 
-    int screen = ModalRoute.of(context).settings.arguments;
+    int screen = ModalRoute.of(context)!.settings.arguments as int;
     final controller = PageController(
       initialPage: screen,
     );
 
     List<Widget> _createChildren() {
-      return new List<Widget>.generate(yearStats.length, (int index) {
-        return YearPage(screen: index);
+      return List<Widget>.generate(yearStats.length, (int index) {
+        return YearPage(key: const Key("YearPage"), screen: index);
       });
     }
 
@@ -32,7 +32,7 @@ class _YearStatsState extends State<YearStats> {
 
 class YearPage extends StatefulWidget {
   final int screen;
-  const YearPage ({Key key, this.screen}): super(key: key);
+  const YearPage ({required Key key, required this.screen}): super(key: key);
   @override
   _YearPageState createState() => _YearPageState();
 }
@@ -50,7 +50,7 @@ class _YearPageState extends State<YearPage> {
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.home, color: Colors.white),
+            icon: const Icon(Icons.home, color: Colors.white),
             onPressed: () {Navigator.popUntil(context, ModalRoute.withName('/'));},
           ),
         ],
@@ -63,7 +63,7 @@ class _YearPageState extends State<YearPage> {
               alignment: Alignment.topCenter,
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(0, 45, 0, 10),
+                  padding: const EdgeInsets.fromLTRB(0, 45, 0, 10),
                   child: Column(
                     //mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
@@ -105,14 +105,14 @@ class _YearPageState extends State<YearPage> {
                                         backgroundImage: AssetImage('assets/${yearStats[widget.screen].second[index].image}'),
                                         radius: 30,
                                       ),
-                                      SizedBox(width: 5),
+                                      const SizedBox(width: 5),
                                     ],
                                   );
                                 },
                               ),
                             ),
                           ),
-                          if (yearStats[widget.screen].third.length == 0) Positioned(
+                          if (yearStats[widget.screen].third.isEmpty) Positioned(
                             top: 60,
                             right: 50,
                             child: Container(),
@@ -126,8 +126,8 @@ class _YearPageState extends State<YearPage> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 180),
-                      Padding(
+                      const SizedBox(height: 180),
+                      const Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Divider(height: 40, thickness: 2),
                       ),
@@ -135,9 +135,9 @@ class _YearPageState extends State<YearPage> {
                         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
                         child: Row(
                           children: <Widget>[
-                            Icon(MdiIcons.reorderHorizontal, size: 30),
-                            Icon(MdiIcons.dragHorizontalVariant, size: 30),
-                            SizedBox(width: 40),
+                            const Icon(MdiIcons.reorderHorizontal, size: 30),
+                            const Icon(MdiIcons.dragHorizontalVariant, size: 30),
+                            const SizedBox(width: 40),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
@@ -149,19 +149,19 @@ class _YearPageState extends State<YearPage> {
                                     letterSpacing: 2,
                                   ),
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Container(
                                   height: (width - 140)/yearStats[widget.screen].bracket.length>65 ? 60 : ((width - 140)/yearStats[widget.screen].bracket.length-5),
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: ListView.builder(
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics: const NeverScrollableScrollPhysics(),
                                       scrollDirection: Axis.horizontal,
                                       shrinkWrap: true,
                                       itemCount: yearStats[widget.screen].bracket.length,
                                       itemBuilder: (context, index) {return
                                         Padding(
-                                          padding: EdgeInsets.fromLTRB(0,0,5,0),
+                                          padding: const EdgeInsets.fromLTRB(0,0,5,0),
                                           child: CircleAvatar(
                                             backgroundImage: AssetImage('assets/${yearStats[widget.screen].bracket[index].image}'),
                                             radius: (width - 140)/yearStats[widget.screen].bracket.length>65 ? 30 : ((width - 140)/yearStats[widget.screen].bracket.length-5)/2,
@@ -176,14 +176,14 @@ class _YearPageState extends State<YearPage> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
                         child: Row(
                           children: <Widget>[
-                            Icon(MdiIcons.numeric4Circle, size: 30),
-                            Icon(MdiIcons.numeric2CircleOutline, size: 30),
-                            SizedBox(width: 40),
+                            const Icon(MdiIcons.numeric4Circle, size: 30),
+                            const Icon(MdiIcons.numeric2CircleOutline, size: 30),
+                            const SizedBox(width: 40),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
@@ -195,7 +195,7 @@ class _YearPageState extends State<YearPage> {
                                     letterSpacing: 2,
                                   ),
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Container(
                                   height: 60,
                                   child: ListView.builder(
@@ -204,7 +204,7 @@ class _YearPageState extends State<YearPage> {
                                     itemCount: yearStats[widget.screen].rounds.length,
                                     itemBuilder: (context, index) {return
                                       Padding(
-                                        padding: EdgeInsets.fromLTRB(0,0,5,0),
+                                        padding: const EdgeInsets.fromLTRB(0,0,5,0),
                                         child: CircleAvatar(
                                           backgroundImage: AssetImage('assets/${yearStats[widget.screen].rounds[index].image}'),
                                           radius: 30,
@@ -218,10 +218,10 @@ class _YearPageState extends State<YearPage> {
                           ],
                         ),
                       ),
-                      if ((yearStats[widget.screen].profilePictures).length > 0)
+                      if ((yearStats[widget.screen].profilePictures).isNotEmpty)
                       Column(
                         children: [
-                          SizedBox(height: 25),
+                          const SizedBox(height: 25),
                           Text(
                             'IMMAGINI PROFILO',
                             style: TextStyle(
@@ -230,7 +230,7 @@ class _YearPageState extends State<YearPage> {
                             ),
                           ),
                           ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: (yearStats[widget.screen].profilePictures).length,
                             itemBuilder: (context, index) {
@@ -251,7 +251,7 @@ class _YearPageState extends State<YearPage> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: DotsIndicator(
                 dotsCount: yearStats.length,
                 position: widget.screen.toDouble(),

@@ -45,18 +45,14 @@ class DatabaseService {
     return snapshot.docs.map((doc){
       var eastPred = {};
       for (var team=0; team <eastTeams.length; team++){
-        eastPred[eastTeams[team]] = doc.data()[eastTeams[team]] ?? -1;
+        eastPred[eastTeams[team]] = (doc.data() as Map)[eastTeams[team]] ?? -1;
       }
       var westPred = {};
       for (var team=0; team <westTeams.length; team++){
-        westPred[westTeams[team]] = doc.data()[westTeams[team]] ?? -1;
+        westPred[westTeams[team]] = (doc.data() as Map)[westTeams[team]] ?? -1;
       }
       
-      return MiniTBPred(
-        name: doc.data()['name'] ?? '',
-        east: eastPred,
-        west: westPred,
-      );
+      return MiniTBPred((doc.data() as Map)['name'] ?? '', eastPred, westPred);
     }).toList();
   }
 
@@ -67,15 +63,10 @@ class DatabaseService {
 
   List<MiniTBPwd> _pwdsFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc){
-      if (doc.data()['pwd'] == '') {
-        return MiniTBPwd(
-          name: doc.data()['name'] ?? '',
-          pwd: '',
-        );
+      if ((doc.data() as Map)['pwd'] == '') {
+        return MiniTBPwd((doc.data() as Map)['name'] ?? '', '');
       }
-      return MiniTBPwd(
-        name: doc.data()['name'] ?? '',
-        pwd: base32.decodeAsString(doc.data()['pwd']),
+      return MiniTBPwd((doc.data() as Map)['name'] ?? '', base32.decodeAsString((doc.data() as Map)['pwd']),
       );
     }).toList();
   }
@@ -87,7 +78,7 @@ class DatabaseService {
 
   DateTime _ddlFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
-      var timestamp = doc.data()['deadline'];
+      var timestamp = (doc.data() as Map)['deadline'];
       var dd = timestamp.toDate();
       return DateTime.parse(dd.toString());
     }).toList()[0];

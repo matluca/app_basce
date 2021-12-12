@@ -1,6 +1,5 @@
 import 'package:appbasce/classes/miniTBStat_class.dart';
 import 'package:flutter/material.dart';
-import 'package:appbasce/classes/yearStat_class.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 Map iconMapMini = {
@@ -18,11 +17,11 @@ class _AlboMiniState extends State<AlboMini> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
-        title: Text("Albo d'oro MiniTB"),
+        title: const Text("Albo d'oro MiniTB"),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.home, color: Colors.white),
+            icon: const Icon(Icons.home, color: Colors.white),
             onPressed: () {Navigator.popUntil(context, ModalRoute.withName('/'));},
           ),
         ],
@@ -30,15 +29,15 @@ class _AlboMiniState extends State<AlboMini> {
       backgroundColor: Colors.blue[200],
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(5,35,5,10),
+          padding: const EdgeInsets.fromLTRB(5,35,5,10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Image(image: AssetImage('assets/albo.png'), height: 150),
-              SizedBox(height: 30),
+              const Image(image: AssetImage('assets/albo.png'), height: 150),
+              const SizedBox(height: 30),
               ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: miniTBStats.length,
                 itemBuilder: (context, index) {
@@ -65,8 +64,8 @@ class _AlboMiniState extends State<AlboMini> {
                             CircleAvatar(
                               backgroundImage: AssetImage('assets/${miniTBStats[index].first[0].image}'),
                             ),
-                            SizedBox(width: 5),
-                            Icon(Icons.play_arrow),
+                            const SizedBox(width: 5),
+                            const Icon(Icons.play_arrow),
                           ],
                         ),
                       ),

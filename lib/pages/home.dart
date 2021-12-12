@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:math' as math;
 
@@ -14,17 +13,17 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
-        title: Text('App Bascé Home'),
+        title: const Text('App Bascé Home'),
         centerTitle: true,
-        leading: Padding(
-          padding: const EdgeInsets.all(10),
+        leading: const Padding(
+          padding: EdgeInsets.all(10),
           child: CircleAvatar(
             backgroundImage: AssetImage('assets/launcher.png'),
           ),
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.info_outline, color: Colors.white),
+            icon: const Icon(Icons.info_outline, color: Colors.white),
             onPressed: () {alertDialog(context);},
           ),
         ],
@@ -32,7 +31,7 @@ class _HomeState extends State<Home> {
       backgroundColor: Colors.blue[200],
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(20,30,20,20),
+          padding: const EdgeInsets.fromLTRB(20,30,20,20),
           child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -47,9 +46,9 @@ class _HomeState extends State<Home> {
                     fontStyle: FontStyle.italic,
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Image.asset('assets/profile2021.jpg'),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Menu(),
               ],
             ),
@@ -67,8 +66,8 @@ class Menu extends StatelessWidget {
       children: <Widget>[
         Card(
           child: ListTile(
-            leading: Icon(Icons.people),
-            trailing: Icon(Icons.play_arrow),
+            leading: const Icon(Icons.people),
+            trailing: const Icon(Icons.play_arrow),
             title: Text(
                 'Profili',
                 style: TextStyle(
@@ -86,9 +85,9 @@ class Menu extends StatelessWidget {
             leading: Transform(
               alignment: Alignment.center,
               transform: Matrix4.rotationY(math.pi),
-              child: Icon(MdiIcons.podium),
+              child: const Icon(MdiIcons.podium),
             ),
-            trailing: Icon(Icons.play_arrow),
+            trailing: const Icon(Icons.play_arrow),
             title: Text(
                 "Albo d'oro",
                 style: TextStyle(
@@ -105,9 +104,9 @@ class Menu extends StatelessWidget {
             leading: Transform(
               alignment: Alignment.center,
               transform: Matrix4.rotationY(math.pi),
-              child: Icon(MdiIcons.podium),
+              child: const Icon(MdiIcons.podium),
             ),
-            trailing: Icon(Icons.play_arrow),
+            trailing: const Icon(Icons.play_arrow),
             title: Text(
                 "Albo d'oro MiniTB",
                 style: TextStyle(
@@ -121,8 +120,8 @@ class Menu extends StatelessWidget {
         ),
         Card(
           child: ListTile(
-            leading: Icon(MdiIcons.playBoxMultiple),
-            trailing: Icon(Icons.play_arrow),
+            leading: const Icon(MdiIcons.playBoxMultiple),
+            trailing: const Icon(Icons.play_arrow),
             title: Text(
               'Partecipa al Mini-TB per la RS',
               style: TextStyle(
@@ -136,8 +135,8 @@ class Menu extends StatelessWidget {
         ),
         Card(
           child: ListTile(
-            leading: Icon(MdiIcons.basketball),
-            trailing: Icon(Icons.play_arrow),
+            leading: const Icon(MdiIcons.basketball),
+            trailing: const Icon(Icons.play_arrow),
             title: Text(
               'Partecipa al Torneo Bascé',
               style: TextStyle(
@@ -161,12 +160,12 @@ alertDialog(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Center(child: Text("App Bascé Info")),
+        title: const Center(child: Text("App Bascé Info")),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text('Versione: 3.0.0', style: TextStyle(color: Colors.grey[700])),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text('Creatore: Luca', style: TextStyle(color: Colors.grey[700]))
           ],
         ),
@@ -183,7 +182,7 @@ showImage(BuildContext context, String image) {
       return Center(
         child: Container(
           child: AlertDialog(
-            contentPadding: EdgeInsets.all(0),
+            contentPadding: const EdgeInsets.all(0),
             content: Image.asset(image),
           ),
         ),

@@ -1,6 +1,5 @@
 import 'package:appbasce/classes/miniTBStat_class.dart';
 import 'package:flutter/material.dart';
-import 'package:appbasce/classes/yearStat_class.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
 class YearStatsMini extends StatefulWidget {
@@ -12,14 +11,14 @@ class _YearStatsMiniState extends State<YearStatsMini> {
   @override
   Widget build(BuildContext context) {
 
-    int screen = ModalRoute.of(context).settings.arguments;
+    int screen = ModalRoute.of(context)!.settings.arguments as int;
     final controller = PageController(
       initialPage: screen,
     );
 
     List<Widget> _createChildren() {
-      return new List<Widget>.generate(miniTBStats.length, (int index) {
-        return YearPageMini(screen: index);
+      return List<Widget>.generate(miniTBStats.length, (int index) {
+        return YearPageMini(key: const Key("YearPageMini"), screen: index);
       });
     }
 
@@ -32,7 +31,7 @@ class _YearStatsMiniState extends State<YearStatsMini> {
 
 class YearPageMini extends StatefulWidget {
   final int screen;
-  const YearPageMini ({Key key, this.screen}): super(key: key);
+  const YearPageMini ({required Key key, required this.screen}): super(key: key);
   @override
   _YearPageMiniState createState() => _YearPageMiniState();
 }
@@ -48,7 +47,7 @@ class _YearPageMiniState extends State<YearPageMini> {
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.home, color: Colors.white),
+            icon: const Icon(Icons.home, color: Colors.white),
             onPressed: () {Navigator.popUntil(context, ModalRoute.withName('/'));},
           ),
         ],
@@ -61,7 +60,7 @@ class _YearPageMiniState extends State<YearPageMini> {
               alignment: Alignment.topCenter,
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(0, 45, 0, 10),
+                  padding: const EdgeInsets.fromLTRB(0, 45, 0, 10),
                   child: Column(
                     //mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
@@ -103,14 +102,14 @@ class _YearPageMiniState extends State<YearPageMini> {
                                         backgroundImage: AssetImage('assets/${miniTBStats[widget.screen].second[index].image}'),
                                         radius: 30,
                                       ),
-                                      SizedBox(width: 5),
+                                      const SizedBox(width: 5),
                                     ],
                                   );
                                 },
                               ),
                             ),
                           ),
-                          if (miniTBStats[widget.screen].third.length == 0) Positioned(
+                          if (miniTBStats[widget.screen].third.isEmpty) Positioned(
                             top: 60,
                             right: 50,
                             child: Container(),
@@ -124,7 +123,7 @@ class _YearPageMiniState extends State<YearPageMini> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 180),
+                      const SizedBox(height: 180),
                     ],
                   ),
                 ),
@@ -134,7 +133,7 @@ class _YearPageMiniState extends State<YearPageMini> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: DotsIndicator(
                 dotsCount: miniTBStats.length,
                 position: widget.screen.toDouble(),

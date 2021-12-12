@@ -22,11 +22,11 @@ class _AlboState extends State<Albo> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
-        title: Text("Albo d'oro"),
+        title: const Text("Albo d'oro"),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.home, color: Colors.white),
+            icon: const Icon(Icons.home, color: Colors.white),
             onPressed: () {Navigator.popUntil(context, ModalRoute.withName('/'));},
           ),
         ],
@@ -34,13 +34,13 @@ class _AlboState extends State<Albo> {
       backgroundColor: Colors.blue[200],
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(5,35,5,10),
+          padding: const EdgeInsets.fromLTRB(5,35,5,10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Image(image: AssetImage('assets/albo.png'), height: 150),
-              SizedBox(height: 30),
+              const Image(image: AssetImage('assets/albo.png'), height: 150),
+              const SizedBox(height: 30),
               ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -69,8 +69,8 @@ class _AlboState extends State<Albo> {
                             CircleAvatar(
                               backgroundImage: AssetImage('assets/${yearStats[index].first[0].image}'),
                             ),
-                            SizedBox(width: 5),
-                            Icon(Icons.play_arrow),
+                            const SizedBox(width: 5),
+                            const Icon(Icons.play_arrow),
                           ],
                         ),
                       ),

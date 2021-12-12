@@ -10,7 +10,7 @@ class MiniTBPwd {
   final String name;
   final String pwd;
 
-  MiniTBPwd({this.name, this.pwd});
+  MiniTBPwd(this.name, this.pwd);
 }
 
 class MiniTBPred {
@@ -18,7 +18,7 @@ class MiniTBPred {
   final Map east;
   final Map west;
 
-  MiniTBPred({this.name, this.east, this.west});
+  MiniTBPred(this.name, this.east, this.west);
 }
 
 Map buildStandings(Map predictions) {
@@ -33,7 +33,7 @@ Map buildStandings(Map predictions) {
 }
 
 List<String> buildCurrentList(Map prediction) {
-  List<String> p = new List.filled(15, '');
+  List<String> p = List.filled(15, '');
   for (int i = 1; i < 16; i++) {
     for (MapEntry<dynamic, dynamic> entry in prediction.entries) {
       if (entry.value == i) {
@@ -53,16 +53,16 @@ List<int> malus(MiniTBPred prediction, MiniTBPred reference) {
     mEast = mEast + (p-r).abs();
   });
   int mWest = 0;
-  prediction.west.keys.forEach((team) {
+  for (var team in prediction.west.keys) {
     int p = min(prediction.west[team] as int, 11);
     int r = min(reference.west[team] as int, 11);
     mWest = mWest + (p-r).abs();
-  });
+  }
   return [mEast, mWest];
 }
 
 String miniTBStandings(List<MiniTBPred> preds) {
-  MiniTBPred reference;
+  MiniTBPred reference = MiniTBPred("", {}, {});
   for (var i=0; i<preds.length; i++) {
     if (preds[i].name == "Admin") {
       reference = preds[i];
@@ -82,11 +82,11 @@ String miniTBStandings(List<MiniTBPred> preds) {
   }
   var sortedKeys = standings.keys.toList(growable:false)
     ..sort((k1, k2) => standings[k1].compareTo(standings[k2]));
-  LinkedHashMap sortedStandings = new LinkedHashMap
+  LinkedHashMap sortedStandings = LinkedHashMap
       .fromIterable(sortedKeys, key: (k) => k, value: (k) => standings[k]);
-  LinkedHashMap sortedEastStandings = new LinkedHashMap
+  LinkedHashMap sortedEastStandings = LinkedHashMap
       .fromIterable(sortedKeys, key: (k) => k, value: (k) => eastStandings[k]);
-  LinkedHashMap sortedWestStandings = new LinkedHashMap
+  LinkedHashMap sortedWestStandings = LinkedHashMap
       .fromIterable(sortedKeys, key: (k) => k, value: (k) => westStandings[k]);
 
   var msg = "";
