@@ -42,7 +42,7 @@ class MiniTBPredictions extends StatelessWidget {
                         radius: 23,
                       ),
                       const SizedBox(width: 6),
-                      Predictions(key: key!, prediction: reference, reference: reference, showMalus: false),
+                      Predictions(key: const Key("MiniTB predictions"), prediction: reference, reference: reference, showMalus: false),
                     ],
                   ),
                 ),
@@ -73,7 +73,7 @@ class MiniTBPredictions extends StatelessWidget {
                                     radius: 23,
                                   ),
                                   const SizedBox(width: 6),
-                                  Predictions(key: key!, prediction: pred, reference: reference, showMalus: true),
+                                  Predictions(key: const Key("MiniTB predictions"), prediction: pred, reference: reference, showMalus: true),
                                 ],
                               ),
                             );

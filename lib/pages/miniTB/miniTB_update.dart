@@ -11,11 +11,13 @@ class MiniTBUpdate extends StatefulWidget {
 
 class _MiniTBUpdateState extends State<MiniTBUpdate> {
   late Future<NBAStandings> futureNBAStandings;
+
   @override
   void initState() {
     super.initState();
     futureNBAStandings = getStandings();
   }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -47,19 +49,25 @@ class _MiniTBUpdateState extends State<MiniTBUpdate> {
                     child: Center(
                       child: Column(
                         children: [
-                          Standings(key: const Key("Standings"), east: eastStandings!, west: westStandings!),
+                          Standings(
+                              key: const Key("Standings"),
+                              east: eastStandings!,
+                              west: westStandings!),
                           Padding(
                             padding: const EdgeInsets.all(5),
                             child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(primary: Colors.red),
+                              style:
+                                  ElevatedButton.styleFrom(primary: Colors.red),
                               child: const Text(
                                 'Update and exit',
                                 style: TextStyle(color: Colors.white),
                               ),
                               onPressed: () async {
-                                DatabaseService().updatePredictionsFromOrderedList(
-                                    'Admin', eastStandings, westStandings);
-                                Navigator.popUntil(context, ModalRoute.withName('/mini_tb'));
+                                DatabaseService()
+                                    .updatePredictionsFromOrderedList(
+                                        'Admin', eastStandings, westStandings);
+                                Navigator.popUntil(
+                                    context, ModalRoute.withName('/mini_tb'));
                               },
                             ),
                           ),
@@ -82,7 +90,13 @@ class _MiniTBUpdateState extends State<MiniTBUpdate> {
 }
 
 Future<NBAStandings> getStandings() async {
-  final response = await http.get(Uri.http("data.nba.net", "10s/prod/v1/current/standings_conference.json"));
+  final response = await http.get(
+      Uri.https("data.nba.net", "10s/prod/v1/current/standings_conference.json"),
+      headers: {
+        "Accept": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET"
+      });
   if (response.statusCode == 200) {
     return NBAStandings.fromJSON(jsonDecode(response.body));
   } else {
@@ -101,7 +115,7 @@ class NBAStandings {
     var west = json['league']['standard']['conference']['west'];
     List<String> eastStandings = [];
     List<String> westStandings = [];
-    for (int i=0; i<15; i++) {
+    for (int i = 0; i < 15; i++) {
       eastStandings.add(pacifyTricode(east[i]['teamSitesOnly']['teamTricode']));
       westStandings.add(pacifyTricode(west[i]['teamSitesOnly']['teamTricode']));
     }
@@ -128,7 +142,8 @@ class Standings extends StatefulWidget {
   final List<String> east;
   final List<String> west;
 
-  Standings({required Key key, required this.east, required this.west}) : super(key: key);
+  Standings({required Key key, required this.east, required this.west})
+      : super(key: key);
 
   @override
   _StandingsState createState() => _StandingsState();
@@ -137,15 +152,14 @@ class Standings extends StatefulWidget {
 class _StandingsState extends State<Standings> {
   @override
   Widget build(BuildContext context) {
-
     var eastStandings = buildStandingsFromList(widget.east).toString();
-    eastStandings = eastStandings.substring(1, eastStandings.length-1);
+    eastStandings = eastStandings.substring(1, eastStandings.length - 1);
     var westStandings = buildStandingsFromList(widget.west).toString();
-    westStandings = westStandings.substring(1, westStandings.length-1);
+    westStandings = westStandings.substring(1, westStandings.length - 1);
 
     return Container(
         padding: const EdgeInsets.all(5),
-        width: MediaQuery.of(context).size.width*0.8,
+        width: MediaQuery.of(context).size.width * 0.8,
         child: Card(
           margin: const EdgeInsets.fromLTRB(5, 2, 5, 2),
           child: Column(
@@ -160,17 +174,14 @@ class _StandingsState extends State<Standings> {
               ),
             ],
           ),
-        )
-    );
+        ));
   }
 }
 
 Map buildStandingsFromList(List<String> st) {
   var standings = {};
   for (int i = 1; i < 16; i++) {
-    standings[i] = st[i-1];
+    standings[i] = st[i - 1];
   }
   return standings;
 }
-
-

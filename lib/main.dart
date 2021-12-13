@@ -26,7 +26,22 @@ void main() {
 
 class App extends StatelessWidget {
   // Create the initialization Future outside of `build`:
+
+  // For Android
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
+  // For Web
+  // final Future<FirebaseApp> _initialization = Firebase.initializeApp(
+  //   options: const FirebaseOptions(
+  //     apiKey: "AIzaSyAkosczGLQBjng85sHD6kQoeX6T-1oLh1E",
+  //     appId: "1:180543049748:web:58fa4e085f07100794d701",
+  //     messagingSenderId: "180543049748",
+  //     projectId: "minitb-rs",
+  //     authDomain: "minitb-rs.firebaseapp.com",
+  //     databaseURL: "https://minitb-rs.firebaseio.com",
+  //     storageBucket: "minitb-rs.appspot.com",
+  //   )
+  // );
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +51,7 @@ class App extends StatelessWidget {
       builder: (context, snapshot) {
         // Check for errors
         if (snapshot.hasError) {
-          return Text(snapshot.error.toString());
+          return Text(snapshot.error.toString(), textDirection: TextDirection.ltr);
         }
 
         // Once complete, show your application
