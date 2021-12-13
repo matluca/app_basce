@@ -4,6 +4,8 @@ import 'package:appbasce/classes/yearStat_class.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
 class YearStats extends StatefulWidget {
+  const YearStats({Key? key}) : super(key: key);
+
   @override
   _YearStatsState createState() => _YearStatsState();
 }
@@ -65,11 +67,9 @@ class _YearPageState extends State<YearPage> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 45, 0, 10),
                   child: Column(
-                    //mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Stack(
-                        overflow: Overflow.visible,
-                        alignment: Alignment.center,
+                        clipBehavior: Clip.none, alignment: Alignment.center,
                         children: <Widget>[
                           Positioned(
                             left: (MediaQuery.of(context).size.width-350)/2,
@@ -92,7 +92,7 @@ class _YearPageState extends State<YearPage> {
                           ) else Positioned(
                             top: 60,
                             left: MediaQuery.of(context).size.width/2-180,
-                            child: Container(
+                            child: SizedBox(
                               height: 60,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
@@ -128,7 +128,7 @@ class _YearPageState extends State<YearPage> {
                       ),
                       const SizedBox(height: 180),
                       const Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Divider(height: 40, thickness: 2),
                       ),
                       Padding(
@@ -150,7 +150,7 @@ class _YearPageState extends State<YearPage> {
                                   ),
                                 ),
                                 const SizedBox(height: 10),
-                                Container(
+                                SizedBox(
                                   height: (width - 140)/yearStats[widget.screen].bracket.length>65 ? 60 : ((width - 140)/yearStats[widget.screen].bracket.length-5),
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
@@ -196,7 +196,7 @@ class _YearPageState extends State<YearPage> {
                                   ),
                                 ),
                                 const SizedBox(height: 10),
-                                Container(
+                                SizedBox(
                                   height: 60,
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
@@ -263,4 +263,3 @@ class _YearPageState extends State<YearPage> {
     );
   }
 }
-

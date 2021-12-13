@@ -7,14 +7,16 @@ import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MiniTBStandings extends StatelessWidget {
+  const MiniTBStandings({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: DatabaseService().preds,
-      builder: (context, snapshot){
+      builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<MiniTBPred> preds = snapshot.data as List<MiniTBPred>;
-          String sponsor = sponsors[DateTime.now().weekday-1];
+          String sponsor = sponsors[DateTime.now().weekday - 1];
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.blue[400],
@@ -23,7 +25,9 @@ class MiniTBStandings extends StatelessWidget {
               actions: <Widget>[
                 IconButton(
                   icon: const Icon(Icons.home, color: Colors.white),
-                  onPressed: () {Navigator.popUntil(context, ModalRoute.withName('/'));},
+                  onPressed: () {
+                    Navigator.popUntil(context, ModalRoute.withName('/'));
+                  },
                 ),
               ],
             ),
@@ -39,9 +43,9 @@ class MiniTBStandings extends StatelessWidget {
                         "MiniTB Standings of the Day",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: Colors.grey[900],
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
+                          color: Colors.grey[900],
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -58,13 +62,12 @@ class MiniTBStandings extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 20),
                       child: SelectableText(
                         miniTBStandings(preds),
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.grey[800],
-                            fontSize: 18),
+                        style: TextStyle(color: Colors.grey[800], fontSize: 18),
                       ),
                     ),
                     Padding(
@@ -73,15 +76,14 @@ class MiniTBStandings extends StatelessWidget {
                         child: ListTile(
                           leading: const Icon(MdiIcons.whatsapp),
                           trailing: const Icon(Icons.send),
-                          title: Text(
-                              "Manda classifica alla CB",
+                          title: Text("Manda classifica alla CB",
                               style: TextStyle(
-                                  color: Colors.grey[700],
-                                  fontSize: 18)
-                          ),
+                                  color: Colors.grey[700], fontSize: 18)),
                           onTap: () async => await launch(
                             WhatsAppUnilink(
-                              text: "*MiniTB Standings of the Day*\n_Presented by ${sponsor}_\n\n" + miniTBStandings(preds),
+                              text:
+                                  "*MiniTB Standings of the Day*\n_Presented by ${sponsor}_\n\n" +
+                                      miniTBStandings(preds),
                             ).toString(),
                           ),
                         ),
@@ -93,7 +95,7 @@ class MiniTBStandings extends StatelessWidget {
             ),
           );
         } else {
-          return Loading();
+          return const Loading();
         }
       },
     );

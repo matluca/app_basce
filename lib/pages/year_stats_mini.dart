@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
 class YearStatsMini extends StatefulWidget {
+  const YearStatsMini({Key? key}) : super(key: key);
+
   @override
   _YearStatsMiniState createState() => _YearStatsMiniState();
 }
@@ -89,7 +91,7 @@ class _YearPageMiniState extends State<YearPageMini> {
                           ) else Positioned(
                             top: 60,
                             left: MediaQuery.of(context).size.width/2-180,
-                            child: Container(
+                            child: SizedBox(
                               height: 60,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
@@ -145,4 +147,3 @@ class _YearPageMiniState extends State<YearPageMini> {
     );
   }
 }
-

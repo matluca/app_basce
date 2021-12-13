@@ -3,6 +3,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'dart:math' as math;
 
 class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -24,14 +26,16 @@ class _HomeState extends State<Home> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.info_outline, color: Colors.white),
-            onPressed: () {alertDialog(context);},
+            onPressed: () {
+              alertDialog(context);
+            },
           ),
         ],
       ),
       backgroundColor: Colors.blue[200],
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20,30,20,20),
+          padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
           child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,7 +53,7 @@ class _HomeState extends State<Home> {
                 const SizedBox(height: 30),
                 Image.asset('assets/profile2021.jpg'),
                 const SizedBox(height: 25),
-                Menu(),
+                const Menu(),
               ],
             ),
           ),
@@ -60,6 +64,8 @@ class _HomeState extends State<Home> {
 }
 
 class Menu extends StatelessWidget {
+  const Menu({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -68,13 +74,11 @@ class Menu extends StatelessWidget {
           child: ListTile(
             leading: const Icon(Icons.people),
             trailing: const Icon(Icons.play_arrow),
-            title: Text(
-                'Profili',
+            title: Text('Profili',
                 style: TextStyle(
                   color: Colors.grey[700],
                   fontSize: 18,
-                )
-            ),
+                )),
             onTap: () {
               Navigator.pushNamed(context, '/profile_list');
             },
@@ -88,12 +92,8 @@ class Menu extends StatelessWidget {
               child: const Icon(MdiIcons.podium),
             ),
             trailing: const Icon(Icons.play_arrow),
-            title: Text(
-                "Albo d'oro",
-                style: TextStyle(
-                    color: Colors.grey[700],
-                    fontSize: 18)
-            ),
+            title: Text("Albo d'oro",
+                style: TextStyle(color: Colors.grey[700], fontSize: 18)),
             onTap: () {
               Navigator.pushNamed(context, '/albo');
             },
@@ -107,12 +107,8 @@ class Menu extends StatelessWidget {
               child: const Icon(MdiIcons.podium),
             ),
             trailing: const Icon(Icons.play_arrow),
-            title: Text(
-                "Albo d'oro MiniTB",
-                style: TextStyle(
-                    color: Colors.grey[700],
-                    fontSize: 18)
-            ),
+            title: Text("Albo d'oro MiniTB",
+                style: TextStyle(color: Colors.grey[700], fontSize: 18)),
             onTap: () {
               Navigator.pushNamed(context, '/albo_mini');
             },
@@ -127,7 +123,8 @@ class Menu extends StatelessWidget {
               style: TextStyle(
                 color: Colors.grey[700],
                 fontSize: 18,
-              ),),
+              ),
+            ),
             onTap: () {
               Navigator.pushNamed(context, '/mini_tb');
             },
@@ -140,9 +137,10 @@ class Menu extends StatelessWidget {
             title: Text(
               'Partecipa al Torneo Bascé',
               style: TextStyle(
-              color: Colors.grey[700],
-              fontSize: 18,
-            ),),
+                color: Colors.grey[700],
+                fontSize: 18,
+              ),
+            ),
             onTap: () {
               Navigator.pushNamed(context, '/wip');
             },
@@ -152,7 +150,6 @@ class Menu extends StatelessWidget {
     );
   }
 }
-
 
 //Function which shows Alert Dialog
 alertDialog(BuildContext context) {
@@ -180,11 +177,9 @@ showImage(BuildContext context, String image) {
     context: context,
     builder: (BuildContext context) {
       return Center(
-        child: Container(
-          child: AlertDialog(
-            contentPadding: const EdgeInsets.all(0),
-            content: Image.asset(image),
-          ),
+        child: AlertDialog(
+          contentPadding: const EdgeInsets.all(0),
+          content: Image.asset(image),
         ),
       );
     },

@@ -3,15 +3,17 @@ import 'package:appbasce/classes/yearStat_class.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 Map iconMap = {
-  i : MdiIcons.romanNumeral1,
-  ii : MdiIcons.romanNumeral2,
-  iii : MdiIcons.romanNumeral3,
-  iv : MdiIcons.romanNumeral4,
-  v : MdiIcons.romanNumeral5,
-  vi : MdiIcons.romanNumeral6,
+  i: MdiIcons.romanNumeral1,
+  ii: MdiIcons.romanNumeral2,
+  iii: MdiIcons.romanNumeral3,
+  iv: MdiIcons.romanNumeral4,
+  v: MdiIcons.romanNumeral5,
+  vi: MdiIcons.romanNumeral6,
 };
 
 class Albo extends StatefulWidget {
+  const Albo({Key? key}) : super(key: key);
+
   @override
   _AlboState createState() => _AlboState();
 }
@@ -27,14 +29,16 @@ class _AlboState extends State<Albo> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.home, color: Colors.white),
-            onPressed: () {Navigator.popUntil(context, ModalRoute.withName('/'));},
+            onPressed: () {
+              Navigator.popUntil(context, ModalRoute.withName('/'));
+            },
           ),
         ],
       ),
       backgroundColor: Colors.blue[200],
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(5,35,5,10),
+          padding: const EdgeInsets.fromLTRB(5, 35, 5, 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,16 +46,18 @@ class _AlboState extends State<Albo> {
               const Image(image: AssetImage('assets/albo.png'), height: 150),
               const SizedBox(height: 30),
               ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: yearStats.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
                     child: Card(
                       child: ListTile(
                         onTap: () {
-                          Navigator.pushNamed(context, '/year_stats', arguments: index);
+                          Navigator.pushNamed(context, '/year_stats',
+                              arguments: index);
                         },
                         title: Center(
                           child: Text(
@@ -67,7 +73,8 @@ class _AlboState extends State<Albo> {
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             CircleAvatar(
-                              backgroundImage: AssetImage('assets/${yearStats[index].first[0].image}'),
+                              backgroundImage: AssetImage(
+                                  'assets/${yearStats[index].first[0].image}'),
                             ),
                             const SizedBox(width: 5),
                             const Icon(Icons.play_arrow),
@@ -86,4 +93,3 @@ class _AlboState extends State<Albo> {
     );
   }
 }
-

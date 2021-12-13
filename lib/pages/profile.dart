@@ -14,6 +14,8 @@ Map tournamentMap = {
 };
 
 class PersonalProfile extends StatefulWidget {
+  const PersonalProfile({Key? key}) : super(key: key);
+
   @override
   _PersonalProfileState createState() => _PersonalProfileState();
 }
@@ -42,7 +44,9 @@ class _PersonalProfileState extends State<PersonalProfile> {
 
 class ProfilePage extends StatefulWidget {
   final int screen;
-  const ProfilePage ({required Key key, required this.screen}): super(key: key);
+
+  const ProfilePage({required Key key, required this.screen}) : super(key: key);
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -50,17 +54,19 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-
-    List tournaments = List.generate(profiles[widget.screen].tournamentYears.length,
-            (index) => tournamentMap[profiles[widget.screen].tournamentYears[index]]);
-    List secondPlaces = List.generate(profiles[widget.screen].secondYears.length,
-            (index) => tournamentMap[profiles[widget.screen].secondYears[index]]);
+    List tournaments = List.generate(
+        profiles[widget.screen].tournamentYears.length,
+        (index) =>
+            tournamentMap[profiles[widget.screen].tournamentYears[index]]);
+    List secondPlaces = List.generate(
+        profiles[widget.screen].secondYears.length,
+        (index) => tournamentMap[profiles[widget.screen].secondYears[index]]);
     List thirdPlaces = List.generate(profiles[widget.screen].thirdYears.length,
-            (index) => tournamentMap[profiles[widget.screen].thirdYears[index]]);
+        (index) => tournamentMap[profiles[widget.screen].thirdYears[index]]);
     List brackets = List.generate(profiles[widget.screen].bracketYears.length,
-            (index) => tournamentMap[profiles[widget.screen].bracketYears[index]]);
+        (index) => tournamentMap[profiles[widget.screen].bracketYears[index]]);
     List rounds = List.generate(profiles[widget.screen].roundsYears.length,
-            (index) => tournamentMap[profiles[widget.screen].roundsYears[index]]);
+        (index) => tournamentMap[profiles[widget.screen].roundsYears[index]]);
 
     return Scaffold(
       appBar: AppBar(
@@ -70,7 +76,9 @@ class _ProfilePageState extends State<ProfilePage> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.home, color: Colors.white),
-            onPressed: () {Navigator.popUntil(context, ModalRoute.withName('/'));},
+            onPressed: () {
+              Navigator.popUntil(context, ModalRoute.withName('/'));
+            },
           ),
         ],
       ),
@@ -88,9 +96,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: <Widget>[
                       Center(
                         child: InkWell(
-                          onTap: () {showImage(context, 'assets/${profiles[widget.screen].image}');},
+                          onTap: () {
+                            showImage(context,
+                                'assets/${profiles[widget.screen].image}');
+                          },
                           child: CircleAvatar(
-                            backgroundImage: AssetImage('assets/${profiles[widget.screen].image}'),
+                            backgroundImage: AssetImage(
+                                'assets/${profiles[widget.screen].image}'),
                             radius: 70,
                           ),
                         ),
@@ -101,8 +113,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       Row(
                         children: <Widget>[
-                          const  SizedBox(width: 10),
-                          const  Icon(MdiIcons.trophy, size: 40, color: Color(0xFFFFD700)),
+                          const SizedBox(width: 10),
+                          const Icon(MdiIcons.trophy,
+                              size: 40, color: Color(0xFFFFD700)),
                           const SizedBox(width: 50),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,8 +128,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               Text(
-                                tournaments.isEmpty ? tournaments.length.toString() :
-                                '${tournaments.length}  (${tournaments.toString().substring(1, tournaments.toString().length-1)} TB)',
+                                tournaments.isEmpty
+                                    ? tournaments.length.toString()
+                                    : '${tournaments.length}  (${tournaments.toString().substring(1, tournaments.toString().length - 1)} TB)',
                                 style: TextStyle(
                                   color: Colors.grey[800],
                                   fontSize: 25,
@@ -131,7 +145,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       Row(
                         children: <Widget>[
                           const SizedBox(width: 10),
-                          const Icon(MdiIcons.trophy, size: 40, color: Color(0xFFA9A9A9)),
+                          const Icon(MdiIcons.trophy,
+                              size: 40, color: Color(0xFFA9A9A9)),
                           const SizedBox(width: 50),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,8 +159,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               Text(
-                                secondPlaces.isEmpty ? secondPlaces.length.toString() :
-                                '${secondPlaces.length}  (${secondPlaces.toString().substring(1,secondPlaces.toString().length-1)} TB)',
+                                secondPlaces.isEmpty
+                                    ? secondPlaces.length.toString()
+                                    : '${secondPlaces.length}  (${secondPlaces.toString().substring(1, secondPlaces.toString().length - 1)} TB)',
                                 style: TextStyle(
                                   color: Colors.grey[800],
                                   fontSize: 25,
@@ -160,7 +176,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       Row(
                         children: <Widget>[
                           const SizedBox(width: 10),
-                          const Icon(MdiIcons.trophy, size: 40, color: Color(0xFFFCD7F32)),
+                          const Icon(MdiIcons.trophy,
+                              size: 40, color: Color(0xFFCD7F32)),
                           const SizedBox(width: 50),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,8 +190,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               Text(
-                                thirdPlaces.isEmpty ? thirdPlaces.length.toString() :
-                                '${thirdPlaces.length}  (${thirdPlaces.toString().substring(1,thirdPlaces.toString().length-1)} TB)',
+                                thirdPlaces.isEmpty
+                                    ? thirdPlaces.length.toString()
+                                    : '${thirdPlaces.length}  (${thirdPlaces.toString().substring(1, thirdPlaces.toString().length - 1)} TB)',
                                 style: TextStyle(
                                   color: Colors.grey[800],
                                   fontSize: 25,
@@ -202,8 +220,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               Text(
-                                brackets.isEmpty ? brackets.length.toString() :
-                                '${brackets.length}  (${brackets.toString().substring(1,brackets.toString().length-1)} TB)',
+                                brackets.isEmpty
+                                    ? brackets.length.toString()
+                                    : '${brackets.length}  (${brackets.toString().substring(1, brackets.toString().length - 1)} TB)',
                                 style: TextStyle(
                                   color: Colors.grey[800],
                                   fontSize: 25,
@@ -231,8 +250,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               Text(
-                                rounds.isEmpty ? rounds.length.toString() :
-                                '${rounds.length}  (${rounds.toString().substring(1,rounds.toString().length-1)} TB)',
+                                rounds.isEmpty
+                                    ? rounds.length.toString()
+                                    : '${rounds.length}  (${rounds.toString().substring(1, rounds.toString().length - 1)} TB)',
                                 style: TextStyle(
                                   color: Colors.grey[800],
                                   fontSize: 25,

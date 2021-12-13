@@ -6,6 +6,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'dart:math' as math;
 
 class MiniTB extends StatefulWidget {
+  const MiniTB({Key? key}) : super(key: key);
+
   @override
   _MiniTBState createState() => _MiniTBState();
 }
@@ -14,104 +16,98 @@ class _MiniTBState extends State<MiniTB> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: DatabaseService().ddl,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          DateTime ddlFromDB = snapshot.data as DateTime;
-          bool beforeDeadline = DateTime.now().isBefore(ddlFromDB);
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.blue[400],
-              title: const Text('Mini TB per la RS'),
-              centerTitle: true,
-              actions: <Widget>[
-                IconButton(
-                  icon: const Icon(Icons.home, color: Colors.white),
-                  onPressed: () {
-                    Navigator.popUntil(context, ModalRoute.withName('/'));
-                  },
-                ),
-              ],
-            ),
-            backgroundColor: Colors.blue[200],
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(5, 35, 5, 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    beforeDeadline
-                        ? InserisciPredizioni()
-                        : InserisciPredizioniMock(),
-                    beforeDeadline
-                        ? VisualizzaClassificaMock()
-                        : VisualizzaClassifica(),
-                    beforeDeadline
-                        ? VisualizzaPredizioniMock()
-                        : VisualizzaPredizioni(),
-                    Card(
-                      child: ListTile(
-                        leading: const Icon(Icons.cloud_download),
-                        trailing: const Icon(Icons.play_arrow),
-                        title: Text(
-                            "Aggiorna classifiche NBA reali automaticamente",
-                            style: TextStyle(
-                                color: Colors.grey[700],
-                                fontSize: 18)
+        stream: DatabaseService().ddl,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            DateTime ddlFromDB = snapshot.data as DateTime;
+            bool beforeDeadline = DateTime.now().isBefore(ddlFromDB);
+            return Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.blue[400],
+                title: const Text('Mini TB per la RS'),
+                centerTitle: true,
+                actions: <Widget>[
+                  IconButton(
+                    icon: const Icon(Icons.home, color: Colors.white),
+                    onPressed: () {
+                      Navigator.popUntil(context, ModalRoute.withName('/'));
+                    },
+                  ),
+                ],
+              ),
+              backgroundColor: Colors.blue[200],
+              body: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 35, 5, 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      beforeDeadline
+                          ? const InserisciPredizioni()
+                          : const InserisciPredizioniMock(),
+                      beforeDeadline
+                          ? const VisualizzaClassificaMock()
+                          : const VisualizzaClassifica(),
+                      beforeDeadline
+                          ? const VisualizzaPredizioniMock()
+                          : const VisualizzaPredizioni(),
+                      Card(
+                        child: ListTile(
+                          leading: const Icon(Icons.cloud_download),
+                          trailing: const Icon(Icons.play_arrow),
+                          title: Text(
+                              "Aggiorna classifiche NBA reali automaticamente",
+                              style: TextStyle(
+                                  color: Colors.grey[700], fontSize: 18)),
+                          onTap: () {
+                            Navigator.pushNamed(context, '/minitb_update');
+                          },
                         ),
-                        onTap: () {
-                          Navigator.pushNamed(context, '/minitb_update');
-                        },
                       ),
-                    ),
-                    const SizedBox(height: 40),
-                    Card(
-                      child: ListTile(
-                        leading: Icon(Icons.settings),
-                        trailing: Icon(Icons.play_arrow),
-                        title: Text(
-                            "Aggiorna classifiche NBA reali manualmente",
-                            style: TextStyle(
-                                color: Colors.grey[700],
-                                fontSize: 18)
+                      const SizedBox(height: 40),
+                      Card(
+                        child: ListTile(
+                          leading: const Icon(Icons.settings),
+                          trailing: const Icon(Icons.play_arrow),
+                          title: Text(
+                              "Aggiorna classifiche NBA reali manualmente",
+                              style: TextStyle(
+                                  color: Colors.grey[700], fontSize: 18)),
+                          onTap: () {
+                            Navigator.pushNamed(context, '/minitb_insert',
+                                arguments: miniTBParticipants.length - 1);
+                          },
                         ),
-                        onTap: () {
-                          Navigator.pushNamed(context, '/minitb_insert',
-                              arguments: miniTBParticipants.length - 1);
-                        },
                       ),
-                    ),
-                    const SizedBox(height: 80),
-                    beforeDeadline
-                        ? Text('Deadline $ddlFromDB', style: TextStyle(color: Colors.grey[800]))
-                        : Container(),
-                  ],
+                      const SizedBox(height: 80),
+                      beforeDeadline
+                          ? Text('Deadline $ddlFromDB',
+                              style: TextStyle(color: Colors.grey[800]))
+                          : Container(),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        } else {
-          return Loading();
-        }
-      }
-    );
+            );
+          } else {
+            return const Loading();
+          }
+        });
   }
 }
 
 class InserisciPredizioni extends StatelessWidget {
+  const InserisciPredizioni({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
         leading: const Icon(MdiIcons.pencil),
         trailing: const Icon(Icons.play_arrow),
-        title: Text(
-            "Inserisci/Aggiorna predizione",
-            style: TextStyle(
-                color: Colors.grey[700],
-                fontSize: 18)
-        ),
+        title: Text("Inserisci/Aggiorna predizione",
+            style: TextStyle(color: Colors.grey[700], fontSize: 18)),
         onTap: () {
           Navigator.pushNamed(context, '/minitb_insert_list');
         },
@@ -121,6 +117,8 @@ class InserisciPredizioni extends StatelessWidget {
 }
 
 class InserisciPredizioniMock extends StatelessWidget {
+  const InserisciPredizioniMock({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -129,30 +127,24 @@ class InserisciPredizioniMock extends StatelessWidget {
       child: ListTile(
         leading: const Icon(MdiIcons.pencil),
         trailing: const Icon(Icons.play_arrow),
-        title: Text(
-            "Inserisci/Aggiorna predizione",
-            style: TextStyle(
-                color: Colors.grey[700],
-                fontSize: 18)
-        ),
+        title: Text("Inserisci/Aggiorna predizione",
+            style: TextStyle(color: Colors.grey[700], fontSize: 18)),
       ),
     );
   }
 }
 
 class VisualizzaPredizioni extends StatelessWidget {
+  const VisualizzaPredizioni({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
         leading: const Icon(MdiIcons.messageTextOutline),
         trailing: const Icon(Icons.play_arrow),
-        title: Text(
-            "Visualizza predizioni",
-            style: TextStyle(
-                color: Colors.grey[700],
-                fontSize: 18)
-        ),
+        title: Text("Visualizza predizioni",
+            style: TextStyle(color: Colors.grey[700], fontSize: 18)),
         onTap: () {
           Navigator.pushNamed(context, '/minitb_predictions');
         },
@@ -162,6 +154,8 @@ class VisualizzaPredizioni extends StatelessWidget {
 }
 
 class VisualizzaPredizioniMock extends StatelessWidget {
+  const VisualizzaPredizioniMock({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -170,18 +164,16 @@ class VisualizzaPredizioniMock extends StatelessWidget {
       child: ListTile(
         leading: const Icon(MdiIcons.messageTextOutline),
         trailing: const Icon(Icons.play_arrow),
-        title: Text(
-            "Visualizza predizioni",
-            style: TextStyle(
-                color: Colors.grey[700],
-                fontSize: 18)
-        ),
+        title: Text("Visualizza predizioni",
+            style: TextStyle(color: Colors.grey[700], fontSize: 18)),
       ),
     );
   }
 }
 
 class VisualizzaClassifica extends StatelessWidget {
+  const VisualizzaClassifica({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -192,12 +184,8 @@ class VisualizzaClassifica extends StatelessWidget {
           child: const Icon(MdiIcons.podium),
         ),
         trailing: const Icon(Icons.play_arrow),
-        title: Text(
-            "Visualizza classifica",
-            style: TextStyle(
-                color: Colors.grey[700],
-                fontSize: 18)
-        ),
+        title: Text("Visualizza classifica",
+            style: TextStyle(color: Colors.grey[700], fontSize: 18)),
         onTap: () {
           Navigator.pushNamed(context, '/minitb_standings');
         },
@@ -207,6 +195,8 @@ class VisualizzaClassifica extends StatelessWidget {
 }
 
 class VisualizzaClassificaMock extends StatelessWidget {
+  const VisualizzaClassificaMock({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -219,12 +209,8 @@ class VisualizzaClassificaMock extends StatelessWidget {
           child: const Icon(MdiIcons.podium),
         ),
         trailing: const Icon(Icons.play_arrow),
-        title: Text(
-            "Visualizza classifica",
-            style: TextStyle(
-                color: Colors.grey[700],
-                fontSize: 18)
-        ),
+        title: Text("Visualizza classifica",
+            style: TextStyle(color: Colors.grey[700], fontSize: 18)),
       ),
     );
   }

@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:appbasce/pages/loading.dart';
 
 class MiniTBUpdate extends StatefulWidget {
+  const MiniTBUpdate({Key? key}) : super(key: key);
+
   @override
   _MiniTBUpdateState createState() => _MiniTBUpdateState();
 }
@@ -42,37 +44,35 @@ class _MiniTBUpdateState extends State<MiniTBUpdate> {
                 ],
               ),
               backgroundColor: Colors.blue[200],
-              body: Container(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 20, 15, 30),
-                    child: Center(
-                      child: Column(
-                        children: [
-                          Standings(
-                              key: const Key("Standings"),
-                              east: eastStandings!,
-                              west: westStandings!),
-                          Padding(
-                            padding: const EdgeInsets.all(5),
-                            child: ElevatedButton(
-                              style:
-                                  ElevatedButton.styleFrom(primary: Colors.red),
-                              child: const Text(
-                                'Update and exit',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              onPressed: () async {
-                                DatabaseService()
-                                    .updatePredictionsFromOrderedList(
-                                        'Admin', eastStandings, westStandings);
-                                Navigator.popUntil(
-                                    context, ModalRoute.withName('/mini_tb'));
-                              },
+              body: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 20, 15, 30),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Standings(
+                            key: const Key("Standings"),
+                            east: eastStandings!,
+                            west: westStandings!),
+                        Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: ElevatedButton(
+                            style:
+                                ElevatedButton.styleFrom(primary: Colors.red),
+                            child: const Text(
+                              'Update and exit',
+                              style: TextStyle(color: Colors.white),
                             ),
+                            onPressed: () async {
+                              DatabaseService()
+                                  .updatePredictionsFromOrderedList(
+                                      'Admin', eastStandings, westStandings);
+                              Navigator.popUntil(
+                                  context, ModalRoute.withName('/mini_tb'));
+                            },
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -81,7 +81,7 @@ class _MiniTBUpdateState extends State<MiniTBUpdate> {
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           } else {
-            return Loading();
+            return const Loading();
           }
         },
       ),
@@ -91,7 +91,8 @@ class _MiniTBUpdateState extends State<MiniTBUpdate> {
 
 Future<NBAStandings> getStandings() async {
   final response = await http.get(
-      Uri.https("data.nba.net", "10s/prod/v1/current/standings_conference.json"),
+      Uri.https(
+          "data.nba.net", "10s/prod/v1/current/standings_conference.json"),
       headers: {
         "Accept": "application/json",
         "Access-Control-Allow-Origin": "*",
@@ -142,7 +143,7 @@ class Standings extends StatefulWidget {
   final List<String> east;
   final List<String> west;
 
-  Standings({required Key key, required this.east, required this.west})
+  const Standings({required Key key, required this.east, required this.west})
       : super(key: key);
 
   @override

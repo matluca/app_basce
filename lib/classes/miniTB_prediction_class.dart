@@ -2,9 +2,26 @@ import 'package:appbasce/classes/profile_class.dart';
 import 'dart:math';
 import 'dart:collection';
 
-List<Profile> miniTBParticipants = [ale, enrico, luca, magu, melo, nic, teo, admin];
+List<Profile> miniTBParticipants = [
+  ale,
+  enrico,
+  luca,
+  magu,
+  melo,
+  nic,
+  teo,
+  admin
+];
 
-List<String> sponsors = ["AT&T", "Taco Bell", "KIA", "Little Caesars", "Vance Refrigeration", "Wendy's", "Chick-fil-a"];
+List<String> sponsors = [
+  "AT&T",
+  "Taco Bell",
+  "KIA",
+  "Little Caesars",
+  "Vance Refrigeration",
+  "Wendy's",
+  "Chick-fil-a"
+];
 
 class MiniTBPwd {
   final String name;
@@ -50,51 +67,57 @@ List<int> malus(MiniTBPred prediction, MiniTBPred reference) {
   prediction.east.keys.forEach((team) {
     int p = min(prediction.east[team] as int, 11);
     int r = min(reference.east[team] as int, 11);
-    mEast = mEast + (p-r).abs();
+    mEast = mEast + (p - r).abs();
   });
   int mWest = 0;
   for (var team in prediction.west.keys) {
     int p = min(prediction.west[team] as int, 11);
     int r = min(reference.west[team] as int, 11);
-    mWest = mWest + (p-r).abs();
+    mWest = mWest + (p - r).abs();
   }
   return [mEast, mWest];
 }
 
 String miniTBStandings(List<MiniTBPred> preds) {
   MiniTBPred reference = MiniTBPred("", {}, {});
-  for (var i=0; i<preds.length; i++) {
+  for (var i = 0; i < preds.length; i++) {
     if (preds[i].name == "Admin") {
       reference = preds[i];
     }
   }
-  var standings= {};
+  var standings = {};
   var eastStandings = {};
   var westStandings = {};
-  for (int i=0; i<preds.length; i++) {
+  for (int i = 0; i < preds.length; i++) {
     if (preds[i].name != "Admin") {
       int east = malus(preds[i], reference)[0];
       int west = malus(preds[i], reference)[1];
-      standings[preds[i].name] = east+west;
+      standings[preds[i].name] = east + west;
       eastStandings[preds[i].name] = east;
       westStandings[preds[i].name] = west;
     }
   }
-  var sortedKeys = standings.keys.toList(growable:false)
+  var sortedKeys = standings.keys.toList(growable: false)
     ..sort((k1, k2) => standings[k1].compareTo(standings[k2]));
-  LinkedHashMap sortedStandings = LinkedHashMap
-      .fromIterable(sortedKeys, key: (k) => k, value: (k) => standings[k]);
-  LinkedHashMap sortedEastStandings = LinkedHashMap
-      .fromIterable(sortedKeys, key: (k) => k, value: (k) => eastStandings[k]);
-  LinkedHashMap sortedWestStandings = LinkedHashMap
-      .fromIterable(sortedKeys, key: (k) => k, value: (k) => westStandings[k]);
+  LinkedHashMap sortedStandings = LinkedHashMap.fromIterable(sortedKeys,
+      key: (k) => k, value: (k) => standings[k]);
+  LinkedHashMap sortedEastStandings = LinkedHashMap.fromIterable(sortedKeys,
+      key: (k) => k, value: (k) => eastStandings[k]);
+  LinkedHashMap sortedWestStandings = LinkedHashMap.fromIterable(sortedKeys,
+      key: (k) => k, value: (k) => westStandings[k]);
 
   var msg = "";
-  for (int i=0; i<sortedKeys.length; i++) {
-    msg = msg + sortedKeys[i] + ": " + sortedStandings.values.toList()[i].toString()
-        + "  (E: " + sortedEastStandings.values.toList()[i].toString()
-        + ", W: " + sortedWestStandings.values.toList()[i].toString() + ")";
-    if (i != sortedKeys.length-1) {
+  for (int i = 0; i < sortedKeys.length; i++) {
+    msg = msg +
+        sortedKeys[i] +
+        ": " +
+        sortedStandings.values.toList()[i].toString() +
+        "  (E: " +
+        sortedEastStandings.values.toList()[i].toString() +
+        ", W: " +
+        sortedWestStandings.values.toList()[i].toString() +
+        ")";
+    if (i != sortedKeys.length - 1) {
       msg = msg + "\n";
     }
   }

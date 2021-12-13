@@ -4,6 +4,8 @@ import 'package:appbasce/services/database.dart';
 import 'package:appbasce/classes/miniTB_prediction_class.dart';
 
 class MiniTBInsertPassword extends StatefulWidget {
+  const MiniTBInsertPassword({Key? key}) : super(key: key);
+
   @override
   _MiniTBInsertPasswordState createState() => _MiniTBInsertPasswordState();
 }
@@ -12,14 +14,16 @@ class _MiniTBInsertPasswordState extends State<MiniTBInsertPassword> {
   @override
   Widget build(BuildContext context) {
     int index = ModalRoute.of(context)!.settings.arguments as int;
-    return InsertPasswordPage(key: const Key("InsertPasswordPage"), index: index);
+    return InsertPasswordPage(
+        key: const Key("InsertPasswordPage"), index: index);
   }
 }
 
 class InsertPasswordPage extends StatefulWidget {
   final int index;
 
-  const InsertPasswordPage({required Key key, required this.index}) : super(key: key);
+  const InsertPasswordPage({required Key key, required this.index})
+      : super(key: key);
 
   @override
   _InsertPasswordPageState createState() => _InsertPasswordPageState();
@@ -28,6 +32,7 @@ class InsertPasswordPage extends StatefulWidget {
 class _InsertPasswordPageState extends State<InsertPasswordPage> {
   String pwd = 'thisisnottherealpassword';
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -50,7 +55,8 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.blue[400],
-              title: Text('${miniTBParticipants[widget.index].name}, inserisci la tua password'),
+              title: Text(
+                  '${miniTBParticipants[widget.index].name}, inserisci la tua password'),
               centerTitle: true,
               actions: <Widget>[
                 IconButton(
@@ -72,7 +78,8 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
                     textAlign: TextAlign.center,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 40),
                     child: Form(
                       key: _formKey,
                       child: TextFormField(
@@ -83,17 +90,20 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
                           });
                         },
                         validator: (val) {
-                          if ((val == '') || ((oldPwd != '') && (val != oldPwd))) {
+                          if ((val == '') ||
+                              ((oldPwd != '') && (val != oldPwd))) {
                             return 'Password vuota o errata';
                           }
                           return null;
                         },
                         decoration: const InputDecoration(
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white, width: 5.0),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 5.0),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey, width: 5.0),
+                            borderSide:
+                                BorderSide(color: Colors.grey, width: 5.0),
                           ),
                           hintText: 'Password',
                         ),
@@ -107,11 +117,13 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () async {
-                      if (_formKey.currentState!.validate()){
+                      if (_formKey.currentState!.validate()) {
                         if (oldPwd == '') {
-                          DatabaseService().updatePassword(miniTBParticipants[widget.index].name, pwd);
+                          DatabaseService().updatePassword(
+                              miniTBParticipants[widget.index].name, pwd);
                         }
-                        Navigator.pushNamed(context, '/minitb_insert', arguments: widget.index);
+                        Navigator.pushNamed(context, '/minitb_insert',
+                            arguments: widget.index);
                       }
                     },
                   ),
@@ -120,10 +132,9 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
             ),
           );
         } else {
-          return Loading();
+          return const Loading();
         }
       },
     );
   }
 }
-

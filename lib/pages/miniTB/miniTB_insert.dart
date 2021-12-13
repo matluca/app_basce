@@ -4,6 +4,8 @@ import 'package:appbasce/services/database.dart';
 import 'package:appbasce/classes/miniTB_prediction_class.dart';
 
 class MiniTBInsertPrediction extends StatefulWidget {
+  const MiniTBInsertPrediction({Key? key}) : super(key: key);
+
   @override
   _MiniTBInsertPredictionState createState() => _MiniTBInsertPredictionState();
 }
@@ -12,14 +14,16 @@ class _MiniTBInsertPredictionState extends State<MiniTBInsertPrediction> {
   @override
   Widget build(BuildContext context) {
     int index = ModalRoute.of(context)!.settings.arguments as int;
-    return InsertPredictionPage(key: const Key("InsertPredictionPage"), index: index);
+    return InsertPredictionPage(
+        key: const Key("InsertPredictionPage"), index: index);
   }
 }
 
 class InsertPredictionPage extends StatefulWidget {
   final int index;
 
-  const InsertPredictionPage({required Key key, required this.index}) : super(key: key);
+  const InsertPredictionPage({required Key key, required this.index})
+      : super(key: key);
 
   @override
   _InsertPredictionPageState createState() => _InsertPredictionPageState();
@@ -44,7 +48,8 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.blue[400],
-              title: Text('${miniTBParticipants[widget.index].name}, riordina le liste'),
+              title: Text(
+                  '${miniTBParticipants[widget.index].name}, riordina le liste'),
               centerTitle: true,
               actions: <Widget>[
                 IconButton(
@@ -56,62 +61,67 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
               ],
             ),
             backgroundColor: Colors.blue[200],
-            body: Container(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
-                  child: Column(
-                    children: [
-                      const Text(
-                        'Tieni premuto per poter riordinare',
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Column(
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Tieni premuto per poter riordinare',
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text('EAST'),
+                            const SizedBox(height: 10),
+                            StandingsList(
+                                key: const Key("StandingsList"),
+                                teams: eastPred),
+                          ],
+                        ),
+                        Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const Text('EAST'),
+                              const Text('WEST'),
                               const SizedBox(height: 10),
-                              StandingsList(key: const Key("StandingsList"), teams: eastPred),
-                            ],
-                          ),
-                          Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                const Text('WEST'),
-                                const SizedBox(height: 10),
-                                StandingsList(key: const Key("StandingsList"), teams: westPred),
-                              ]),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(primary: Colors.red),
-                          child: const Text(
-                            'Update and exit',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          onPressed: () async {
-                            DatabaseService().updatePredictionsFromOrderedList(
-                                miniTBParticipants[widget.index].name, eastPred, westPred);
-                            Navigator.popUntil(context, ModalRoute.withName('/mini_tb'));
-                          },
+                              StandingsList(
+                                  key: const Key("StandingsList"),
+                                  teams: westPred),
+                            ]),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: Colors.red),
+                        child: const Text(
+                          'Update and exit',
+                          style: TextStyle(color: Colors.white),
                         ),
+                        onPressed: () async {
+                          DatabaseService().updatePredictionsFromOrderedList(
+                              miniTBParticipants[widget.index].name,
+                              eastPred,
+                              westPred);
+                          Navigator.popUntil(
+                              context, ModalRoute.withName('/mini_tb'));
+                        },
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
           );
         } else {
-          return Loading();
+          return const Loading();
         }
       },
     );
@@ -121,7 +131,8 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
 class StandingsList extends StatefulWidget {
   final List<String> teams;
 
-  StandingsList({required Key key, required this.teams}) : super(key: key);
+  const StandingsList({required Key key, required this.teams})
+      : super(key: key);
 
   @override
   _StandingsListState createState() => _StandingsListState();

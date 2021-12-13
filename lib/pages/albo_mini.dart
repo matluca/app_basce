@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 Map iconMapMini = {
-  iMini : MdiIcons.romanNumeral1,
+  iMini: MdiIcons.romanNumeral1,
 };
 
 class AlboMini extends StatefulWidget {
+  const AlboMini({Key? key}) : super(key: key);
+
   @override
   _AlboMiniState createState() => _AlboMiniState();
 }
@@ -22,14 +24,16 @@ class _AlboMiniState extends State<AlboMini> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.home, color: Colors.white),
-            onPressed: () {Navigator.popUntil(context, ModalRoute.withName('/'));},
+            onPressed: () {
+              Navigator.popUntil(context, ModalRoute.withName('/'));
+            },
           ),
         ],
       ),
       backgroundColor: Colors.blue[200],
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(5,35,5,10),
+          padding: const EdgeInsets.fromLTRB(5, 35, 5, 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,11 +46,13 @@ class _AlboMiniState extends State<AlboMini> {
                 itemCount: miniTBStats.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
                     child: Card(
                       child: ListTile(
                         onTap: () {
-                          Navigator.pushNamed(context, '/year_stats_mini', arguments: index);
+                          Navigator.pushNamed(context, '/year_stats_mini',
+                              arguments: index);
                         },
                         title: Center(
                           child: Text(
@@ -57,12 +63,14 @@ class _AlboMiniState extends State<AlboMini> {
                             ),
                           ),
                         ),
-                        leading: Icon(iconMapMini[miniTBStats[index]], size: 40),
+                        leading:
+                            Icon(iconMapMini[miniTBStats[index]], size: 40),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             CircleAvatar(
-                              backgroundImage: AssetImage('assets/${miniTBStats[index].first[0].image}'),
+                              backgroundImage: AssetImage(
+                                  'assets/${miniTBStats[index].first[0].image}'),
                             ),
                             const SizedBox(width: 5),
                             const Icon(Icons.play_arrow),
@@ -81,4 +89,3 @@ class _AlboMiniState extends State<AlboMini> {
     );
   }
 }
-

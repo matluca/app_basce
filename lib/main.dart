@@ -30,6 +30,8 @@ class App extends StatelessWidget {
   // For Android
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
+  App({Key? key}) : super(key: key);
+
   // For Web
   // final Future<FirebaseApp> _initialization = Firebase.initializeApp(
   //   options: const FirebaseOptions(
@@ -51,7 +53,8 @@ class App extends StatelessWidget {
       builder: (context, snapshot) {
         // Check for errors
         if (snapshot.hasError) {
-          return Text(snapshot.error.toString(), textDirection: TextDirection.ltr);
+          return Text(snapshot.error.toString(),
+              textDirection: TextDirection.ltr);
         }
 
         // Once complete, show your application
@@ -60,10 +63,11 @@ class App extends StatelessWidget {
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        return const Center(child: SizedBox(
-            width: 50,
-            height: 50,
-            child: CircularProgressIndicator(),
+        return const Center(
+            child: SizedBox(
+          width: 50,
+          height: 50,
+          child: CircularProgressIndicator(),
         ));
       },
     );
@@ -72,7 +76,10 @@ class App extends StatelessWidget {
 
 class AppBasceLogin extends StatelessWidget {
   // Create the initialization Future outside of `build`:
-  final Future<UserCredential?> _login = AuthService().signInWithEmailAndPassword();
+  final Future<UserCredential?> _login =
+      AuthService().signInWithEmailAndPassword();
+
+  AppBasceLogin({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -87,46 +94,47 @@ class AppBasceLogin extends StatelessWidget {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          return AppBasce();
+          return const AppBasce();
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        return Center(child: Container(
-            width: 50,
-            height: 50,
-            child: CircularProgressIndicator(),
+        return const Center(
+            child: SizedBox(
+          width: 50,
+          height: 50,
+          child: CircularProgressIndicator(),
         ));
       },
     );
   }
 }
 
-
 class AppBasce extends StatelessWidget {
+  const AppBasce({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: "/",
       routes: {
-        '/': (context) => Home(),
-        '/loading': (context) => Loading(),
-        '/wip': (context) => WorkInProgress(),
-        '/profile_list': (context) => ProfileList(),
-        '/profile': (context) => PersonalProfile(),
-        '/albo': (context) => Albo(),
-        '/albo_mini': (context) => AlboMini(),
-        '/year_stats': (context) => YearStats(),
-        '/year_stats_mini': (context) => YearStatsMini(),
-        '/mini_tb': (context) => MiniTB(),
-        '/minitb_insert_list': (context) => MiniTBInsertList(),
-        '/minitb_insert': (context) => MiniTBInsertPrediction(),
-        '/minitb_update': (context) => MiniTBUpdate(),
-        '/minitb_predictions': (context) => MiniTBPredictions(),
-        '/minitb_standings': (context) => MiniTBStandings(),
-        '/minitb_pwd': (context) => MiniTBInsertPassword(),
+        '/': (context) => const Home(),
+        '/loading': (context) => const Loading(),
+        '/wip': (context) => const WorkInProgress(),
+        '/profile_list': (context) => const ProfileList(),
+        '/profile': (context) => const PersonalProfile(),
+        '/albo': (context) => const Albo(),
+        '/albo_mini': (context) => const AlboMini(),
+        '/year_stats': (context) => const YearStats(),
+        '/year_stats_mini': (context) => const YearStatsMini(),
+        '/mini_tb': (context) => const MiniTB(),
+        '/minitb_insert_list': (context) => const MiniTBInsertList(),
+        '/minitb_insert': (context) => const MiniTBInsertPrediction(),
+        '/minitb_update': (context) => const MiniTBUpdate(),
+        '/minitb_predictions': (context) => const MiniTBPredictions(),
+        '/minitb_standings': (context) => const MiniTBStandings(),
+        '/minitb_pwd': (context) => const MiniTBInsertPassword(),
       },
     );
   }
 }
-
