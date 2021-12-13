@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "minitb-rs"
+  },
+  "targets": {
+    "minitb-rs": {
+      "hosting": {
+        "minitb-rs": [
+          "minitb-rs"
+        ],
+        "appbasce": [
+          "appbasce"
+        ]
+      }
+    }
   }
 }
