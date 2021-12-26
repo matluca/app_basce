@@ -1,6 +1,6 @@
 import 'package:appbasce/pages/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:appbasce/services/database.dart';
+import 'package:appbasce/services/database_miniTB.dart';
 import 'package:appbasce/classes/miniTB_prediction_class.dart';
 
 class MiniTBInsertPrediction extends StatefulWidget {
@@ -33,7 +33,7 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: DatabaseService().preds,
+      stream: DatabaseServiceMiniTB().preds,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<MiniTBPred> preds = snapshot.data as List<MiniTBPred>;
@@ -106,7 +106,7 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
                           style: TextStyle(color: Colors.white),
                         ),
                         onPressed: () async {
-                          DatabaseService().updatePredictionsFromOrderedList(
+                          DatabaseServiceMiniTB().updatePredictionsFromOrderedList(
                               miniTBParticipants[widget.index].name,
                               eastPred,
                               westPred);

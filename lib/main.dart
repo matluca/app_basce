@@ -17,6 +17,9 @@ import 'package:appbasce/pages/miniTB/miniTB_update.dart';
 import 'package:appbasce/pages/miniTB/minitb_predictions.dart';
 import 'package:appbasce/pages/miniTB/minitb_standings.dart';
 import 'package:appbasce/pages/miniTB/miniTB_insert_pwd.dart';
+import 'package:appbasce/pages/TB/tb.dart';
+import 'package:appbasce/pages/TB/tb_insert_list.dart';
+import 'package:appbasce/pages/TB/tb_insert_pwd.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() {
@@ -134,6 +137,9 @@ class AppBasce extends StatelessWidget {
         '/minitb_predictions': (context) => const MiniTBPredictions(),
         '/minitb_standings': (context) => const MiniTBStandings(),
         '/minitb_pwd': (context) => const MiniTBInsertPassword(),
+        '/tb': (context) => const TB(),
+        '/tb_insert_list': (context) => const TBInsertList(),
+        '/tb_pwd': (context) => const TBInsertPassword(),
       },
     );
   }

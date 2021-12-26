@@ -1,16 +1,16 @@
 import 'package:appbasce/pages/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:appbasce/services/database_miniTB.dart';
-import 'package:appbasce/classes/miniTB_prediction_class.dart';
+import 'package:appbasce/services/database_TB.dart';
+import 'package:appbasce/classes/tb_prediction_class.dart';
 
-class MiniTBInsertPassword extends StatefulWidget {
-  const MiniTBInsertPassword({Key? key}) : super(key: key);
+class TBInsertPassword extends StatefulWidget {
+  const TBInsertPassword({Key? key}) : super(key: key);
 
   @override
-  _MiniTBInsertPasswordState createState() => _MiniTBInsertPasswordState();
+  _TBInsertPasswordState createState() => _TBInsertPasswordState();
 }
 
-class _MiniTBInsertPasswordState extends State<MiniTBInsertPassword> {
+class _TBInsertPasswordState extends State<TBInsertPassword> {
   @override
   Widget build(BuildContext context) {
     int index = ModalRoute.of(context)!.settings.arguments as int;
@@ -36,13 +36,13 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: DatabaseServiceMiniTB().pwds,
+      stream: DatabaseServiceTB().pwds,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          List<MiniTBPwd> pwds = snapshot.data as List<MiniTBPwd>;
+          List<TBPwd> pwds = snapshot.data as List<TBPwd>;
           String oldPwd = "";
           for (var i = 0; i < pwds.length; i++) {
-            if (pwds[i].name == miniTBParticipants[widget.index].name) {
+            if (pwds[i].name == tbParticipants[widget.index].name) {
               oldPwd = pwds[i].pwd;
             }
           }
@@ -56,7 +56,7 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
             appBar: AppBar(
               backgroundColor: Colors.blue[400],
               title: Text(
-                  '${miniTBParticipants[widget.index].name}, inserisci la tua password'),
+                  '${tbParticipants[widget.index].name}, inserisci la tua password'),
               centerTitle: true,
               actions: <Widget>[
                 IconButton(
@@ -119,10 +119,10 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         if (oldPwd == '') {
-                          DatabaseServiceMiniTB().updatePassword(
-                              miniTBParticipants[widget.index].name, pwd);
+                          DatabaseServiceTB().updatePassword(
+                              tbParticipants[widget.index].name, pwd);
                         }
-                        Navigator.pushNamed(context, '/minitb_insert',
+                        Navigator.pushNamed(context, '/wip', //TODO: predictions page
                             arguments: widget.index);
                       }
                     },

@@ -1,7 +1,7 @@
 import 'package:appbasce/classes/miniTB_prediction_class.dart';
 import 'package:appbasce/pages/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:appbasce/services/database.dart';
+import 'package:appbasce/services/database_miniTB.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:math' as math;
 
@@ -16,7 +16,7 @@ class _MiniTBState extends State<MiniTB> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: DatabaseService().ddl,
+        stream: DatabaseServiceMiniTB().ddl,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             DateTime ddlFromDB = snapshot.data as DateTime;
