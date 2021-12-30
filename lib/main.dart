@@ -20,6 +20,8 @@ import 'package:appbasce/pages/miniTB/miniTB_insert_pwd.dart';
 import 'package:appbasce/pages/TB/tb.dart';
 import 'package:appbasce/pages/TB/tb_insert_list.dart';
 import 'package:appbasce/pages/TB/tb_insert_pwd.dart';
+import 'package:appbasce/pages/TB/tb_insert.dart';
+import 'package:appbasce/pages/TB/tb_insert_one.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() {
@@ -140,6 +142,8 @@ class AppBasce extends StatelessWidget {
         '/tb': (context) => const TB(),
         '/tb_insert_list': (context) => const TBInsertList(),
         '/tb_pwd': (context) => const TBInsertPassword(),
+        '/tb_insert': (context) => const TBInsertPrediction(),
+        '/tb_insert_one': (context) => const TBInsertOnePrediction(),
       },
     );
   }

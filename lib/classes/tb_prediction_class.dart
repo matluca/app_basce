@@ -22,11 +22,18 @@ class TBPwd {
 
 class TBPred {
   final String name;
-  final String homeTeam;
-  final String awayTeam;
-  final int home;
-  final int away;
+  String homeTeam;
+  String awayTeam;
+  int home;
+  int away;
   final DateTime deadline;
 
   TBPred(this.name, this.homeTeam, this.awayTeam, this.home, this.away, this.deadline);
+}
+
+class TBPredId {
+  final String id;
+  final String name;
+
+  TBPredId(this.id, this.name);
 }

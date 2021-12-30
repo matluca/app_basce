@@ -2,20 +2,20 @@ import 'package:appbasce/classes/tb_prediction_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:base32/base32.dart';
 
-List<String> ids = [
+List<String> tbRoundsIds = [
   'E-1-1',
   'E-1-2',
   'E-1-3',
   'E-1-4',
-  'E-2-1',
-  'E-2-2',
-  'E-3-1',
   'W-1-1',
   'W-1-2',
   'W-1-3',
   'W-1-4',
+  'E-2-1',
+  'E-2-2',
   'W-2-1',
   'W-2-2',
+  'E-3-1',
   'W-3-1',
   'F'
 ];
@@ -53,13 +53,16 @@ class DatabaseServiceTB {
   // predictions from snapshot
   List<TBPred> _predListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
-      String homeTeam = (doc.data() as Map)['home-team'];
-      String awayTeam = (doc.data() as Map)['away-team'];
-      int home = (doc.data() as Map)['home'];
-      int away = (doc.data() as Map)['away'];
+      String homeTeam = (doc.data() as Map)['home-team'] ?? "-";
+      String awayTeam = (doc.data() as Map)['away-team'] ?? "-";
+      int home = (doc.data() as Map)['home'] ?? 0;
+      int away = (doc.data() as Map)['away'] ?? 0;
       var timestamp = (doc.data() as Map)['deadline'];
-      var dd = timestamp.toDate();
-      DateTime deadline = DateTime.parse(dd.toString());
+      var deadline = DateTime.now();
+      if (timestamp != null) {
+        var dd = timestamp.toDate();
+        deadline = DateTime.parse(dd.toString());
+      }
       String name = (doc.data() as Map)['name'];
       return TBPred(name, homeTeam, awayTeam, home, away, deadline);
     }).toList();
