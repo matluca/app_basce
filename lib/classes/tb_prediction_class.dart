@@ -1,9 +1,17 @@
 import 'package:appbasce/classes/profile_class.dart';
 
-List<Profile> tbParticipants = [
-  luca,
-  admin
-];
+var allowedParticipants = {
+  "Admin": admin,
+  "Ale": ale,
+  "Enrico": enrico,
+  "Fabio": fabio,
+  "Luca": luca,
+  "Magu": magu,
+  "Melo": melo,
+  "Nic": nic,
+  "Teo": teo,
+  "Yiwei": yiwei
+};
 
 class TBPwd {
   final String name;

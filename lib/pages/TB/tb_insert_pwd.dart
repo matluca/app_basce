@@ -42,7 +42,7 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
           List<TBPwd> pwds = snapshot.data as List<TBPwd>;
           String oldPwd = "";
           for (var i = 0; i < pwds.length; i++) {
-            if (pwds[i].name == tbParticipants[widget.index].name) {
+            if (pwds[i].name == allowedParticipants[pwds[widget.index].name]!.name) {
               oldPwd = pwds[i].pwd;
             }
           }
@@ -56,7 +56,7 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
             appBar: AppBar(
               backgroundColor: Colors.blue[400],
               title: Text(
-                  '${tbParticipants[widget.index].name}, inserisci la tua password'),
+                  '${allowedParticipants[pwds[widget.index].name]!.name}, inserisci la tua password'),
               centerTitle: true,
               actions: <Widget>[
                 IconButton(
@@ -120,7 +120,7 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
                       if (_formKey.currentState!.validate()) {
                         if (oldPwd == '') {
                           DatabaseServiceTB().updatePassword(
-                              tbParticipants[widget.index].name, pwd);
+                              allowedParticipants[pwds[widget.index].name]!.name, pwd);
                         }
                         Navigator.pushNamed(context, '/wip', //TODO: predictions page
                             arguments: widget.index);
