@@ -1,11 +1,7 @@
-import 'dart:ffi';
-
 import 'package:appbasce/classes/tb_prediction_class.dart';
 import 'package:appbasce/pages/loading.dart';
 import 'package:appbasce/services/database_TB.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 
 class TBInsertOnePrediction extends StatefulWidget {
   const TBInsertOnePrediction({Key? key}) : super(key: key);

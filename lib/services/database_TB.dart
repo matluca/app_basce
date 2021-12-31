@@ -1,16 +1,18 @@
 import 'package:appbasce/classes/tb_prediction_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:base32/base32.dart';
+import 'dart:async';
+import 'package:async/async.dart';
 
 List<String> tbRoundsIds = [
-  'E-1-1',
-  'E-1-2',
-  'E-1-3',
-  'E-1-4',
-  'W-1-1',
-  'W-1-2',
-  'W-1-3',
-  'W-1-4',
+  // 'E-1-1',
+  // 'E-1-2',
+  // 'E-1-3',
+  // 'E-1-4',
+  // 'W-1-1',
+  // 'W-1-2',
+  // 'W-1-3',
+  // 'W-1-4',
   'E-2-1',
   'E-2-2',
   'W-2-1',
@@ -44,7 +46,18 @@ class DatabaseServiceTB {
     return await passwords.doc(name).set(data);
   }
 
-  // get predictions
+  // get all predictions
+  Future<Map<String,List<TBPred>>> get allPredictions async {
+    Map<String,List<TBPred>> predictions = {};
+    for (var id in tbRoundsIds) {
+      CollectionReference coll = FirebaseFirestore.instance.collection(id);
+      List<TBPred> data = await coll.get().then(_predListFromSnapshot);
+      predictions[id]=data;
+    }
+    return predictions;
+  }
+
+  // get predictions for a single series
   Stream<List<TBPred>> predictions(String id) {
     CollectionReference coll = FirebaseFirestore.instance.collection(id);
     return coll.snapshots().map(_predListFromSnapshot);
@@ -57,8 +70,8 @@ class DatabaseServiceTB {
       String awayTeam = (doc.data() as Map)['away-team'] ?? "-";
       int home = (doc.data() as Map)['home'] ?? 0;
       int away = (doc.data() as Map)['away'] ?? 0;
+      DateTime? deadline;
       var timestamp = (doc.data() as Map)['deadline'];
-      var deadline = DateTime.now();
       if (timestamp != null) {
         var dd = timestamp.toDate();
         deadline = DateTime.parse(dd.toString());

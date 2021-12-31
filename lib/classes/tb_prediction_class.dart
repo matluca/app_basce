@@ -26,7 +26,7 @@ class TBPred {
   String awayTeam;
   int home;
   int away;
-  final DateTime deadline;
+  final DateTime? deadline;
 
   TBPred(this.name, this.homeTeam, this.awayTeam, this.home, this.away, this.deadline);
 }
