@@ -93,5 +93,15 @@ List<DataRow> rows(Map<String,List<TBPred>> predictions, List<TBPwd> pwds) {
     );
     r.add(row);
   }
+  List<DataCell> malusCells = [
+    const DataCell(Text('Malus')),
+    DataCell.empty,
+  ];
+  for (var pwd in pwds) {
+    if (pwd.name != "Admin") {
+      malusCells.add(DataCell(Text(roundsMalus(predictions, pwd.name).toString())));
+    }
+  }
+  r.add(DataRow(cells: malusCells));
   return r;
 }

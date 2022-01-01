@@ -43,8 +43,8 @@ class _TBInsertOnePredictionPageState extends State<TBInsertOnePredictionPage> {
           if (snapshot.hasData) {
             List<TBPred> preds = snapshot.data as List<TBPred>;
             TBPred pred =
-                TBPred(widget.predId.name, "-", "-", 0, 0, DateTime.now());
-            TBPred reference = TBPred("Admin", "-", "-", 0, 0, DateTime.now());
+                TBPred(widget.predId.name, "-", "-", 0, 0, null);
+            TBPred reference = TBPred("Admin", "-", "-", 0, 0, null);
             for (final p in preds) {
               if (p.name == widget.predId.name) {
                 pred = p;
@@ -120,8 +120,8 @@ class _TBInsertOnePredictionPageState extends State<TBInsertOnePredictionPage> {
                                       if ((val == null) || (val == '')) {
                                         return 'Numero di partite vuoto';
                                       }
-                                      var games = int.parse(val);
-                                      if ((games < 0) || (games > 4)) {
+                                      var games = int.tryParse(val);
+                                      if ((games == null) || (games < 0) || (games > 4)) {
                                         return 'Numero di partite invalido';
                                       }
                                       return null;
@@ -143,8 +143,8 @@ class _TBInsertOnePredictionPageState extends State<TBInsertOnePredictionPage> {
                                       if ((val == null) || (val == '')) {
                                         return 'Numero di partite vuoto';
                                       }
-                                      var games = int.parse(val);
-                                      if ((games < 0) || (games > 4)) {
+                                      var games = int.tryParse(val);
+                                      if ((games == null) || (games < 0) || (games > 4)) {
                                         return 'Numero di partite invalido';
                                       }
                                       return null;
