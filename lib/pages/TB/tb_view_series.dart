@@ -95,12 +95,3 @@ List<DataRow> rows(Map<String,List<TBPred>> predictions, List<TBPwd> pwds) {
   }
   return r;
 }
-
-TBPred? namedPrediction(List<TBPred> pred, String name) {
-  for (var p in pred) {
-    if (p.name == name) {
-      return p;
-    }
-  }
-  return null;
-}

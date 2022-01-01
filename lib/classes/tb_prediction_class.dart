@@ -37,3 +37,12 @@ class TBPredId {
 
   TBPredId(this.id, this.name);
 }
+
+TBPred? namedPrediction(List<TBPred> pred, String name) {
+  for (var p in pred) {
+    if (p.name == name) {
+      return p;
+    }
+  }
+  return null;
+}
