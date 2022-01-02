@@ -38,10 +38,17 @@ class _TBViewSeriesState extends State<TBViewSeries> {
                     ],
                   ),
                   backgroundColor: Colors.blue[200],
-                  body: SingleChildScrollView(
-                    child: DataTable(
-                      columns: columns(pwds),
-                      rows: rows(predictions, pwds),
+                  body: Align(
+                    alignment: Alignment.topCenter,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: DataTable(
+                          columns: columns(pwds),
+                          rows: rows(predictions, pwds),
+                        ),
+                      ),
                     ),
                   ),
                 );

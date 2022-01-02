@@ -38,6 +38,20 @@ class DatabaseServiceTB {
     return await coll.doc(name).set(data);
   }
 
+  // update admin predictions
+  Future updateAdminPredictions(
+      String id, String name, String homeTeam, String awayTeam, int home, int away, DateTime deadline) async {
+    Map<String, dynamic> data = {};
+    data['home'] = home;
+    data['home-team'] = homeTeam;
+    data['away-team'] = awayTeam;
+    data['away'] = away;
+    data['deadline'] = deadline;
+    data['name'] = name;
+    CollectionReference coll = FirebaseFirestore.instance.collection(id);
+    return await coll.doc(name).set(data);
+  }
+
   // update password
   Future updatePassword(String name, String pwd) async {
     Map<String, dynamic> data = {};

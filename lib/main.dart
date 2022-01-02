@@ -22,6 +22,7 @@ import 'package:appbasce/pages/TB/tb_insert_list.dart';
 import 'package:appbasce/pages/TB/tb_insert_pwd.dart';
 import 'package:appbasce/pages/TB/tb_insert.dart';
 import 'package:appbasce/pages/TB/tb_insert_one.dart';
+import 'package:appbasce/pages/TB/tb_insert_one_admin.dart';
 import 'package:appbasce/pages/TB/tb_view_series.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -34,22 +35,22 @@ class App extends StatelessWidget {
   // Create the initialization Future outside of `build`:
 
   // For Android
-  //final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   App({Key? key}) : super(key: key);
 
   // For Web
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp(
-    options: const FirebaseOptions(
-      apiKey: "AIzaSyAkosczGLQBjng85sHD6kQoeX6T-1oLh1E",
-      appId: "1:180543049748:web:58fa4e085f07100794d701",
-      messagingSenderId: "180543049748",
-      projectId: "minitb-rs",
-      authDomain: "minitb-rs.firebaseapp.com",
-      databaseURL: "https://minitb-rs.firebaseio.com",
-      storageBucket: "minitb-rs.appspot.com",
-    )
-  );
+  // final Future<FirebaseApp> _initialization = Firebase.initializeApp(
+  //   options: const FirebaseOptions(
+  //     apiKey: "AIzaSyAkosczGLQBjng85sHD6kQoeX6T-1oLh1E",
+  //     appId: "1:180543049748:web:58fa4e085f07100794d701",
+  //     messagingSenderId: "180543049748",
+  //     projectId: "minitb-rs",
+  //     authDomain: "minitb-rs.firebaseapp.com",
+  //     databaseURL: "https://minitb-rs.firebaseio.com",
+  //     storageBucket: "minitb-rs.appspot.com",
+  //   )
+  // );
 
   @override
   Widget build(BuildContext context) {
@@ -145,6 +146,7 @@ class AppBasce extends StatelessWidget {
         '/tb_pwd': (context) => const TBInsertPassword(),
         '/tb_insert': (context) => const TBInsertPrediction(),
         '/tb_insert_one': (context) => const TBInsertOnePrediction(),
+        '/tb_insert_one_admin': (context) => const TBInsertOnePredictionAdmin(),
         '/tb_view_series': (context) => const TBViewSeries(),
       },
     );

@@ -77,12 +77,12 @@ class _TBInsertPredictionPageState extends State<TBInsertPredictionPage> {
                             child: ListTile(
                               onTap: () {
                                 TBPredId arg = TBPredId(tbRoundsIds[index], widget.profile.name);
-                                Navigator.pushNamed(context, '/tb_insert_one',
+                                Navigator.pushNamed(context, insertPagePath(widget.profile.name),
                                     arguments: arg);
                               },
                               title: Center(
                                 child: Text(
-                                  seriesTeams(predictions, tbRoundsIds[index]),
+                                  seriesTeams(predictions, tbRoundsIds[index], widget.profile.name),
                                   style: TextStyle(
                                     color: Colors.grey[700],
                                     fontSize: 18,
@@ -108,8 +108,18 @@ class _TBInsertPredictionPageState extends State<TBInsertPredictionPage> {
   }
 }
 
-String seriesTeams(Map<String,List<TBPred>> predictions, String id) {
+String seriesTeams(Map<String,List<TBPred>> predictions, String id, String name) {
+  if (name == "Admin") {
+    return id;
+  }
   TBPred reference = namedPrediction(predictions[id]!, "Admin")!;
   return "${reference.homeTeam} - ${reference.awayTeam}";
+}
+
+String insertPagePath(String name) {
+  if (name == "Admin") {
+    return "/tb_insert_one_admin";
+  }
+  return "/tb_insert_one";
 }
 

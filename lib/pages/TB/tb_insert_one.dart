@@ -82,79 +82,73 @@ class _TBInsertOnePredictionPageState extends State<TBInsertOnePredictionPage> {
                         style: TextStyle(fontSize: 20),
                         textAlign: TextAlign.center,
                       ),
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Column(
-                            children: [
-                              Text(
+                      Form(
+                        key: _formKey,
+                        child: DataTable(
+                          columns: [DataColumn(label: Container()), DataColumn(label: Container(width: 50))],
+                          rows: [
+                            DataRow(cells: [
+                              DataCell(Text(
                                 reference.homeTeam,
                                 style: const TextStyle(fontSize: 20),
+                              )),
+                              DataCell(
+                                TextFormField(
+                                  onChanged: (val) {
+                                    setState(() {
+                                      var games = int.tryParse(val);
+                                      if (games != null) {
+                                        home = games;
+                                      }
+                                    });
+                                  },
+                                  initialValue: pred.home.toString(),
+                                  keyboardType: TextInputType.number,
+                                  validator: (val) {
+                                    if ((val == null) || (val == '')) {
+                                      return 'Numero di partite vuoto';
+                                    }
+                                    var games = int.tryParse(val);
+                                    if ((games == null) || (games < 0) || (games > 4)) {
+                                      return 'Numero di partite invalido';
+                                    }
+                                    return null;
+                                  },
+                                ),
                               ),
-                              const SizedBox(height: 10),
-                              Text(
+                            ]),
+                            DataRow(cells: [
+                              DataCell(Text(
                                 reference.awayTeam,
                                 style: const TextStyle(fontSize: 20),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(width: 20),
-                          Form(
-                            key: _formKey,
-                            child: Expanded(
-                              child: Column(
-                                children: [
-                                  TextFormField(
-                                    onChanged: (val) {
-                                      setState(() {
-                                        var games = int.tryParse(val);
-                                        if (games != null) {
-                                          home = games;
-                                        }
-                                      });
-                                    },
-                                    initialValue: pred.home.toString(),
-                                    keyboardType: TextInputType.number,
-                                    validator: (val) {
-                                      if ((val == null) || (val == '')) {
-                                        return 'Numero di partite vuoto';
-                                      }
+                              )),
+                              DataCell(
+                                TextFormField(
+                                  onChanged: (val) {
+                                    setState(() {
                                       var games = int.tryParse(val);
-                                      if ((games == null) || (games < 0) || (games > 4)) {
-                                        return 'Numero di partite invalido';
+                                      if (games != null) {
+                                        away = games;
                                       }
-                                      return null;
-                                    },
-                                  ),
-                                  const SizedBox(height: 10),
-                                  TextFormField(
-                                    onChanged: (val) {
-                                      setState(() {
-                                        var games = int.tryParse(val);
-                                        if (games != null) {
-                                          away = games;
-                                        }
-                                      });
-                                    },
-                                    initialValue: pred.away.toString(),
-                                    keyboardType: TextInputType.number,
-                                    validator: (val) {
-                                      if ((val == null) || (val == '')) {
-                                        return 'Numero di partite vuoto';
-                                      }
-                                      var games = int.tryParse(val);
-                                      if ((games == null) || (games < 0) || (games > 4)) {
-                                        return 'Numero di partite invalido';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ],
+                                    });
+                                  },
+                                  initialValue: pred.away.toString(),
+                                  keyboardType: TextInputType.number,
+                                  validator: (val) {
+                                    if ((val == null) || (val == '')) {
+                                      return 'Numero di partite vuoto';
+                                    }
+                                    var games = int.tryParse(val);
+                                    if ((games == null) || (games < 0) || (games > 4)) {
+                                      return 'Numero di partite invalido';
+                                    }
+                                    return null;
+                                  },
+                                ),
                               ),
-                            ),
-                          ),
-                        ],
+                            ]),
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
