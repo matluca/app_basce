@@ -140,6 +140,7 @@ class _TBInsertOnePredictionAdminPageState extends State<TBInsertOnePredictionAd
                                 )),
                                 DataCell(
                                   TextFormField(
+                                    decoration: decoration(),
                                     onChanged: (val) {
                                       setState(() {
                                         homeTeam = val;
@@ -162,6 +163,7 @@ class _TBInsertOnePredictionAdminPageState extends State<TBInsertOnePredictionAd
                                 )),
                                 DataCell(
                                   TextFormField(
+                                    decoration: decoration(),
                                     onChanged: (val) {
                                       setState(() {
                                         awayTeam = val;
@@ -184,6 +186,7 @@ class _TBInsertOnePredictionAdminPageState extends State<TBInsertOnePredictionAd
                                 )),
                                 DataCell(
                                   TextFormField(
+                                    decoration: decoration(),
                                     onChanged: (val) {
                                       setState(() {
                                         var games = int.tryParse(val);
@@ -214,6 +217,7 @@ class _TBInsertOnePredictionAdminPageState extends State<TBInsertOnePredictionAd
                                 )),
                                 DataCell(
                                   TextFormField(
+                                    decoration: decoration(),
                                     onChanged: (val) {
                                       setState(() {
                                         var games = int.tryParse(val);
@@ -244,7 +248,7 @@ class _TBInsertOnePredictionAdminPageState extends State<TBInsertOnePredictionAd
                                 )),
                                 DataCell(
                                   TextFormField(
-                                    decoration: InputDecoration(hintText: dateFormatter.format(deadline!)),
+                                    decoration: decoration(dateFormatter.format(deadline!)),
                                     onTap: () => pickDate(context, deadline!),
                                   ),
                                 ),
@@ -253,7 +257,7 @@ class _TBInsertOnePredictionAdminPageState extends State<TBInsertOnePredictionAd
                                 DataCell.empty,
                                 DataCell(
                                   TextFormField(
-                                    decoration: InputDecoration(hintText: format24hTime(time!)),
+                                    decoration: decoration(format24hTime(time!)),
                                     onTap: () => pickTime(context, time!),
                                   ),
                                 ),
@@ -329,4 +333,16 @@ bool isValid(int? home, int? away) {
     return false;
   }
   return true;
+}
+
+InputDecoration decoration([String? hintText]) {
+  return InputDecoration(
+    focusedBorder: const OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.white, width: 3.0)
+    ),
+    enabledBorder: const OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.grey, width: 3.0),
+    ),
+    hintText: hintText,
+  );
 }

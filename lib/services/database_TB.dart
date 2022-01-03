@@ -60,6 +60,19 @@ class DatabaseServiceTB {
     return await passwords.doc(name).set(data);
   }
 
+  // get all predictions after deadline
+  Future<Map<String,List<TBPred>>> get allPredictionsAfterDeadline async {
+    Map<String,List<TBPred>> predictions = {};
+    Map<String,List<TBPred>> allPreds = await allPredictions;
+    for (var p in allPreds.entries) {
+      TBPred reference = namedPrediction(p.value, "Admin")!;
+      if ((reference.deadline == null) || (DateTime.now().isAfter(reference.deadline!))) {
+        predictions[p.key] = p.value;
+      }
+    }
+    return predictions;
+  }
+
   // get all predictions
   Future<Map<String,List<TBPred>>> get allPredictions async {
     Map<String,List<TBPred>> predictions = {};

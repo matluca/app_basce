@@ -122,7 +122,7 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
                           DatabaseServiceTB().updatePassword(
                               allowedParticipants[pwds[widget.index].name]!.name, pwd);
                         }
-                        Navigator.pushNamed(context, '/tb_insert',
+                        Navigator.pushReplacementNamed(context, '/tb_insert',
                             arguments: allowedParticipants[pwds[widget.index].name]);
                       }
                     },

@@ -19,7 +19,7 @@ class _TBViewSeriesState extends State<TBViewSeries> {
         if (snapshot.hasData) {
           List<TBPwd> pwds = snapshot.data as List<TBPwd>;
           return FutureBuilder(
-            future: DatabaseServiceTB().allPredictions,
+            future: DatabaseServiceTB().allPredictionsAfterDeadline,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 Map<String,List<TBPred>> predictions = snapshot.data as Map<String,List<TBPred>>;

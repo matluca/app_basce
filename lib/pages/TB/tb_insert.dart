@@ -3,6 +3,7 @@ import 'package:appbasce/services/database_TB.dart';
 import 'package:flutter/material.dart';
 import 'package:appbasce/classes/profile_class.dart';
 import 'package:appbasce/classes/tb_prediction_class.dart';
+import 'package:intl/intl.dart';
 
 class TBInsertPrediction extends StatefulWidget {
   const TBInsertPrediction({Key? key}) : super(key: key);
@@ -73,24 +74,11 @@ class _TBInsertPredictionPageState extends State<TBInsertPredictionPage> {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 1, horizontal: 4),
-                          child: Card(
-                            child: ListTile(
-                              onTap: () {
-                                TBPredId arg = TBPredId(tbRoundsIds[index], widget.profile.name);
-                                Navigator.pushNamed(context, insertPagePath(widget.profile.name),
-                                    arguments: arg);
-                              },
-                              title: Center(
-                                child: Text(
-                                  seriesTeams(predictions, tbRoundsIds[index], widget.profile.name),
-                                  style: TextStyle(
-                                    color: Colors.grey[700],
-                                    fontSize: 18,
-                                  ),
-                                ),
-                              ),
-                              //trailing: Icon(Icons.play_arrow),
-                            ),
+                          child: SeriesCard(
+                              key: const Key("SeriesCard"),
+                              predictions: predictions,
+                              name: widget.profile.name,
+                              id: tbRoundsIds[index]
                           ),
                         );
                       },
@@ -108,11 +96,70 @@ class _TBInsertPredictionPageState extends State<TBInsertPredictionPage> {
   }
 }
 
-String seriesTeams(Map<String,List<TBPred>> predictions, String id, String name) {
-  if (name == "Admin") {
-    return id;
+class SeriesCard extends StatefulWidget {
+  final Map<String,List<TBPred>> predictions;
+  final String id;
+  final String name;
+  const SeriesCard({Key? key, required this.predictions, required this.id, required this.name}) : super(key: key);
+
+  @override
+  _SeriesCardState createState() => _SeriesCardState();
+}
+
+class _SeriesCardState extends State<SeriesCard> {
+  @override
+  Widget build(BuildContext context) {
+    TBPred reference = namedPrediction(widget.predictions[widget.id]!, "Admin")!;
+    if ((widget.name == "Admin") || (reference.deadline == null) || (DateTime.now().isBefore(reference.deadline!))) {
+      return Card(
+        child: ListTile(
+          onTap: () {
+            TBPredId arg = TBPredId(widget.id, widget.name);
+            Navigator.pushNamed(context, insertPagePath(widget.name),
+                arguments: arg);
+          },
+          title: Center(
+            child: Text(
+              seriesTeams(widget.predictions, widget.id, widget.name),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.grey[700],
+                fontSize: 18,
+              ),
+            ),
+          ),
+        ),
+      );
+    } else {
+      return Card(
+        elevation: 0,
+        color: Colors.grey,
+        child: ListTile(
+          title: Center(
+            child: Text(
+              seriesTeams(widget.predictions, widget.id, widget.name),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.grey[700],
+                fontSize: 18,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
   }
+}
+
+String seriesTeams(Map<String,List<TBPred>> predictions, String id, String name) {
   TBPred reference = namedPrediction(predictions[id]!, "Admin")!;
+  final DateFormat dateFormatter = DateFormat('dd MMM, HH:mm');
+  if (name == "Admin") {
+    return "$id\n${reference.homeTeam} - ${reference.awayTeam}";
+  }
+  if (reference.deadline != null) {
+    return "${reference.homeTeam} - ${reference.awayTeam}\n${dateFormatter.format(reference.deadline!)}";
+  }
   return "${reference.homeTeam} - ${reference.awayTeam}";
 }
 
