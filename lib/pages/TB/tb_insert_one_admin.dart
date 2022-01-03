@@ -109,7 +109,7 @@ class _TBInsertOnePredictionAdminPageState extends State<TBInsertOnePredictionAd
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.blue[400],
-                title: Text('${widget.predId.name}, inserisci predizione'),
+                title: Text('${widget.predId.name}, gestisci predizione'),
                 centerTitle: true,
                 actions: <Widget>[
                   IconButton(
@@ -278,7 +278,7 @@ class _TBInsertOnePredictionAdminPageState extends State<TBInsertOnePredictionAd
                               DatabaseServiceTB().updateAdminPredictions(
                                   widget.predId.id, widget.predId.name, homeTeam, awayTeam, home!, away!, d);
                               Navigator.popUntil(
-                                  context, ModalRoute.withName('/tb_insert'));
+                                  context, ModalRoute.withName('/tb_insert_admin'));
                             }
                           },
                         ),

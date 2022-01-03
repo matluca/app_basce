@@ -56,12 +56,17 @@ class _TBInsertListState extends State<TBInsertList> {
                             child: Card(
                               child: ListTile(
                                 onTap: () {
-                                  Navigator.pushNamed(context, '/tb_pwd',
-                                      arguments: index);
+                                  if (allowedParticipants[pwds[index].name]!.name == "Admin") {
+                                    Navigator.pushNamed(context, '/tb_insert',
+                                        arguments: allowedParticipants[pwds[index].name]);
+                                  } else {
+                                    Navigator.pushNamed(context, '/tb_pwd',
+                                        arguments: index);
+                                  }
                                 },
                                 title: Center(
                                   child: Text(
-                                    allowedParticipants[pwds[index].name]!.name,
+                                    displayName(allowedParticipants[pwds[index].name]!.name),
                                     style: TextStyle(
                                       color: Colors.grey[700],
                                       fontSize: 18,
@@ -88,5 +93,14 @@ class _TBInsertListState extends State<TBInsertList> {
             return const Loading();
           }
         });
+  }
+}
+
+String displayName(String name) {
+  if (name == "Admin") {
+    return 'Modifica risultati';
+  }
+  else {
+    return name;
   }
 }

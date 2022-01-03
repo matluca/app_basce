@@ -162,14 +162,15 @@ class _TBInsertOnePredictionPageState extends State<TBInsertOnePredictionPage> {
                             style: TextStyle(color: Colors.white),
                           ),
                           onPressed: () async {
-                            if (_formKey.currentState!.validate() && isValid(home, away) && DateTime.now().isBefore(reference.deadline!)) {
+                            if ((_formKey.currentState!.validate() && isValid(home, away) && DateTime.now().isBefore(reference.deadline!))
+                            || (widget.predId.name == "Admin")) {
                               DatabaseServiceTB().updatePredictions(widget.predId.id, widget.predId.name, home!, away!);
                               Navigator.popUntil(
                                   context, ModalRoute.withName('/tb_insert'));
                             }
                           },
                         ),
-                        ErrorMessage(message: errorMessage(home, away, reference.deadline!)),
+                        ErrorMessage(message: errorMessage(home, away, reference.deadline!, widget.predId.name)),
                       ],
                     ),
                   ),
@@ -233,7 +234,10 @@ InputDecoration decoration() {
   );
 }
 
-String errorMessage(int? home, int? away, DateTime deadline) {
+String errorMessage(int? home, int? away, DateTime deadline, String name) {
+  if (name == "Admin") {
+    return '';
+  }
   if (!isValid(home, away)) {
     return 'Predizione invalida';
   }

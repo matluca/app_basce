@@ -60,7 +60,20 @@ class _TBState extends State<TB> {
                   },
                 ),
               ),
-              const SizedBox(height: 80),
+              const SizedBox(height: 100),
+              Card(
+                child: ListTile(
+                  leading: const Icon(Icons.settings),
+                  trailing: const Icon(Icons.play_arrow),
+                  title: Text(
+                      "Admin",
+                      style: TextStyle(
+                          color: Colors.grey[700], fontSize: 18)),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/tb_pwd', arguments: 0);
+                  },
+                ),
+              ),
             ],
           ),
         ),

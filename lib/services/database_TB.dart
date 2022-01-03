@@ -35,7 +35,7 @@ class DatabaseServiceTB {
     data['away'] = away;
     data['name'] = name;
     CollectionReference coll = FirebaseFirestore.instance.collection(id);
-    return await coll.doc(name).set(data);
+    return await coll.doc(name).update(data);
   }
 
   // update admin predictions

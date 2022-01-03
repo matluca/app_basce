@@ -5,32 +5,30 @@ import 'package:appbasce/classes/profile_class.dart';
 import 'package:appbasce/classes/tb_prediction_class.dart';
 import 'package:intl/intl.dart';
 
-class TBInsertPrediction extends StatefulWidget {
-  const TBInsertPrediction({Key? key}) : super(key: key);
+class TBInsertPredictionAdmin extends StatefulWidget {
+  const TBInsertPredictionAdmin({Key? key}) : super(key: key);
 
   @override
-  _TBInsertPredictionState createState() => _TBInsertPredictionState();
+  _TBInsertPredictionAdminState createState() => _TBInsertPredictionAdminState();
 }
 
-class _TBInsertPredictionState extends State<TBInsertPrediction> {
+class _TBInsertPredictionAdminState extends State<TBInsertPredictionAdmin> {
   @override
   Widget build(BuildContext context) {
-    Profile profile = ModalRoute.of(context)!.settings.arguments as Profile;
-    return TBInsertPredictionPage(
-        key: const Key("TBInsertPredictionPage"), profile: profile);
+    return const TBInsertPredictionAdminPage(
+        key: Key("TBInsertPredictionAdminPage"));
   }
 }
 
-class TBInsertPredictionPage extends StatefulWidget {
-  final Profile profile;
-  const TBInsertPredictionPage({required Key key, required this.profile})
+class TBInsertPredictionAdminPage extends StatefulWidget {
+  const TBInsertPredictionAdminPage({required Key key})
       : super(key: key);
 
   @override
-  _TBInsertPredictionPageState createState() => _TBInsertPredictionPageState();
+  _TBInsertPredictionAdminPageState createState() => _TBInsertPredictionAdminPageState();
 }
 
-class _TBInsertPredictionPageState extends State<TBInsertPredictionPage> {
+class _TBInsertPredictionAdminPageState extends State<TBInsertPredictionAdminPage> {
   @override
   Widget build(BuildContext context) {
     final orientation = MediaQuery.of(context).orientation;
@@ -45,8 +43,8 @@ class _TBInsertPredictionPageState extends State<TBInsertPredictionPage> {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.blue[400],
-              title: Text(
-                  '${widget.profile.name}, inserisci predizioni'),
+              title: const Text(
+                  'Admin, gestisci predizioni'),
               centerTitle: true,
               actions: <Widget>[
                 IconButton(
@@ -74,10 +72,9 @@ class _TBInsertPredictionPageState extends State<TBInsertPredictionPage> {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 1, horizontal: 4),
-                          child: SeriesCard(
+                          child: SeriesCardAdmin(
                               key: const Key("SeriesCard"),
                               predictions: predictions,
-                              name: widget.profile.name,
                               id: tbRoundsIds[index]
                           ),
                         );
@@ -96,66 +93,41 @@ class _TBInsertPredictionPageState extends State<TBInsertPredictionPage> {
   }
 }
 
-class SeriesCard extends StatefulWidget {
+class SeriesCardAdmin extends StatefulWidget {
   final Map<String,List<TBPred>> predictions;
   final String id;
-  final String name;
-  const SeriesCard({Key? key, required this.predictions, required this.id, required this.name}) : super(key: key);
+  const SeriesCardAdmin({Key? key, required this.predictions, required this.id}) : super(key: key);
 
   @override
-  _SeriesCardState createState() => _SeriesCardState();
+  _SeriesCardAdminState createState() => _SeriesCardAdminState();
 }
 
-class _SeriesCardState extends State<SeriesCard> {
+class _SeriesCardAdminState extends State<SeriesCardAdmin> {
   @override
   Widget build(BuildContext context) {
-    TBPred reference = namedPrediction(widget.predictions[widget.id]!, "Admin")!;
-    if ((widget.name == "Admin") || (reference.deadline == null) || (DateTime.now().isBefore(reference.deadline!))) {
-      return Card(
-        child: ListTile(
-          onTap: () {
-            TBPredId arg = TBPredId(widget.id, widget.name);
-            Navigator.pushNamed(context, "/tb_insert_one",
-                arguments: arg);
-          },
-          title: Center(
-            child: Text(
-              seriesTeams(widget.predictions, widget.id, widget.name),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.grey[700],
-                fontSize: 18,
-              ),
+    return Card(
+      child: ListTile(
+        onTap: () {
+          TBPredId arg = TBPredId(widget.id, "Admin");
+          Navigator.pushNamed(context, "/tb_insert_one_admin",
+              arguments: arg);
+        },
+        title: Center(
+          child: Text(
+            seriesTeamsAdmin(widget.predictions, widget.id),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.grey[700],
+              fontSize: 18,
             ),
           ),
         ),
-      );
-    } else {
-      return Card(
-        elevation: 0,
-        color: Colors.grey,
-        child: ListTile(
-          title: Center(
-            child: Text(
-              seriesTeams(widget.predictions, widget.id, widget.name),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.grey[700],
-                fontSize: 18,
-              ),
-            ),
-          ),
-        ),
-      );
-    }
+      ),
+    );
   }
 }
 
-String seriesTeams(Map<String,List<TBPred>> predictions, String id, String name) {
+String seriesTeamsAdmin(Map<String,List<TBPred>> predictions, String id) {
   TBPred reference = namedPrediction(predictions[id]!, "Admin")!;
-  final DateFormat dateFormatter = DateFormat('dd MMM, HH:mm');
-  if ((name == "Admin") || (reference.deadline == null)) {
-    return "${reference.homeTeam} - ${reference.awayTeam}";
-  }
-  return "${reference.homeTeam} - ${reference.awayTeam}\n${dateFormatter.format(reference.deadline!)}";
+  return "$id\n${reference.homeTeam} - ${reference.awayTeam}";
 }
