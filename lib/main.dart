@@ -25,6 +25,7 @@ import 'package:appbasce/pages/TB/tb_insert_admin.dart';
 import 'package:appbasce/pages/TB/tb_insert_one.dart';
 import 'package:appbasce/pages/TB/tb_insert_one_admin.dart';
 import 'package:appbasce/pages/TB/tb_view_series.dart';
+import 'package:appbasce/pages/TB/tb_insert_bracket.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() {
@@ -150,6 +151,7 @@ class AppBasce extends StatelessWidget {
         '/tb_insert_one': (context) => const TBInsertOnePrediction(),
         '/tb_insert_one_admin': (context) => const TBInsertOnePredictionAdmin(),
         '/tb_view_series': (context) => const TBViewSeries(),
+        '/tb_insert_bracket': (context) => const TBInsertBracket(),
       },
     );
   }

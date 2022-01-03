@@ -39,7 +39,7 @@ class _TBState extends State<TB> {
                   leading: const Icon(MdiIcons.pencil),
                   trailing: const Icon(Icons.play_arrow),
                   title: Text(
-                      "Inserisci predizioni turni",
+                      "Inserisci predizioni",
                       style: TextStyle(
                           color: Colors.grey[700], fontSize: 18)),
                   onTap: () {
@@ -52,7 +52,7 @@ class _TBState extends State<TB> {
                   leading: const Icon(MdiIcons.messageTextOutline),
                   trailing: const Icon(Icons.play_arrow),
                   title: Text(
-                      "Visualizza predizioni turni",
+                      "Visualizza predizioni",
                       style: TextStyle(
                           color: Colors.grey[700], fontSize: 18)),
                   onTap: () {

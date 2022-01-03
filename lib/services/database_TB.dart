@@ -2,17 +2,8 @@ import 'package:appbasce/classes/tb_prediction_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:base32/base32.dart';
 import 'dart:async';
-import 'package:async/async.dart';
 
 List<String> tbRoundsIds = [
-  // 'E-1-1',
-  // 'E-1-2',
-  // 'E-1-3',
-  // 'E-1-4',
-  // 'W-1-1',
-  // 'W-1-2',
-  // 'W-1-3',
-  // 'W-1-4',
   'E-2-1',
   'E-2-2',
   'W-2-1',
@@ -26,6 +17,10 @@ class DatabaseServiceTB {
   // collections reference
   final CollectionReference passwords =
       FirebaseFirestore.instance.collection('tb-passwords');
+  final CollectionReference seeds =
+      FirebaseFirestore.instance.collection('tb-seeds');
+  final CollectionReference brackets =
+      FirebaseFirestore.instance.collection('tb-brackets');
 
   // update predictions
   Future updatePredictions(
@@ -61,6 +56,13 @@ class DatabaseServiceTB {
     data['name'] = name;
     data['pwd'] = base32.encodeString(pwd);
     return await passwords.doc(name).set(data);
+  }
+
+  // update bracket
+  Future updateBracket(String name, Map<String,int> bracket) async {
+    Map<String,dynamic> data = bracket;
+    data['name'] = name;
+    return await brackets.doc(name).set(data);
   }
 
   // get all predictions after deadline
@@ -125,6 +127,40 @@ class DatabaseServiceTB {
         (doc.data() as Map)['name'] ?? '',
         base32.decodeAsString((doc.data() as Map)['pwd']),
       );
+    }).toList();
+  }
+
+  // get TB seeds
+  Future<Map> get tbSeeds {
+    return seeds.get().then(_tbSeedsFromSnapshot);
+  }
+
+  Map _tbSeedsFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return (doc.data() as Map);
+    }).toList()[0];
+  }
+
+  // get brackets
+  Future<Map<String,Map<String,int>>> get tbBrackets async {
+    Map<String,Map<String,int>> brs = {};
+    List<Map> bracketList = await brackets.get().then(_tbBracketsFromSnapshot);
+    for (var br in bracketList) {
+      Map<String,int> b = {};
+      String name = br['name'] ?? '';
+      for (var entry in br.entries) {
+        if (entry.key != 'name') {
+          b[entry.key] = entry.value as int;
+        }
+      }
+      brs[name] = b;
+    }
+    return brs;
+  }
+
+  List<Map> _tbBracketsFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return (doc.data() as Map);
     }).toList();
   }
 }

@@ -63,6 +63,24 @@ class _TBInsertPredictionPageState extends State<TBInsertPredictionPage> {
                 padding: const EdgeInsets.fromLTRB(5, 25, 5, 10),
                 child: Column(
                   children: <Widget>[
+                    Card(
+                      child: ListTile(
+                        onTap: () {
+                          Navigator.pushNamed(context, "/tb_insert_bracket");
+                        },
+                        title: Center(
+                          child: Text(
+                            'Bracket',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.grey[700],
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 50),
                     GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           childAspectRatio: (width - 30) / columns / 85,
