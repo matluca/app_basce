@@ -52,11 +52,11 @@ class _TBState extends State<TB> {
                   leading: const Icon(MdiIcons.messageTextOutline),
                   trailing: const Icon(Icons.play_arrow),
                   title: Text(
-                      "Visualizza predizioni",
+                      "Visualizza risultati",
                       style: TextStyle(
                           color: Colors.grey[700], fontSize: 18)),
                   onTap: () {
-                    Navigator.pushNamed(context, '/tb_view_series');
+                    Navigator.pushNamed(context, '/tb_view_results');
                   },
                 ),
               ),

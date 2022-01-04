@@ -76,24 +76,6 @@ class _TBInsertPredictionPageState extends State<TBInsertPredictionPage> {
                             child: Column(
                               children: <Widget>[
                                 BracketCard(bracketId: TBBracketId(widget.profile.name, bracket, bracketDeadline)),
-                                // Card(
-                                //   child: ListTile(
-                                //     onTap: () {
-                                //       TBBracketId arg = TBBracketId(widget.profile.name, bracket, bracketDeadline);
-                                //       Navigator.pushNamed(context, "/tb_insert_bracket", arguments: arg);
-                                //     },
-                                //     title: Center(
-                                //       child: Text(
-                                //         'Bracket\n${dateFormatter.format(bracketDeadline)}',
-                                //         textAlign: TextAlign.center,
-                                //         style: TextStyle(
-                                //           color: Colors.grey[700],
-                                //           fontSize: 18,
-                                //         ),
-                                //       ),
-                                //     ),
-                                //   ),
-                                // ),
                                 const SizedBox(height: 50),
                                 GridView.builder(
                                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
