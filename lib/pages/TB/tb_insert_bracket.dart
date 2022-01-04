@@ -45,7 +45,6 @@ class _TBInsertBracketPageState extends State<TBInsertBracketPage> {
       onChanged: (val) {
         setState(() {
           widget.bracket.bracket[key] = val;
-          _formKey.currentState!.validate();
         });
       },
       validator: (val) {
@@ -78,11 +77,14 @@ class _TBInsertBracketPageState extends State<TBInsertBracketPage> {
           widget.bracket.bracket['E1458'] ??= tbSeeds['E1'];
           widget.bracket.bracket['E2367'] ??= tbSeeds['E2'];
           widget.bracket.bracket['E'] ??= tbSeeds['E1'];
-          widget.bracket.bracket['F'] ??= tbSeeds['W'];
+          widget.bracket.bracket['F'] ??= tbSeeds['W1'];
+          if (_formKey.currentState != null) {
+            _formKey.currentState!.validate();
+          }
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.blue[400],
-              title: const Text('"Name" Inserisci bracket'),
+              title: Text('${widget.bracket.name}, inserisci bracket'),
               centerTitle: true,
               actions: <Widget>[
                 IconButton(
@@ -108,15 +110,15 @@ class _TBInsertBracketPageState extends State<TBInsertBracketPage> {
                           key: _formKey,
                           child: DataTable(
                             columns: [
+                              const DataColumn(label: Text('First\nround')),
+                              const DataColumn(label: Text('Second\nround')),
+                              const DataColumn(label: Text('Conference\nfinals')),
                               DataColumn(label: Container()),
+                              const DataColumn(label: Text('NBA\nFinals')),
                               DataColumn(label: Container()),
-                              DataColumn(label: Container()),
-                              DataColumn(label: Container()),
-                              DataColumn(label: Container()),
-                              DataColumn(label: Container()),
-                              DataColumn(label: Container()),
-                              DataColumn(label: Container()),
-                              DataColumn(label: Container()),
+                              const DataColumn(label: Text('Conference\nfinals')),
+                              const DataColumn(label: Text('Second\nround')),
+                              const DataColumn(label: Text('First\nround')),
                             ],
                             rows: [
                               DataRow(cells: [
@@ -218,7 +220,7 @@ class _TBInsertBracketPageState extends State<TBInsertBracketPage> {
                             style: TextStyle(color: Colors.white),
                           ),
                           onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
+                            if ((_formKey.currentState!.validate()) && (DateTime.now().isBefore(widget.bracket.deadline) || (widget.bracket.name == 'Admin'))) {
                               DatabaseServiceTB().updateBracket(widget.bracket.name, widget.bracket.bracket);
                               Navigator.popUntil(
                                   context, ModalRoute.withName('/tb_insert'));

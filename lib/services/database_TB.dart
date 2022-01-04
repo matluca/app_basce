@@ -21,6 +21,8 @@ class DatabaseServiceTB {
       FirebaseFirestore.instance.collection('tb-seeds');
   final CollectionReference brackets =
       FirebaseFirestore.instance.collection('tb-brackets');
+  final CollectionReference bracketDeadline =
+      FirebaseFirestore.instance.collection('tb-bracket-deadline');
 
   // update predictions
   Future updatePredictions(
@@ -162,5 +164,18 @@ class DatabaseServiceTB {
     return snapshot.docs.map((doc) {
       return (doc.data() as Map);
     }).toList();
+  }
+
+  // get deadline
+  Future<DateTime> get bracketDdl {
+    return bracketDeadline.get().then(_ddlFromSnapshot);
+  }
+
+  DateTime _ddlFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      var timestamp = (doc.data() as Map)['deadline'];
+      var dd = timestamp.toDate();
+      return DateTime.parse(dd.toString());
+    }).toList()[0];
   }
 }

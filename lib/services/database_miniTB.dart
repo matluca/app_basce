@@ -107,7 +107,7 @@ class DatabaseServiceMiniTB {
     }).toList();
   }
 
-  // get passwords
+  // get deadline
   Stream<DateTime> get ddl {
     return deadline.snapshots().map(_ddlFromSnapshot);
   }

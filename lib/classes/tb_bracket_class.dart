@@ -1,8 +1,9 @@
 class TBBracketId {
   final String name;
   final Map<String,String> bracket;
+  final DateTime deadline;
 
-  TBBracketId(this.name, this.bracket);
+  TBBracketId(this.name, this.bracket, this.deadline);
 }
 
 Map<String,int> bracketToRoundsWon(Map<String,String> bracket, Map<String,String> seeds) {
@@ -15,4 +16,3 @@ Map<String,int> bracketToRoundsWon(Map<String,String> bracket, Map<String,String
   }
   return roundsWon;
 }
-

@@ -60,7 +60,7 @@ class _TBInsertOnePredictionPageState extends State<TBInsertOnePredictionPage> {
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.blue[400],
-                title: Text('${widget.predId.name}, inserisci predizione'),
+                title: Text('${widget.predId.name}, inserisci predizione serie'),
                 centerTitle: true,
                 actions: <Widget>[
                   IconButton(
