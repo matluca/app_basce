@@ -59,7 +59,7 @@ class DatabaseServiceTB {
   }
 
   // update bracket
-  Future updateBracket(String name, Map<String,int> bracket) async {
+  Future updateBracket(String name, Map<String,String> bracket) async {
     Map<String,dynamic> data = bracket;
     data['name'] = name;
     return await brackets.doc(name).set(data);
@@ -142,15 +142,15 @@ class DatabaseServiceTB {
   }
 
   // get brackets
-  Future<Map<String,Map<String,int>>> get tbBrackets async {
-    Map<String,Map<String,int>> brs = {};
+  Future<Map<String,Map<String,String>>> get tbBrackets async {
+    Map<String,Map<String,String>> brs = {};
     List<Map> bracketList = await brackets.get().then(_tbBracketsFromSnapshot);
     for (var br in bracketList) {
-      Map<String,int> b = {};
+      Map<String,String> b = {};
       String name = br['name'] ?? '';
       for (var entry in br.entries) {
         if (entry.key != 'name') {
-          b[entry.key] = entry.value as int;
+          b[entry.key] = entry.value ?? '';
         }
       }
       brs[name] = b;

@@ -1,3 +1,4 @@
+import 'package:appbasce/classes/tb_bracket_class.dart';
 import 'package:appbasce/pages/loading.dart';
 import 'package:appbasce/services/database_TB.dart';
 import 'package:flutter/material.dart';
@@ -42,69 +43,81 @@ class _TBInsertPredictionPageState extends State<TBInsertPredictionPage> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           Map<String,List<TBPred>> predictions = snapshot.data as Map<String,List<TBPred>>;
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.blue[400],
-              title: Text(
-                  '${widget.profile.name}, inserisci predizioni'),
-              centerTitle: true,
-              actions: <Widget>[
-                IconButton(
-                  icon: const Icon(Icons.home, color: Colors.white),
-                  onPressed: () {
-                    Navigator.popUntil(context, ModalRoute.withName('/'));
-                  },
-                ),
-              ],
-            ),
-            backgroundColor: Colors.blue[200],
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(5, 25, 5, 10),
-                child: Column(
-                  children: <Widget>[
-                    Card(
-                      child: ListTile(
-                        onTap: () {
-                          Navigator.pushNamed(context, "/tb_insert_bracket");
+          return FutureBuilder(
+            future: DatabaseServiceTB().tbBrackets,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                Map<String,Map<String,String>> brackets = snapshot.data as Map<String,Map<String,String>>;
+                Map<String,String> bracket = brackets[widget.profile.name] ?? {};
+                return Scaffold(
+                  appBar: AppBar(
+                    backgroundColor: Colors.blue[400],
+                    title: Text(
+                        '${widget.profile.name}, inserisci predizioni'),
+                    centerTitle: true,
+                    actions: <Widget>[
+                      IconButton(
+                        icon: const Icon(Icons.home, color: Colors.white),
+                        onPressed: () {
+                          Navigator.popUntil(context, ModalRoute.withName('/'));
                         },
-                        title: Center(
-                          child: Text(
-                            'Bracket',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.grey[700],
-                              fontSize: 18,
+                      ),
+                    ],
+                  ),
+                  backgroundColor: Colors.blue[200],
+                  body: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 25, 5, 10),
+                      child: Column(
+                        children: <Widget>[
+                          Card(
+                            child: ListTile(
+                              onTap: () {
+                                TBBracketId arg = TBBracketId(widget.profile.name, bracket);
+                                Navigator.pushNamed(context, "/tb_insert_bracket", arguments: arg);
+                              },
+                              title: Center(
+                                child: Text(
+                                  'Bracket',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.grey[700],
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                          const SizedBox(height: 50),
+                          GridView.builder(
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                childAspectRatio: (width - 30) / columns / 85,
+                                crossAxisCount: columns),
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: predictions.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 1, horizontal: 4),
+                                child: SeriesCard(
+                                    key: const Key("SeriesCard"),
+                                    predictions: predictions,
+                                    name: widget.profile.name,
+                                    id: tbRoundsIds[index]
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 50),
-                    GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: (width - 30) / columns / 85,
-                          crossAxisCount: columns),
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: predictions.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 1, horizontal: 4),
-                          child: SeriesCard(
-                              key: const Key("SeriesCard"),
-                              predictions: predictions,
-                              name: widget.profile.name,
-                              id: tbRoundsIds[index]
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                  ),
+                );
+              } else {
+                return const Loading();
+              }
+            }
           );
         } else {
           return const Loading();
