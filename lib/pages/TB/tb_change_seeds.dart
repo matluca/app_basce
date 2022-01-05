@@ -10,6 +10,23 @@ class TBChangeSeeds extends StatefulWidget {
 }
 
 class _TBChangeSeedsState extends State<TBChangeSeeds> {
+  @override
+  Widget build(BuildContext context) {
+    bool authorized = ModalRoute.of(context)!.settings.arguments as bool;
+    return TBChangeSeedsPage(
+        key: const Key("TBChangeSeedsPage"), authorized: authorized);
+  }
+}
+
+class TBChangeSeedsPage extends StatefulWidget {
+  final bool authorized;
+  const TBChangeSeedsPage({Key? key, required this.authorized}) : super(key: key);
+
+  @override
+  _TBChangeSeedsPageState createState() => _TBChangeSeedsPageState();
+}
+
+class _TBChangeSeedsPageState extends State<TBChangeSeedsPage> {
   Map? newSeeds;
   final _formKey = GlobalKey<FormState>();
 
@@ -61,7 +78,7 @@ class _TBChangeSeedsState extends State<TBChangeSeeds> {
     return FutureBuilder(
       future: DatabaseServiceTB().tbSeeds,
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
+        if (snapshot.hasData && widget.authorized) {
           Map seeds = snapshot.data as Map;
           newSeeds ??= seeds;
           return Scaffold(

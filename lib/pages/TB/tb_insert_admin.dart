@@ -15,13 +15,15 @@ class TBInsertPredictionAdmin extends StatefulWidget {
 class _TBInsertPredictionAdminState extends State<TBInsertPredictionAdmin> {
   @override
   Widget build(BuildContext context) {
-    return const TBInsertPredictionAdminPage(
-        key: Key("TBInsertPredictionAdminPage"));
+    bool authorized = ModalRoute.of(context)!.settings.arguments as bool;
+    return TBInsertPredictionAdminPage(
+        key: const Key("TBInsertPredictionAdminPage"), authorized: authorized);
   }
 }
 
 class TBInsertPredictionAdminPage extends StatefulWidget {
-  const TBInsertPredictionAdminPage({required Key key})
+  final bool authorized;
+  const TBInsertPredictionAdminPage({required Key key, required this.authorized})
       : super(key: key);
 
   @override
@@ -38,7 +40,7 @@ class _TBInsertPredictionAdminPageState extends State<TBInsertPredictionAdminPag
     return FutureBuilder(
       future: DatabaseServiceTB().allPredictions,
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
+        if (snapshot.hasData && widget.authorized) {
           Map<String,List<TBPred>> predictions = snapshot.data as Map<String,List<TBPred>>;
           return Scaffold(
             appBar: AppBar(
@@ -64,7 +66,8 @@ class _TBInsertPredictionAdminPageState extends State<TBInsertPredictionAdminPag
                     Card(
                       child: ListTile(
                         onTap: () {
-                          Navigator.pushNamed(context, "/tb_change_seeds");
+                          Navigator.pushNamed(context, "/tb_change_seeds",
+                            arguments: widget.authorized);
                         },
                         title: Center(
                           child: Text(
@@ -82,7 +85,8 @@ class _TBInsertPredictionAdminPageState extends State<TBInsertPredictionAdminPag
                     Card(
                       child: ListTile(
                         onTap: () {
-                          Navigator.pushNamed(context, "/tb_change_bracket_deadline");
+                          Navigator.pushNamed(context, "/tb_change_bracket_deadline",
+                            arguments: widget.authorized);
                         },
                         title: Center(
                           child: Text(

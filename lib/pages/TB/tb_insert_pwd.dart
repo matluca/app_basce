@@ -123,7 +123,8 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
                               allowedParticipants[pwds[widget.index].name]!.name, pwd);
                         }
                         if (allowedParticipants[pwds[widget.index].name]!.name == "Admin") {
-                          Navigator.pushReplacementNamed(context, '/tb_insert_admin');
+                          Navigator.pushReplacementNamed(context, '/tb_insert_admin',
+                            arguments: true);
                         } else {
                           Navigator.pushReplacementNamed(context, '/tb_insert',
                             arguments: allowedParticipants[pwds[widget.index].name]);

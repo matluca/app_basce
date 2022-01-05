@@ -11,6 +11,24 @@ class TBChangeBracketDeadline extends StatefulWidget {
 }
 
 class _TBChangeBracketDeadlineState extends State<TBChangeBracketDeadline> {
+  @override
+  Widget build(BuildContext context) {
+    bool authorized = ModalRoute.of(context)!.settings.arguments as bool;
+    return TBChangeBracketDeadlinePage(
+      key: const Key("TBChangeBracketDeadlinePage"), authorized: authorized);
+  }
+}
+
+
+class TBChangeBracketDeadlinePage extends StatefulWidget {
+  final bool authorized;
+  const TBChangeBracketDeadlinePage({Key? key, required this.authorized}) : super(key: key);
+
+  @override
+  _TBChangeBracketDeadlinePageState createState() => _TBChangeBracketDeadlinePageState();
+}
+
+class _TBChangeBracketDeadlinePageState extends State<TBChangeBracketDeadlinePage> {
   DateTime? deadline;
   TimeOfDay? time;
 
@@ -62,7 +80,7 @@ class _TBChangeBracketDeadlineState extends State<TBChangeBracketDeadline> {
     return FutureBuilder(
       future: DatabaseServiceTB().bracketDdl,
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
+        if (snapshot.hasData && widget.authorized) {
           DateTime bracketDeadline = snapshot.data as DateTime;
 
           deadline ??= bracketDeadline;
