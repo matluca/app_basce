@@ -60,11 +60,23 @@ class DatabaseServiceTB {
     return await passwords.doc(name).set(data);
   }
 
+  // update seeds
+  Future updateSeeds(Map seedsMap) async {
+    return await seeds.doc('tb-seeds').set(seedsMap);
+  }
+
   // update bracket
   Future updateBracket(String name, Map<String,String> bracket) async {
     Map<String,dynamic> data = bracket;
     data['name'] = name;
     return await brackets.doc(name).set(data);
+  }
+
+  // update bracket deadline
+  Future updateBracketDeadline(DateTime deadline) async {
+    Map<String,dynamic> data = {};
+    data['deadline'] = deadline;
+    return await bracketDeadline.doc('deadline').set(data);
   }
 
   // get all predictions after deadline

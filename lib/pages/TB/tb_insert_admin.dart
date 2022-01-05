@@ -61,6 +61,42 @@ class _TBInsertPredictionAdminPageState extends State<TBInsertPredictionAdminPag
                 padding: const EdgeInsets.fromLTRB(5, 25, 5, 10),
                 child: Column(
                   children: <Widget>[
+                    Card(
+                      child: ListTile(
+                        onTap: () {
+                          Navigator.pushNamed(context, "/tb_change_seeds");
+                        },
+                        title: Center(
+                          child: Text(
+                            'Cambia seeds',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.grey[700],
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Card(
+                      child: ListTile(
+                        onTap: () {
+                          Navigator.pushNamed(context, "/tb_change_bracket_deadline");
+                        },
+                        title: Center(
+                          child: Text(
+                            'Cambia deadline brackets',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.grey[700],
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
                     GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           childAspectRatio: (width - 30) / columns / 85,

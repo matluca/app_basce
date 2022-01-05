@@ -26,6 +26,8 @@ import 'package:appbasce/pages/TB/tb_insert_one.dart';
 import 'package:appbasce/pages/TB/tb_insert_one_admin.dart';
 import 'package:appbasce/pages/TB/tb_view_results.dart';
 import 'package:appbasce/pages/TB/tb_insert_bracket.dart';
+import 'package:appbasce/pages/TB/tb_change_seeds.dart';
+import 'package:appbasce/pages/TB/tb_change_bracket_deadline.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() {
@@ -152,6 +154,8 @@ class AppBasce extends StatelessWidget {
         '/tb_insert_one_admin': (context) => const TBInsertOnePredictionAdmin(),
         '/tb_view_results': (context) => const TBViewResults(),
         '/tb_insert_bracket': (context) => const TBInsertBracket(),
+        '/tb_change_bracket_deadline': (context) => const TBChangeBracketDeadline(),
+        '/tb_change_seeds': (context) => const TBChangeSeeds(),
       },
     );
   }
