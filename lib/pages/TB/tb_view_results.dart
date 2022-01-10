@@ -82,6 +82,16 @@ class _TBViewResultsState extends State<TBViewResults> {
                                                   //dataRowHeight: 30,
                                                   rows: bracketRows(brackets, pwds, tbSeeds, bracketDeadline),
                                                 ),
+                                                const SizedBox(height: 30),
+                                                const Text(
+                                                  "Classifica Finale",
+                                                  style: TextStyle(fontSize: 20),
+                                                ),
+                                                DataTable(
+                                                  columns: standingsColumns(pwds),
+                                                  //dataRowHeight: 30,
+                                                  rows: standingsRows(predictions, brackets, pwds, tbSeeds, bracketDeadline),
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -156,12 +166,24 @@ List<DataRow> roundsRows(Map<String,List<TBPred>> predictions, List<TBPwd> pwds)
     const DataCell(Text('Malus', style: TextStyle(fontWeight: FontWeight.bold))),
     DataCell.empty,
   ];
+  Map<String,double> maluses = roundsMaluses(predictions, pwds);
   for (var pwd in pwds) {
     if (pwd.name != "Admin") {
-      malusCells.add(DataCell(Text(roundsMalus(predictions, pwd.name).toString(), style: const TextStyle(fontWeight: FontWeight.bold))));
+      malusCells.add(DataCell(Text(maluses[pwd.name]!.toString(), style: const TextStyle(fontWeight: FontWeight.bold))));
     }
   }
   r.add(DataRow(cells: malusCells));
+  List<DataCell> standingsCells = [
+    const DataCell(Text('Classifica', style: TextStyle(fontWeight: FontWeight.bold))),
+    DataCell.empty,
+  ];
+  Map<String,int> standings = roundsStandings(maluses);
+  for (var pwd in pwds) {
+    if (pwd.name != "Admin") {
+      standingsCells.add(DataCell(Text(standings[pwd.name]!.toString(), style: const TextStyle(fontWeight: FontWeight.bold))));
+    }
+  }
+  r.add(DataRow(cells: standingsCells));
   return r;
 }
 
@@ -201,5 +223,93 @@ List<DataRow> bracketRows(Map<String, Map<String,String>> brackets, List<TBPwd> 
     }
     r.add(DataRow(cells: cells));
   }
+  List<DataCell> malusCells = [
+    const DataCell(Text('Malus', style: TextStyle(fontWeight: FontWeight.bold))),
+    DataCell.empty,
+  ];
+  Map<String,int> maluses = bracketMaluses(roundsWon, pwds, seeds);
+  for (var pwd in pwds) {
+    if (pwd.name != "Admin") {
+      malusCells.add(DataCell(Text(maluses[pwd.name].toString(), style: const TextStyle(fontWeight: FontWeight.bold))));
+    }
+  }
+  r.add(DataRow(cells: malusCells));
+  List<DataCell> standingsCells = [
+    const DataCell(Text('Classifica', style: TextStyle(fontWeight: FontWeight.bold))),
+    DataCell.empty,
+  ];
+  Map<String,int> standings = bracketStandings(maluses);
+  for (var pwd in pwds) {
+    if (pwd.name != "Admin") {
+      standingsCells.add(DataCell(Text(standings[pwd.name]!.toString(), style: const TextStyle(fontWeight: FontWeight.bold))));
+    }
+  }
+  r.add(DataRow(cells: standingsCells));
   return r;
+}
+
+List<DataColumn> standingsColumns(List<TBPwd> pwds) {
+  List<DataColumn> c = [
+    DataColumn(label: Container()),
+  ];
+  for (var pwd in pwds) {
+    if (pwd.name != "Admin") {
+      c.add(DataColumn(label: Text(pwd.name, style: const TextStyle(fontWeight: FontWeight.bold))));
+    }
+  }
+  return c;
+}
+
+List<DataRow> standingsRows(Map<String,List<TBPred>> predictions, Map<String, Map<String,String>> brackets, List<TBPwd> pwds, Map seeds, DateTime bracketDeadline) {
+  if (DateTime.now().isBefore(bracketDeadline)) {
+    return [];
+  }
+  Map<String,double> rMaluses = roundsMaluses(predictions, pwds);
+  Map<String,int> rStandings = roundsStandings(rMaluses);
+  Map<String, Map<String,int>> roundsWon = {};
+  for (var entry in brackets.entries) {
+    roundsWon[entry.key] = bracketToRoundsWon(entry.value, seeds);
+  }
+  Map<String,int> brMaluses = bracketMaluses(roundsWon, pwds, seeds);
+  Map<String,int> brStandings = bracketStandings(brMaluses);
+  Map<String,int> totalPoints = {};
+  for (var pwd in pwds) {
+    if (pwd.name != 'Admin') {
+      totalPoints[pwd.name] = rStandings[pwd.name]! + brStandings[pwd.name]!;
+    }
+  }
+  List<DataRow> r = [];
+  List<DataCell> pointsCells = [
+    const DataCell(Text('Punti classifica finale'))
+  ];
+  for (var pwd in pwds) {
+    if (pwd.name != "Admin") {
+      pointsCells.add(DataCell(Text(totalPoints[pwd.name].toString())));
+    }
+  }
+  r.add(DataRow(cells: pointsCells));
+  Map<String,int> overallStandings = globalStandings(totalPoints);
+  List<DataCell> standingsCells = [
+    const DataCell(Text('Classifica finale', style: TextStyle(fontWeight: FontWeight.bold)))
+  ];
+  for (var pwd in pwds) {
+    if (pwd.name != "Admin") {
+      standingsCells.add(DataCell(Text(overallStandings[pwd.name].toString(), style: const TextStyle(fontWeight: FontWeight.bold))));
+    }
+  }
+  r.add(DataRow(cells: standingsCells));
+  return r;
+}
+
+Map<String,int> globalStandings(Map<String,int> totalPoints) {
+  Map<String,int> standings = {};
+  var sortedKeys = totalPoints.keys.toList(growable: false)
+    ..sort((k1, k2) => totalPoints[k1]!.compareTo(totalPoints[k2]!));
+  for (int i = 0; i < sortedKeys.length; i++) {
+    standings[sortedKeys[i]] = i+1;
+    if ((i>0) && (totalPoints[sortedKeys[i]] == totalPoints[sortedKeys[i-1]])) {
+      standings[sortedKeys[i]] = standings[sortedKeys[i-1]]!;
+    }
+  }
+  return standings;
 }
