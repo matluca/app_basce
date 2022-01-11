@@ -85,13 +85,17 @@ double roundsMalus(Map<String,List<TBPred>> allPredictions, String name) {
   return malus;
 }
 
-Map<String,int> roundsStandings(Map<String,double> roundMaluses) {
+Map<String,int> roundsStandings(Map<String,double> roundMaluses, Map<String,double> extra) {
+  Map<String,double> tot = {};
+  for (var entry in roundMaluses.entries) {
+    tot[entry.key] = entry.value + (extra[entry.key] ?? 0);
+  }
   Map<String,int> standings = {};
-  var sortedKeys = roundMaluses.keys.toList(growable: false)
-    ..sort((k1, k2) => roundMaluses[k1]!.compareTo(roundMaluses[k2]!));
+  var sortedKeys = tot.keys.toList(growable: false)
+    ..sort((k1, k2) => tot[k1]!.compareTo(tot[k2]!));
   for (int i = 0; i < sortedKeys.length; i++) {
     standings[sortedKeys[i]] = i+1;
-    if ((i>0) && (roundMaluses[sortedKeys[i]] == roundMaluses[sortedKeys[i-1]])) {
+    if ((i>0) && (tot[sortedKeys[i]] == tot[sortedKeys[i-1]])) {
       standings[sortedKeys[i]] = standings[sortedKeys[i-1]]!;
     }
   }

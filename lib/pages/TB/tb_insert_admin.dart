@@ -120,6 +120,25 @@ class _TBInsertPredictionAdminPageState extends State<TBInsertPredictionAdminPag
                         );
                       },
                     ),
+                    const SizedBox(height: 20),
+                    Card(
+                      child: ListTile(
+                        onTap: () {
+                          Navigator.pushNamed(context, "/tb_change_extra",
+                              arguments: widget.authorized);
+                        },
+                        title: Center(
+                          child: Text(
+                            'Assegna extra bonus/malus',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.grey[700],
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

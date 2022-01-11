@@ -39,65 +39,77 @@ class _TBViewResultsState extends State<TBViewResults> {
                               builder: (context, snapshot) {
                                 if (snapshot.hasData) {
                                   DateTime bracketDeadline = snapshot.data as DateTime;
-                                  return Scaffold(
-                                    appBar: AppBar(
-                                      backgroundColor: Colors.blue[400],
-                                      title: const Text('Risultati'),
-                                      centerTitle: true,
-                                      actions: <Widget>[
-                                        IconButton(
-                                          icon: const Icon(Icons.home, color: Colors.white),
-                                          onPressed: () {
-                                            Navigator.popUntil(context, ModalRoute.withName('/'));
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                    backgroundColor: Colors.blue[200],
-                                    body: SingleChildScrollView(
-                                      scrollDirection: Axis.vertical,
-                                      child: Align(
-                                        alignment: Alignment.topCenter,
-                                        child: SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Padding(
-                                            padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
-                                            child: Column(
-                                              children: [
-                                                const Text(
-                                                  "Turni",
-                                                  style: TextStyle(fontSize: 20),
+                                  return FutureBuilder(
+                                    future: DatabaseServiceTB().tbExtra,
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData) {
+                                        List<Map<String,double>> extra = snapshot.data as List<Map<String,double>>;
+                                        Map<String,double> extraRounds = extra[0];
+                                        Map<String,double> extraBracket = extra[1];
+                                        return Scaffold(
+                                          appBar: AppBar(
+                                            backgroundColor: Colors.blue[400],
+                                            title: const Text('Risultati'),
+                                            centerTitle: true,
+                                            actions: <Widget>[
+                                              IconButton(
+                                                icon: const Icon(Icons.home, color: Colors.white),
+                                                onPressed: () {
+                                                  Navigator.popUntil(context, ModalRoute.withName('/'));
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                          backgroundColor: Colors.blue[200],
+                                          body: SingleChildScrollView(
+                                            scrollDirection: Axis.vertical,
+                                            child: Align(
+                                              alignment: Alignment.topCenter,
+                                              child: SingleChildScrollView(
+                                                scrollDirection: Axis.horizontal,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
+                                                  child: Column(
+                                                    children: [
+                                                      const Text(
+                                                        "Turni",
+                                                        style: TextStyle(fontSize: 20),
+                                                      ),
+                                                      DataTable(
+                                                        columns: roundsColumns(pwds),
+                                                        rows: roundsRows(predictions, pwds, extraRounds),
+                                                      ),
+                                                      const SizedBox(height: 30),
+                                                      const Text(
+                                                        "Bracket",
+                                                        style: TextStyle(fontSize: 20),
+                                                      ),
+                                                      DataTable(
+                                                        columns: bracketColumns(pwds),
+                                                        //dataRowHeight: 30,
+                                                        rows: bracketRows(brackets, pwds, tbSeeds, bracketDeadline, extraBracket),
+                                                      ),
+                                                      const SizedBox(height: 30),
+                                                      const Text(
+                                                        "Classifica Finale",
+                                                        style: TextStyle(fontSize: 20),
+                                                      ),
+                                                      DataTable(
+                                                        columns: standingsColumns(pwds),
+                                                        //dataRowHeight: 30,
+                                                        rows: standingsRows(predictions, brackets, pwds, tbSeeds, bracketDeadline, extra),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                DataTable(
-                                                  columns: roundsColumns(pwds),
-                                                  rows: roundsRows(predictions, pwds),
-                                                ),
-                                                const SizedBox(height: 30),
-                                                const Text(
-                                                  "Bracket",
-                                                  style: TextStyle(fontSize: 20),
-                                                ),
-                                                DataTable(
-                                                  columns: bracketColumns(pwds),
-                                                  //dataRowHeight: 30,
-                                                  rows: bracketRows(brackets, pwds, tbSeeds, bracketDeadline),
-                                                ),
-                                                const SizedBox(height: 30),
-                                                const Text(
-                                                  "Classifica Finale",
-                                                  style: TextStyle(fontSize: 20),
-                                                ),
-                                                DataTable(
-                                                  columns: standingsColumns(pwds),
-                                                  //dataRowHeight: 30,
-                                                  rows: standingsRows(predictions, brackets, pwds, tbSeeds, bracketDeadline),
-                                                ),
-                                              ],
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                    ),
+                                        );
+                                      } else {
+                                        return const Loading();
+                                      }
+                                    }
                                   );
                                 } else {
                                   return const Loading();
@@ -140,7 +152,7 @@ List<DataColumn> roundsColumns(List<TBPwd> pwds) {
   return c;
 }
 
-List<DataRow> roundsRows(Map<String,List<TBPred>> predictions, List<TBPwd> pwds) {
+List<DataRow> roundsRows(Map<String,List<TBPred>> predictions, List<TBPwd> pwds, Map<String,double> extra) {
   List<DataRow> r = [];
   for (var seriesPredictions in predictions.values) {
     List<DataCell> cells = [];
@@ -162,6 +174,7 @@ List<DataRow> roundsRows(Map<String,List<TBPred>> predictions, List<TBPwd> pwds)
     );
     r.add(row);
   }
+
   List<DataCell> malusCells = [
     const DataCell(Text('Malus', style: TextStyle(fontWeight: FontWeight.bold))),
     DataCell.empty,
@@ -173,11 +186,34 @@ List<DataRow> roundsRows(Map<String,List<TBPred>> predictions, List<TBPwd> pwds)
     }
   }
   r.add(DataRow(cells: malusCells));
+
+  List<DataCell> extraCells = [
+    const DataCell(Text('Extra bonus/malus', style: TextStyle(fontWeight: FontWeight.bold))),
+    DataCell.empty,
+  ];
+  for (var pwd in pwds) {
+    if (pwd.name != "Admin") {
+      extraCells.add(DataCell(Text((extra[pwd.name] ?? 0).toString(), style: const TextStyle(fontWeight: FontWeight.bold))));
+    }
+  }
+  r.add(DataRow(cells: extraCells));
+
+  List<DataCell> totCells = [
+    const DataCell(Text('Totale', style: TextStyle(fontWeight: FontWeight.bold))),
+    DataCell.empty,
+  ];
+  for (var pwd in pwds) {
+    if (pwd.name != "Admin") {
+      totCells.add(DataCell(Text(((extra[pwd.name] ?? 0) + (maluses[pwd.name] ?? 0)).toString(), style: const TextStyle(fontWeight: FontWeight.bold))));
+    }
+  }
+  r.add(DataRow(cells: totCells));
+
   List<DataCell> standingsCells = [
     const DataCell(Text('Classifica', style: TextStyle(fontWeight: FontWeight.bold))),
     DataCell.empty,
   ];
-  Map<String,int> standings = roundsStandings(maluses);
+  Map<String,int> standings = roundsStandings(maluses, extra);
   for (var pwd in pwds) {
     if (pwd.name != "Admin") {
       standingsCells.add(DataCell(Text(standings[pwd.name]!.toString(), style: const TextStyle(fontWeight: FontWeight.bold))));
@@ -200,7 +236,7 @@ List<DataColumn> bracketColumns(List<TBPwd> pwds) {
   return c;
 }
 
-List<DataRow> bracketRows(Map<String, Map<String,String>> brackets, List<TBPwd> pwds, Map seeds, DateTime bracketDeadline) {
+List<DataRow> bracketRows(Map<String, Map<String,String>> brackets, List<TBPwd> pwds, Map seeds, DateTime bracketDeadline, Map<String,double> extra) {
   if (DateTime.now().isBefore(bracketDeadline)) {
     return [];
   }
@@ -223,6 +259,7 @@ List<DataRow> bracketRows(Map<String, Map<String,String>> brackets, List<TBPwd> 
     }
     r.add(DataRow(cells: cells));
   }
+
   List<DataCell> malusCells = [
     const DataCell(Text('Malus', style: TextStyle(fontWeight: FontWeight.bold))),
     DataCell.empty,
@@ -234,11 +271,34 @@ List<DataRow> bracketRows(Map<String, Map<String,String>> brackets, List<TBPwd> 
     }
   }
   r.add(DataRow(cells: malusCells));
+
+  List<DataCell> extraCells = [
+    const DataCell(Text('Extra bonus/malus', style: TextStyle(fontWeight: FontWeight.bold))),
+    DataCell.empty,
+  ];
+  for (var pwd in pwds) {
+    if (pwd.name != "Admin") {
+      extraCells.add(DataCell(Text((extra[pwd.name] ?? 0).toString(), style: const TextStyle(fontWeight: FontWeight.bold))));
+    }
+  }
+  r.add(DataRow(cells: extraCells));
+
+  List<DataCell> totCells = [
+    const DataCell(Text('Totale', style: TextStyle(fontWeight: FontWeight.bold))),
+    DataCell.empty,
+  ];
+  for (var pwd in pwds) {
+    if (pwd.name != "Admin") {
+      totCells.add(DataCell(Text(((extra[pwd.name] ?? 0) + (maluses[pwd.name] ?? 0)).toString(), style: const TextStyle(fontWeight: FontWeight.bold))));
+    }
+  }
+  r.add(DataRow(cells: totCells));
+
   List<DataCell> standingsCells = [
     const DataCell(Text('Classifica', style: TextStyle(fontWeight: FontWeight.bold))),
     DataCell.empty,
   ];
-  Map<String,int> standings = bracketStandings(maluses);
+  Map<String,int> standings = bracketStandings(maluses, extra);
   for (var pwd in pwds) {
     if (pwd.name != "Admin") {
       standingsCells.add(DataCell(Text(standings[pwd.name]!.toString(), style: const TextStyle(fontWeight: FontWeight.bold))));
@@ -260,18 +320,18 @@ List<DataColumn> standingsColumns(List<TBPwd> pwds) {
   return c;
 }
 
-List<DataRow> standingsRows(Map<String,List<TBPred>> predictions, Map<String, Map<String,String>> brackets, List<TBPwd> pwds, Map seeds, DateTime bracketDeadline) {
+List<DataRow> standingsRows(Map<String,List<TBPred>> predictions, Map<String, Map<String,String>> brackets, List<TBPwd> pwds, Map seeds, DateTime bracketDeadline, List<Map<String,double>> extra) {
   if (DateTime.now().isBefore(bracketDeadline)) {
     return [];
   }
   Map<String,double> rMaluses = roundsMaluses(predictions, pwds);
-  Map<String,int> rStandings = roundsStandings(rMaluses);
+  Map<String,int> rStandings = roundsStandings(rMaluses, extra[0]);
   Map<String, Map<String,int>> roundsWon = {};
   for (var entry in brackets.entries) {
     roundsWon[entry.key] = bracketToRoundsWon(entry.value, seeds);
   }
   Map<String,int> brMaluses = bracketMaluses(roundsWon, pwds, seeds);
-  Map<String,int> brStandings = bracketStandings(brMaluses);
+  Map<String,int> brStandings = bracketStandings(brMaluses, extra[1]);
   Map<String,int> totalPoints = {};
   for (var pwd in pwds) {
     if (pwd.name != 'Admin') {

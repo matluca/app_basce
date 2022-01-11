@@ -56,13 +56,17 @@ int bracketMalus(Map<String, Map<String,int>> roundsWon, String name, Map seeds)
   return malus;
 }
 
-Map<String,int> bracketStandings(Map<String,int> bracketMaluses) {
+Map<String,int> bracketStandings(Map<String,int> bracketMaluses, Map<String,double> extra) {
+  Map<String,double> tot = {};
+  for (var entry in bracketMaluses.entries) {
+    tot[entry.key] = entry.value + (extra[entry.key] ?? 0);
+  }
   Map<String,int> standings = {};
-  var sortedKeys = bracketMaluses.keys.toList(growable: false)
-    ..sort((k1, k2) => bracketMaluses[k1]!.compareTo(bracketMaluses[k2]!));
+  var sortedKeys = tot.keys.toList(growable: false)
+    ..sort((k1, k2) => tot[k1]!.compareTo(tot[k2]!));
   for (int i = 0; i < sortedKeys.length; i++) {
     standings[sortedKeys[i]] = i+1;
-    if ((i>0) && (bracketMaluses[sortedKeys[i]] == bracketMaluses[sortedKeys[i-1]])) {
+    if ((i>0) && (tot[sortedKeys[i]] == tot[sortedKeys[i-1]])) {
       standings[sortedKeys[i]] = standings[sortedKeys[i-1]]!;
     }
   }

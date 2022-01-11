@@ -23,6 +23,8 @@ class DatabaseServiceTB {
       FirebaseFirestore.instance.collection('tb-brackets');
   final CollectionReference bracketDeadline =
       FirebaseFirestore.instance.collection('tb-bracket-deadline');
+  final CollectionReference extra =
+      FirebaseFirestore.instance.collection('tb-extra');
 
   // update predictions
   Future updatePredictions(
@@ -77,6 +79,12 @@ class DatabaseServiceTB {
     Map<String,dynamic> data = {};
     data['deadline'] = deadline;
     return await bracketDeadline.doc('deadline').set(data);
+  }
+
+  Future updateExtra(Map<String,double> rounds, Map<String,double> bracket) async {
+    await extra.doc('rounds').set(rounds);
+    await extra.doc('bracket').set(bracket);
+    return;
   }
 
   // get all predictions after deadline
@@ -189,5 +197,21 @@ class DatabaseServiceTB {
       var dd = timestamp.toDate();
       return DateTime.parse(dd.toString());
     }).toList()[0];
+  }
+
+  // get extra
+  Future<List<Map<String,double>>> get tbExtra async {
+     Map<String,double> rounds = await extra.doc('rounds').get().then(_extraFromSnapshot);
+     Map<String,double> bracket = await extra.doc('bracket').get().then(_extraFromSnapshot);
+     return [rounds, bracket];
+  }
+
+  Map<String,double> _extraFromSnapshot(DocumentSnapshot snapshot) {
+    Map rawData = snapshot.data() as Map;
+    Map<String,double> data = {};
+    for (var entry in rawData.entries) {
+      data[entry.key] = entry.value as double;
+    }
+    return data;
   }
 }
