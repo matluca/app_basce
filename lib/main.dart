@@ -30,32 +30,21 @@ import 'package:appbasce/pages/TB/tb_change_seeds.dart';
 import 'package:appbasce/pages/TB/tb_change_extra.dart';
 import 'package:appbasce/pages/TB/tb_change_bracket_deadline.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
+import 'configure_non_web.dart' if (dart.library.html) 'configure_web.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  // configure URL strategy for web app
+  configureApp();
   runApp(App());
 }
 
 class App extends StatelessWidget {
-  // Create the initialization Future outside of `build`:
-
-  // For Android
-  //final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-
   App({Key? key}) : super(key: key);
 
-  // For Web
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp(
-    options: const FirebaseOptions(
-      apiKey: "AIzaSyAkosczGLQBjng85sHD6kQoeX6T-1oLh1E",
-      appId: "1:180543049748:web:58fa4e085f07100794d701",
-      messagingSenderId: "180543049748",
-      projectId: "minitb-rs",
-      authDomain: "minitb-rs.firebaseapp.com",
-      databaseURL: "https://minitb-rs.firebaseio.com",
-      storageBucket: "minitb-rs.appspot.com",
-    )
-  );
+  // Initialize Firebase
+  final Future<FirebaseApp> _initialization = initializeApp();
 
   @override
   Widget build(BuildContext context) {
