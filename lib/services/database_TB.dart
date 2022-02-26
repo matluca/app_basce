@@ -210,7 +210,7 @@ class DatabaseServiceTB {
     Map rawData = snapshot.data() as Map;
     Map<String,double> data = {};
     for (var entry in rawData.entries) {
-      data[entry.key] = entry.value as double;
+      data[entry.key] = entry.value.toDouble();
     }
     return data;
   }
