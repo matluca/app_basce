@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:appbasce/services/database_miniTB.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:math' as math;
+import 'package:url_launcher/url_launcher.dart';
 
 class MiniTB extends StatefulWidget {
   const MiniTB({Key? key}) : super(key: key);
@@ -80,6 +81,17 @@ class _MiniTBState extends State<MiniTB> {
                           },
                         ),
                       ),
+                      Card(
+                        child: ListTile(
+                          leading: const Icon(Icons.text_snippet),
+                          trailing: const Icon(Icons.play_arrow),
+                          title: Text(
+                              "Regolamento",
+                              style: TextStyle(
+                                  color: Colors.grey[700], fontSize: 18)),
+                          onTap: _launchURL,
+                        ),
+                      ),
                       const SizedBox(height: 80),
                       beforeDeadline
                           ? Text('Deadline $ddlFromDB',
@@ -94,6 +106,15 @@ class _MiniTBState extends State<MiniTB> {
             return const Loading();
           }
         });
+  }
+}
+
+_launchURL() async {
+  const url = 'https://github.com/matluca/app_basce/blob/master/lib/pages/miniTB/RegolamentoMiniTB.md';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }
 

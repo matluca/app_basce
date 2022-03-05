@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:math' as math;
+import 'package:url_launcher/url_launcher.dart';
 
 class TB extends StatefulWidget {
   const TB({Key? key}) : super(key: key);
@@ -63,6 +64,17 @@ class _TBState extends State<TB> {
               const SizedBox(height: 100),
               Card(
                 child: ListTile(
+                  leading: const Icon(Icons.text_snippet),
+                  trailing: const Icon(Icons.play_arrow),
+                  title: Text(
+                      "Regolamento",
+                      style: TextStyle(
+                          color: Colors.grey[700], fontSize: 18)),
+                  onTap: _launchURL,
+                ),
+              ),
+              Card(
+                child: ListTile(
                   leading: const Icon(Icons.settings),
                   trailing: const Icon(Icons.play_arrow),
                   title: Text(
@@ -79,6 +91,15 @@ class _TBState extends State<TB> {
         ),
       ),
     );
+  }
+}
+
+_launchURL() async {
+  const url = 'https://raw.githubusercontent.com/matluca/app_basce/master/lib/pages/TB/RegolamentoTB.pdf';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }
 
