@@ -72,15 +72,33 @@ class Menu extends StatelessWidget {
       children: <Widget>[
         Card(
           child: ListTile(
-            leading: const Icon(Icons.people),
+            leading: const Icon(MdiIcons.basketball),
             trailing: const Icon(Icons.play_arrow),
-            title: Text('Profili',
-                style: TextStyle(
-                  color: Colors.grey[700],
-                  fontSize: 18,
-                )),
+            title: Text(
+              'Partecipa al Torneo Bascé',
+              style: TextStyle(
+                color: Colors.grey[700],
+                fontSize: 18,
+              ),
+            ),
             onTap: () {
-              Navigator.pushNamed(context, '/profile_list');
+              Navigator.pushNamed(context, '/tb');
+            },
+          ),
+        ),
+        Card(
+          child: ListTile(
+            leading: const Icon(MdiIcons.playBoxMultiple),
+            trailing: const Icon(Icons.play_arrow),
+            title: Text(
+              'Partecipa al Mini-TB per la RS',
+              style: TextStyle(
+                color: Colors.grey[700],
+                fontSize: 18,
+              ),
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/mini_tb');
             },
           ),
         ),
@@ -116,33 +134,15 @@ class Menu extends StatelessWidget {
         ),
         Card(
           child: ListTile(
-            leading: const Icon(MdiIcons.playBoxMultiple),
+            leading: const Icon(Icons.people),
             trailing: const Icon(Icons.play_arrow),
-            title: Text(
-              'Partecipa al Mini-TB per la RS',
-              style: TextStyle(
-                color: Colors.grey[700],
-                fontSize: 18,
-              ),
-            ),
+            title: Text('Profili',
+                style: TextStyle(
+                  color: Colors.grey[700],
+                  fontSize: 18,
+                )),
             onTap: () {
-              Navigator.pushNamed(context, '/mini_tb');
-            },
-          ),
-        ),
-        Card(
-          child: ListTile(
-            leading: const Icon(MdiIcons.basketball),
-            trailing: const Icon(Icons.play_arrow),
-            title: Text(
-              'Partecipa al Torneo Bascé',
-              style: TextStyle(
-                color: Colors.grey[700],
-                fontSize: 18,
-              ),
-            ),
-            onTap: () {
-              Navigator.pushNamed(context, '/wip');
+              Navigator.pushNamed(context, '/profile_list');
             },
           ),
         ),
@@ -161,7 +161,7 @@ alertDialog(BuildContext context) {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text('Versione: 3.0.0', style: TextStyle(color: Colors.grey[700])),
+            Text('Versione: 4.0', style: TextStyle(color: Colors.grey[700])),
             const SizedBox(height: 10),
             Text('Creatore: Luca', style: TextStyle(color: Colors.grey[700]))
           ],

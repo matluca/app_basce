@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:appbasce/services/database.dart';
+import 'package:appbasce/services/database_miniTB.dart';
 import 'package:http/http.dart' as http;
 import 'package:appbasce/pages/loading.dart';
 
@@ -64,7 +64,7 @@ class _MiniTBUpdateState extends State<MiniTBUpdate> {
                               style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () async {
-                              DatabaseService()
+                              DatabaseServiceMiniTB()
                                   .updatePredictionsFromOrderedList(
                                       'Admin', eastStandings, westStandings);
                               Navigator.popUntil(

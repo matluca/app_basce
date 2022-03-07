@@ -38,7 +38,7 @@ List<String> westTeams = [
   'UTA'
 ];
 
-class DatabaseService {
+class DatabaseServiceMiniTB {
   // collections reference
   final CollectionReference predictions =
       FirebaseFirestore.instance.collection('predictions');
@@ -107,7 +107,7 @@ class DatabaseService {
     }).toList();
   }
 
-  // get passwords
+  // get deadline
   Stream<DateTime> get ddl {
     return deadline.snapshots().map(_ddlFromSnapshot);
   }

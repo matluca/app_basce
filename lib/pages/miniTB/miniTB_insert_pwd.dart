@@ -1,6 +1,6 @@
 import 'package:appbasce/pages/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:appbasce/services/database.dart';
+import 'package:appbasce/services/database_miniTB.dart';
 import 'package:appbasce/classes/miniTB_prediction_class.dart';
 
 class MiniTBInsertPassword extends StatefulWidget {
@@ -36,7 +36,7 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: DatabaseService().pwds,
+      stream: DatabaseServiceMiniTB().pwds,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<MiniTBPwd> pwds = snapshot.data as List<MiniTBPwd>;
@@ -119,7 +119,7 @@ class _InsertPasswordPageState extends State<InsertPasswordPage> {
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         if (oldPwd == '') {
-                          DatabaseService().updatePassword(
+                          DatabaseServiceMiniTB().updatePassword(
                               miniTBParticipants[widget.index].name, pwd);
                         }
                         Navigator.pushNamed(context, '/minitb_insert',

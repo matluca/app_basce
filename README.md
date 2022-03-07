@@ -1,16 +1,17 @@
 # App Bascé
 
-The App Bascé is the unofficial app for the Chattina Bascé.
-The App is developed as a Flutter application, and could be released for Android, iOS and as web
-application.
+The App Bascé is the unofficial app for the Chattina Bascé. The App is developed as a Flutter
+application, and could be released for Android, iOS and as web application.
 
 ### Build app for Android
 
 For building the app and creating APK releases for Android, go to the project root and run
+
 ```
 flutter build apk --split-per-abi
 ```
-This procuced three APK files and stores them in `./build/app/outputs/apk/release`. In order to
+
+This produced three APK files and stores them in `./build/app/outputs/apk/release`. In order to
 create a fat APK, remove the `--split-per-abi` flag. The right APK for a 64bit device is
 `app-arm64-v8a-release.apk`.
 
@@ -20,22 +21,34 @@ details.
 ### Build web app
 
 For building the app for a web version release, go to the project root and run
+
 ```
 flutter build web
 ```
-This generates all the necessary files in `./build/web`. To test locally, launch a web server.
-For example, navigate to `./build/web` and run `python -m http.server 8080`, which makes the web
-version available under `localhost:8080`.
 
-See [Build and release a web app](https://flutter.dev/docs/deployment/web) for further
-details.
+This generates all the necessary files in `./build/web`. To test locally, launch a web server. For
+example, navigate to `./build/web` and run `python -m http.server 8080`, which makes the web version
+available under `localhost:8080`.
+
+See [Build and release a web app](https://flutter.dev/docs/deployment/web) for further details.
 
 Use
+
 ```
 firebase serve
 ```
+
 to launch a browser running the app locally. To deploy the App to Firebase hosting, run
+
 ```
 firebase deploy --only hosting
 ```
-The app will then be available at [minitb-rs.web.app](https://minitb-rs.web.app).
+
+The app will then be available at [minitb-rs.web.app](https://minitb-rs.web.app). To specify a
+different target, run
+
+```
+firebase deploy --only hosting:appbasce
+```
+
+which will make the app available at [appbasce.web.app](https://appbasce.web.app)

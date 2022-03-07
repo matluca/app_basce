@@ -1,6 +1,6 @@
 import 'package:appbasce/pages/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:appbasce/services/database.dart';
+import 'package:appbasce/services/database_miniTB.dart';
 import 'package:appbasce/classes/miniTB_prediction_class.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
@@ -12,7 +12,7 @@ class MiniTBStandings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: DatabaseService().preds,
+      stream: DatabaseServiceMiniTB().preds,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<MiniTBPred> preds = snapshot.data as List<MiniTBPred>;
