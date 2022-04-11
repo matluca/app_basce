@@ -45,7 +45,7 @@ class _YearPageMiniState extends State<YearPageMini> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
-        title: Text('${miniTBStats[widget.screen].label} MiniTB (${miniTBStats[widget.screen].year.toString()})'),
+        title: Text('${miniTBStats[widget.screen].label} MiniTB (${miniTBStats[widget.screen].season})'),
         centerTitle: true,
         actions: <Widget>[
           IconButton(

@@ -4,6 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 Map iconMapMini = {
   iMini: MdiIcons.romanNumeral1,
+  iiMini: MdiIcons.romanNumeral2,
 };
 
 class AlboMini extends StatefulWidget {
@@ -56,7 +57,7 @@ class _AlboMiniState extends State<AlboMini> {
                         },
                         title: Center(
                           child: Text(
-                            '${miniTBStats[index].label} MiniTB (${miniTBStats[index].year.toString()})',
+                            '${miniTBStats[index].label} MiniTB (${miniTBStats[index].season})',
                             style: TextStyle(
                               color: Colors.grey[700],
                               fontSize: 18,
