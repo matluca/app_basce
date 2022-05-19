@@ -1,6 +1,4 @@
-import 'dart:collection';
 import 'package:appbasce/classes/profile_class.dart';
-import 'package:flutter/material.dart';
 
 var allowedParticipants = {
   "Admin": admin,
@@ -82,7 +80,7 @@ double roundsMalus(Map<String,List<TBPred>> allPredictions, String name) {
       }
     }
   }
-  return malus;
+  return double.parse(malus.toStringAsFixed(1));
 }
 
 Map<String,int> roundsStandings(Map<String,double> roundMaluses, Map<String,double> extra) {
