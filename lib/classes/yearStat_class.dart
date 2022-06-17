@@ -25,5 +25,6 @@ Stats v = Stats('V', 2020, [teo], [ale], [magu], [teo, ale], [nic],
     ['assets/profile2020.jpg', 'assets/profile2020-bis.jpg']);
 Stats vi = Stats('VI', 2021, [luca], [teo], [fabio], [fabio, melo], [teo],
     ['assets/profile2021.jpg']);
+Stats vii = Stats('VII', 2022, [nic], [melo], [enrico], [nic], [melo], []);
 
-List<Stats> yearStats = [i, ii, iii, iv, v, vi];
+List<Stats> yearStats = [i, ii, iii, iv, v, vi, vii];

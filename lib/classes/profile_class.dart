@@ -13,15 +13,16 @@ class Profile {
 
 Profile ale = Profile(
     'Ale', 'ale.jpg', [2018], [2017, 2020], [], [2017, 2018, 2020], [2018]);
-Profile enrico = Profile('Enrico', 'enrico.jpg', [], [], [2019], [], []);
+Profile enrico = Profile('Enrico', 'enrico.jpg', [], [], [2019, 2022], [], []);
 Profile fabio =
     Profile('Fabio', 'fabio.jpg', [], [], [2017, 2021], [2017, 2021], []);
 Profile luca = Profile('Luca', 'luca.jpg', [2021], [2019], [], [2019], []);
 Profile magu = Profile(
     'Magu', 'gianluca.jpg', [2016], [2018], [2020], [2016, 2017, 2018], []);
-Profile melo = Profile(
-    'Melo', 'melo.jpg', [2017, 2019], [], [2018], [2017, 2021], [2017, 2019]);
-Profile nic = Profile('Nic', 'nic.jpg', [], [2016], [], [], [2016, 2020]);
+Profile melo = Profile('Melo', 'melo.jpg', [2017, 2019], [2022], [2018],
+    [2017, 2021], [2017, 2019, 2022]);
+Profile nic =
+    Profile('Nic', 'nic.jpg', [2022], [2016], [], [2022], [2016, 2020]);
 Profile teo =
     Profile('Teo', 'teo.jpg', [2020], [2016, 2021], [], [2020], [2021]);
 Profile yiwei = Profile('Yiwei', 'yiwei.jpg', [], [], [], [], []);
