@@ -67,8 +67,7 @@ class _YearPageMiniState extends State<YearPageMini> {
                     //mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Stack(
-                        overflow: Overflow.visible,
-                        alignment: Alignment.center,
+                        clipBehavior: Clip.none, alignment: Alignment.center,
                         children: <Widget>[
                           Positioned(
                             left: (MediaQuery.of(context).size.width-350)/2,
