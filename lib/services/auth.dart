@@ -6,7 +6,7 @@ class AuthService {
 
   // sign in with email and password
   Future<UserCredential?> signInWithEmailAndPassword() async {
-    String pwd = await loadAsset();
+    String pwd = (await loadAsset()).trim();
     try {
       Future<UserCredential> result = _auth.signInWithEmailAndPassword(
           email: 'torneobasce@gmail.com', password: pwd);
