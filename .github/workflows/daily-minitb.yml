@@ -16,4 +16,4 @@ jobs:
       - run: pip install requests
       - run: python scripts/daily_minitb.py
         env:
-          PASSWORD: ${{ secrets.FIREBASE_DB_LOGIN_PASSWORD }}
+          PASSWORD: ${{ secrets.FIREBASE_DB_ADMIN_PASSWORD }}

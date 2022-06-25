@@ -33,7 +33,7 @@ def get_di_token():
     if pwd is None:
         pwd = ""
     auth_url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDiXzh_G3clIgnzU_k5tSPmSSOFL2L8-IM'
-    auth_data = f'{{"email":"torneobasce@gmail.com","password":"{pwd}","returnSecureToken":true}}'
+    auth_data = f'{{"email":"firebase@matluca.com","password":"{pwd}","returnSecureToken":true}}'
     auth_headers = {'Content-Type': 'application/json'}
     r = requests.post(auth_url, data=auth_data, headers=auth_headers)
     if r.status_code != 200:
