@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
+
 import json
 import os
 import requests
+import sys
 from datetime import date
 
 
@@ -13,6 +15,9 @@ def get_daily_standings_from_api():
         "Access-Control-Allow-Methods": "GET"
     }
     resp = requests.get(url, headers=headers)
+    if resp.status_code != 200:
+        print(resp.json())
+        sys.exit('Could not retrieve NBA standings')
     json_resp = resp.json()
     east = json_resp['league']['standard']['conference']['east']
     west = json_resp['league']['standard']['conference']['west']
@@ -31,22 +36,30 @@ def get_di_token():
     auth_data = f'{{"email":"torneobasce@gmail.com","password":"{pwd}","returnSecureToken":true}}'
     auth_headers = {'Content-Type': 'application/json'}
     r = requests.post(auth_url, data=auth_data, headers=auth_headers)
+    if r.status_code != 200:
+        print(r.json())
+        sys.exit('Could not get id token for Firebase DB')
     return (r.json())['idToken']
 
 
 def push_standings_to_db(standings):
     document = {'fields': standings}
-    try:
-        id_token = get_di_token()
-    except KeyError:
-        print('Could not get id token for Firebase DB')
-        return
+    id_token = get_di_token()
     headers = {'Authorization': f'Bearer {id_token}'}
     today = date.today()
     doc_name = today.strftime("%Y-%m-%d")
-    print(doc_name)
     url = f'https://firestore.googleapis.com/v1/projects/minitb-rs/databases/(default)/documents/minitb-daily/{doc_name}'
     resp = requests.patch(url, data=json.dumps(document), headers=headers)
+    if resp.status_code != 200:
+        print(resp.json())
+        sys.exit('Could not create daily standings document')
+    print(resp.json())
+    url = f'https://firestore.googleapis.com/v1/projects/minitb-rs/databases/(default)/documents/predictions/Admin'
+    document['fields']['name'] = {'stringValue': 'Admin'}
+    resp = requests.patch(url, data=json.dumps(document), headers=headers)
+    if resp.status_code != 200:
+        print(resp.json())
+        sys.exit('Could not update standings document')
     print(resp.json())
 
 

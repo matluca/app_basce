@@ -2,8 +2,8 @@ name: MiniTB Daily Standings Update
 
 on:
   schedule:
-    # runs every day at 5:00 (UTC)
-    - cron: '15 14 * * *'
+    # runs every day at 5:15 (UTC)
+    - cron: '15 5 * * *'
 
 jobs:
   get_and_push_standings:
