@@ -1,0 +1,19 @@
+name: MiniTB Daily Standings Update
+
+on:
+  schedule:
+    # runs every day at 5:00 (UTC)
+    - cron: '15 14 * * *'
+
+jobs:
+  get_and_push_standings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+      - run: pip install requests
+      - run: python scripts/daily_minitb.py
+        env:
+          PASSWORD: ${{ secrets.FIREBASE_DB_LOGIN_PASSWORD }}
