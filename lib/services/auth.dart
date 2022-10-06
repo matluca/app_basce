@@ -9,7 +9,7 @@ class AuthService {
     String pwd = (await loadAsset()).trim();
     try {
       Future<UserCredential> result = _auth.signInWithEmailAndPassword(
-          email: 'torneobasce@gmail.com', password: pwd);
+          email: 'firebase@matluca.com', password: pwd);
       return result;
     } catch (e) {
       return null;
