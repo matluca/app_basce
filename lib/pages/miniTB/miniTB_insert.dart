@@ -37,7 +37,7 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<MiniTBPred> preds = snapshot.data as List<MiniTBPred>;
-          MiniTBPred pred = MiniTBPred("", {}, {});
+          MiniTBPred pred = MiniTBPred("", {}, {}, "");
           for (var i = 0; i < preds.length; i++) {
             if (preds[i].name == miniTBParticipants[widget.index].name) {
               pred = preds[i];
