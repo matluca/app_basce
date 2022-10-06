@@ -4,10 +4,10 @@ import 'package:base32/base32.dart';
 
 List<String> eastTeams = [
   'ATL',
+  'BKN',
   'BOS',
-  'BRK',
+  'CHA',
   'CHI',
-  'CHO',
   'CLE',
   'DET',
   'IND',
@@ -31,7 +31,7 @@ List<String> westTeams = [
   'MIN',
   'NOP',
   'OKC',
-  'PHO',
+  'PHX',
   'POR',
   'SAC',
   'SAS',
@@ -46,6 +46,8 @@ class DatabaseServiceMiniTB {
       FirebaseFirestore.instance.collection('passwords');
   final CollectionReference deadline =
       FirebaseFirestore.instance.collection('deadline');
+  final CollectionReference minitb_daily =
+      FirebaseFirestore.instance.collection('minitb-daily');
 
   // update predictions
   Future updatePredictionsFromOrderedList(
@@ -86,8 +88,35 @@ class DatabaseServiceMiniTB {
         westPred[westTeams[team]] = (doc.data() as Map)[westTeams[team]] ?? -1;
       }
 
-      return MiniTBPred((doc.data() as Map)['name'] ?? '', eastPred, westPred);
+      return MiniTBPred((doc.data() as Map)['name'] ?? '', eastPred, westPred, (doc.data() as Map)['date'] ?? '');
     }).toList();
+  }
+
+  // Check If daily prediction exists
+  Future<bool> checkIfDocExists(String date) async {
+    try {
+      var doc = await minitb_daily.doc(date).get();
+      return doc.exists;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  // get daily standings
+  Future<MiniTBPred> dailyStandings(String date) async {
+    return minitb_daily.doc(date).get().then(_dailyStandings);
+  }
+
+  MiniTBPred _dailyStandings(DocumentSnapshot snapshot) {
+    var eastPred = {};
+    for (var team = 0; team < eastTeams.length; team++) {
+      eastPred[eastTeams[team]] = (snapshot.data() as Map)[eastTeams[team]] ?? -1;
+    }
+    var westPred = {};
+    for (var team = 0; team < westTeams.length; team++) {
+      westPred[westTeams[team]] = (snapshot.data() as Map)[westTeams[team]] ?? -1;
+    }
+    return MiniTBPred('', eastPred, westPred, '');
   }
 
   // get passwords

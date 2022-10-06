@@ -117,25 +117,13 @@ class NBAStandings {
     List<String> eastStandings = [];
     List<String> westStandings = [];
     for (int i = 0; i < 15; i++) {
-      eastStandings.add(pacifyTricode(east[i]['teamSitesOnly']['teamTricode']));
-      westStandings.add(pacifyTricode(west[i]['teamSitesOnly']['teamTricode']));
+      eastStandings.add(east[i]['teamSitesOnly']['teamTricode']);
+      westStandings.add(west[i]['teamSitesOnly']['teamTricode']);
     }
     return NBAStandings(
       eastStandings: eastStandings,
       westStandings: westStandings,
     );
-  }
-}
-
-String pacifyTricode(String code) {
-  if (code == 'BKN') {
-    return 'BRK';
-  } else if (code == 'CHA') {
-    return 'CHO';
-  } else if (code == 'PHX') {
-    return 'PHO';
-  } else {
-    return code;
   }
 }
 

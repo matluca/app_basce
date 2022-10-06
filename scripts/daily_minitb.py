@@ -47,8 +47,8 @@ def push_standings_to_db(standings):
     id_token = get_di_token()
     headers = {'Authorization': f'Bearer {id_token}'}
     today = date.today()
-    doc_name = today.strftime("%Y-%m-%d")
-    url = f'https://firestore.googleapis.com/v1/projects/minitb-rs/databases/(default)/documents/minitb-daily/{doc_name}'
+    today_string = today.strftime("%Y-%m-%d")
+    url = f'https://firestore.googleapis.com/v1/projects/minitb-rs/databases/(default)/documents/minitb-daily/{today_string}'
     resp = requests.patch(url, data=json.dumps(document), headers=headers)
     if resp.status_code != 200:
         print(resp.json())
@@ -56,6 +56,7 @@ def push_standings_to_db(standings):
     print(resp.json())
     url = f'https://firestore.googleapis.com/v1/projects/minitb-rs/databases/(default)/documents/predictions/Admin'
     document['fields']['name'] = {'stringValue': 'Admin'}
+    document['fields']['date'] = {'stringValue': today_string}
     resp = requests.patch(url, data=json.dumps(document), headers=headers)
     if resp.status_code != 200:
         print(resp.json())

@@ -16,6 +16,7 @@ import 'package:appbasce/pages/miniTB/miniTB_insert.dart';
 import 'package:appbasce/pages/miniTB/miniTB_update.dart';
 import 'package:appbasce/pages/miniTB/minitb_predictions.dart';
 import 'package:appbasce/pages/miniTB/minitb_standings.dart';
+import 'package:appbasce/pages/miniTB/minitb_nba_standings.dart';
 import 'package:appbasce/pages/miniTB/miniTB_insert_pwd.dart';
 import 'package:appbasce/pages/TB/tb.dart';
 import 'package:appbasce/pages/TB/tb_insert_list.dart';
@@ -134,6 +135,7 @@ class AppBasce extends StatelessWidget {
         '/minitb_update': (context) => const MiniTBUpdate(),
         '/minitb_predictions': (context) => const MiniTBPredictions(),
         '/minitb_standings': (context) => const MiniTBStandings(),
+        '/minitb_nba_standings': (context) => const MiniTBNBAStandings(),
         '/minitb_pwd': (context) => const MiniTBInsertPassword(),
         '/tb': (context) => const TB(),
         '/tb_insert_list': (context) => const TBInsertList(),

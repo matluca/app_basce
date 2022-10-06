@@ -55,6 +55,19 @@ class _MiniTBState extends State<MiniTB> {
                           : const VisualizzaPredizioni(),
                       Card(
                         child: ListTile(
+                          leading: const Icon(Icons.sports_basketball),
+                          trailing: const Icon(Icons.play_arrow),
+                          title: Text(
+                              "Visualizza classifiche NBA",
+                              style: TextStyle(
+                                  color: Colors.grey[700], fontSize: 18)),
+                          onTap: () {
+                            Navigator.pushNamed(context, '/minitb_nba_standings');
+                          },
+                        ),
+                      ),
+                      Card(
+                        child: ListTile(
                           leading: const Icon(Icons.cloud_download),
                           trailing: const Icon(Icons.play_arrow),
                           title: Text(

@@ -14,7 +14,7 @@ class MiniTBPredictions extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<MiniTBPred> preds = snapshot.data as List<MiniTBPred>;
-          MiniTBPred reference = MiniTBPred("", {}, {});
+          MiniTBPred reference = MiniTBPred("", {}, {}, "");
           for (var i = 0; i < preds.length; i++) {
             if (preds[i].name == "Admin") {
               reference = preds[i];
@@ -67,7 +67,7 @@ class MiniTBPredictions extends StatelessWidget {
                           shrinkWrap: true,
                           itemCount: miniTBParticipants.length - 1,
                           itemBuilder: (context, index) {
-                            MiniTBPred pred = MiniTBPred("", {}, {});
+                            MiniTBPred pred = MiniTBPred("", {}, {}, "");
                             for (var i = 0; i < preds.length; i++) {
                               if (preds[i].name ==
                                   miniTBParticipants[index].name) {
