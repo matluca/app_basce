@@ -5,6 +5,7 @@ import 'package:appbasce/services/database_miniTB.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:math' as math;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:intl/intl.dart';
 
 class MiniTB extends StatefulWidget {
   const MiniTB({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class MiniTB extends StatefulWidget {
 class _MiniTBState extends State<MiniTB> {
   @override
   Widget build(BuildContext context) {
+    final DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm');
     return StreamBuilder(
         stream: DatabaseServiceMiniTB().ddl,
         builder: (context, snapshot) {
@@ -107,7 +109,7 @@ class _MiniTBState extends State<MiniTB> {
                       ),
                       const SizedBox(height: 80),
                       beforeDeadline
-                          ? Text('Deadline $ddlFromDB',
+                          ? Text('Deadline: ${formatter.format(ddlFromDB)}',
                               style: TextStyle(color: Colors.grey[800]))
                           : Container(),
                     ],

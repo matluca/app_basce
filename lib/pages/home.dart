@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                Image.asset('assets/profile2021.jpg'),
+                Image.asset('assets/profile2022.jpg'),
                 const SizedBox(height: 25),
                 const Menu(),
               ],

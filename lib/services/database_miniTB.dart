@@ -45,7 +45,7 @@ class DatabaseServiceMiniTB {
   final CollectionReference passwords =
       FirebaseFirestore.instance.collection('passwords');
   final CollectionReference deadline =
-      FirebaseFirestore.instance.collection('deadline');
+      FirebaseFirestore.instance.collection('minitb-deadline');
   final CollectionReference minitb_daily =
       FirebaseFirestore.instance.collection('minitb-daily');
 
@@ -90,16 +90,6 @@ class DatabaseServiceMiniTB {
 
       return MiniTBPred((doc.data() as Map)['name'] ?? '', eastPred, westPred, (doc.data() as Map)['date'] ?? '');
     }).toList();
-  }
-
-  // Check If daily prediction exists
-  Future<bool> checkIfDocExists(String date) async {
-    try {
-      var doc = await minitb_daily.doc(date).get();
-      return doc.exists;
-    } catch (e) {
-      throw e;
-    }
   }
 
   // get daily standings
