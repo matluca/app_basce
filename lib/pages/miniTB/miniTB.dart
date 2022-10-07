@@ -66,34 +66,34 @@ class _MiniTBState extends State<MiniTB> {
                           },
                         ),
                       ),
-                      Card(
-                        child: ListTile(
-                          leading: const Icon(Icons.cloud_download),
-                          trailing: const Icon(Icons.play_arrow),
-                          title: Text(
-                              "Aggiorna classifiche NBA reali automaticamente",
-                              style: TextStyle(
-                                  color: Colors.grey[700], fontSize: 18)),
-                          onTap: () {
-                            Navigator.pushNamed(context, '/minitb_update');
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 40),
-                      Card(
-                        child: ListTile(
-                          leading: const Icon(Icons.settings),
-                          trailing: const Icon(Icons.play_arrow),
-                          title: Text(
-                              "Aggiorna classifiche NBA reali manualmente",
-                              style: TextStyle(
-                                  color: Colors.grey[700], fontSize: 18)),
-                          onTap: () {
-                            Navigator.pushNamed(context, '/minitb_insert',
-                                arguments: miniTBParticipants.length - 1);
-                          },
-                        ),
-                      ),
+                      // Card(
+                      //   child: ListTile(
+                      //     leading: const Icon(Icons.cloud_download),
+                      //     trailing: const Icon(Icons.play_arrow),
+                      //     title: Text(
+                      //         "Aggiorna classifiche NBA reali automaticamente",
+                      //         style: TextStyle(
+                      //             color: Colors.grey[700], fontSize: 18)),
+                      //     onTap: () {
+                      //       Navigator.pushNamed(context, '/minitb_update');
+                      //     },
+                      //   ),
+                      // ),
+                      const SizedBox(height: 60),
+                      // Card(
+                      //   child: ListTile(
+                      //     leading: const Icon(Icons.settings),
+                      //     trailing: const Icon(Icons.play_arrow),
+                      //     title: Text(
+                      //         "Aggiorna classifiche NBA reali manualmente",
+                      //         style: TextStyle(
+                      //             color: Colors.grey[700], fontSize: 18)),
+                      //     onTap: () {
+                      //       Navigator.pushNamed(context, '/minitb_insert',
+                      //           arguments: miniTBParticipants.length - 1);
+                      //     },
+                      //   ),
+                      // ),
                       Card(
                         child: ListTile(
                           leading: const Icon(Icons.text_snippet),

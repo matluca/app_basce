@@ -79,7 +79,7 @@ List<int> malus(MiniTBPred prediction, MiniTBPred reference) {
   return [mEast, mWest];
 }
 
-String miniTBStandings(List<MiniTBPred> preds) {
+String miniTBStandings(List<MiniTBPred> preds, MiniTBPred yesterday) {
   MiniTBPred reference = MiniTBPred("", {}, {}, "");
   for (var i = 0; i < preds.length; i++) {
     if (preds[i].name == "Admin") {
@@ -89,11 +89,21 @@ String miniTBStandings(List<MiniTBPred> preds) {
   var standings = {};
   var eastStandings = {};
   var westStandings = {};
+  var diff = {};
   for (int i = 0; i < preds.length; i++) {
     if (preds[i].name != "Admin") {
       int east = malus(preds[i], reference)[0];
       int west = malus(preds[i], reference)[1];
+      int eastYesterday = malus(preds[i], yesterday)[0];
+      int westYesterday = malus(preds[i], yesterday)[1];
       standings[preds[i].name] = east + west;
+      int d = east + west - eastYesterday - westYesterday;
+      diff[preds[i].name] = "(=)";
+      if (d > 0) {
+        diff[preds[i].name] = "(+${d})";
+      } else if (d < 0) {
+        diff[preds[i].name] = "(${d})";
+      }
       eastStandings[preds[i].name] = east;
       westStandings[preds[i].name] = west;
     }
@@ -106,6 +116,8 @@ String miniTBStandings(List<MiniTBPred> preds) {
       key: (k) => k, value: (k) => eastStandings[k]);
   LinkedHashMap sortedWestStandings = LinkedHashMap.fromIterable(sortedKeys,
       key: (k) => k, value: (k) => westStandings[k]);
+  LinkedHashMap sortedDiffs = LinkedHashMap.fromIterable(sortedKeys,
+      key: (k) => k, value: (k) => diff[k]);
 
   var msg = "";
   for (int i = 0; i < sortedKeys.length; i++) {
@@ -117,7 +129,9 @@ String miniTBStandings(List<MiniTBPred> preds) {
         sortedEastStandings.values.toList()[i].toString() +
         ", W: " +
         sortedWestStandings.values.toList()[i].toString() +
-        ")";
+        ")" +
+        "  " +
+        sortedDiffs.values.toList()[i];
     if (i != sortedKeys.length - 1) {
       msg = msg + "\n";
     }
