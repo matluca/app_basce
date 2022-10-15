@@ -7,7 +7,7 @@ sulla differenza tra le predizioni e le classifiche finali reali.
 
 ### Date
 
-La deadline per stilare le predizioni è fissata per il 18 ottobre 2022, ore 20:00 CET. Dopo la
+La deadline per stilare le predizioni è fissata per il 18 ottobre 2022, ore 20:00 CEST. Dopo la
 deadline non è più possibile modificare le proprie predizioni. L'ultima partita di regular season
 NBA verrà giocata il 9 Aprile 2023; dopodichè saranno note le classifiche finali e si potrà
 progedere al calcolo dei malus. I PlayIn previsti prima dei playoff NBA non contano ai fini del
