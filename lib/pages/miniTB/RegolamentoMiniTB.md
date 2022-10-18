@@ -21,7 +21,7 @@ base alle classifiche al momento dell'annullamento della stagione.
 
 Il calcolo del malus per ciascun giocatore viene effettuato nel modo seguente:
 
-* per ciascuna squadra, siano _p_ e _r_ le rispettiva posizione nella predizione e nella classifica
+* per ciascuna squadra, siano _p_ e _r_ le rispettive posizioni nella predizione e nella classifica
   reale.
 * per ciascuna squadra, viene calcolato un malus pari a _m_ = |min(_p_,11) - min(_r_,11)|
 * il malus totale è la somma dei malus per ciascuna squadra
