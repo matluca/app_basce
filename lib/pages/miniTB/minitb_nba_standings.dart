@@ -29,13 +29,13 @@ class MiniTBNBAStandings extends StatelessWidget {
                     .dailyStandings(formatter.format(todayDate)),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    MiniTBPred yesterday = snapshot.data as MiniTBPred;
+                    MiniTBPred today = snapshot.data as MiniTBPred;
                     return FutureBuilder(
                       future: DatabaseServiceMiniTB()
                           .dailyStandings(formatter.format(yesterdayDate)),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          MiniTBPred today = snapshot.data as MiniTBPred;
+                          MiniTBPred yesterday = snapshot.data as MiniTBPred;
                           return Scaffold(
                             appBar: AppBar(
                               backgroundColor: Colors.blue[400],
@@ -163,11 +163,11 @@ class _StandingsListState extends State<StandingsList> {
               String display = '=';
               if (diff > 0) {
                 color = Colors.red;
-                display = '↓${diff}';
+                display = '-${diff}';
               }
               if (diff < 0) {
                 color = Colors.green;
-                display = '↑${-diff}';
+                display = '+${-diff}';
               }
               return Center(
                   child: Padding(

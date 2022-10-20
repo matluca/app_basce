@@ -5,6 +5,51 @@ import os
 import requests
 import sys
 from datetime import date
+from nba_api.stats.endpoints import leaguestandings
+
+
+tricode_map = {
+    'Celtics': 'BOS',
+    'Jazz': 'UTA',
+    'Bulls': 'CHI',
+    'Warriors': 'GSW',
+    'Pelicans': 'NOP',
+    'Wizards': 'WAS',
+    'Pistons': 'DET',
+    'Timberwolves': 'MIN',
+    'Raptors': 'TOR',
+    'Trail Blazers': 'POR',
+    'Hornets': 'CHA',
+    'Suns': 'PHX',
+    'Grizzlies': 'MEM',
+    'Hawks': 'ATL',
+    'Cavaliers': 'CLE',
+    'Mavericks': 'DAL',
+    'Magic': 'ORL',
+    'Thunder': 'OKC',
+    'Kings': 'SAC',
+    'Pacers': 'IND',
+    'Heat': 'MIA',
+    'Lakers': 'LAL',
+    '76ers': 'PHI',
+    'Nuggets': 'DEN',
+    'Rockets': 'HOU',
+    'Knicks': 'NYK',
+    'Spurs': 'SAS',
+    'Nets': 'BKN',
+    'Clippers': 'LAC',
+    'Bucks': 'MIL'
+}
+
+
+def get_daily_standings_from_api_2():
+    d = leaguestandings.LeagueStandings().get_dict()
+    r = d['resultSets'][0]['rowSet']
+    standings = {}
+    for team in r:
+        print(team[4], team[7])
+        standings[tricode_map[team[4]]] = {'integerValue': f'{team[7]}'}
+    return standings
 
 
 def get_daily_standings_from_api():
@@ -65,7 +110,7 @@ def push_standings_to_db(standings):
 
 
 def daily_minitb():
-    standings = get_daily_standings_from_api()
+    standings = get_daily_standings_from_api_2()
     push_standings_to_db(standings)
 
 
