@@ -47,7 +47,6 @@ def get_daily_standings_from_api_2():
     r = d['resultSets'][0]['rowSet']
     standings = {}
     for team in r:
-        print(team[4], team[7])
         standings[tricode_map[team[4]]] = {'integerValue': f'{team[7]}'}
     return standings
 
