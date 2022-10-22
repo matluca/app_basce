@@ -4,6 +4,7 @@ on:
   schedule:
     # runs every day at 5:15 (UTC)
     - cron: '15 5 * * *'
+  workflow_dispatch:
 
 jobs:
   get_and_push_standings:
