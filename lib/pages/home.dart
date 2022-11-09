@@ -40,18 +40,7 @@ class _HomeState extends State<Home> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  'Welcome Biatch!',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 40,
-                    color: Colors.grey[800],
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-                const SizedBox(height: 30),
-                Image.asset('assets/profile2022.jpg'),
+                SizedBox(child: Image.asset('assets/profile2022.jpg'), width: 700),
                 const SizedBox(height: 25),
                 const Menu(),
               ],
@@ -161,7 +150,7 @@ alertDialog(BuildContext context) {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text('Versione: 5.0.1', style: TextStyle(color: Colors.grey[700])),
+            Text('Versione: 5.1.0', style: TextStyle(color: Colors.grey[700])),
             const SizedBox(height: 10),
             Text('Creatore: Luca', style: TextStyle(color: Colors.grey[700]))
           ],

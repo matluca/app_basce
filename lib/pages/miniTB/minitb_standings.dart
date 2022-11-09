@@ -27,7 +27,10 @@ class MiniTBStandings extends StatelessWidget {
           String todayString = reference.date;
           DateTime todayDate = DateTime.parse(todayString);
           DateTime yesterdayDate = todayDate.subtract(new Duration(days: 1));
-          String sponsor = sponsors[DateTime.now().weekday - 1];
+          DateTime actualToday = DateTime.now();
+          String sponsor = sponsors[actualToday.weekday - 1];
+          bool isUpdated = (actualToday.day == todayDate.day) &&
+              (actualToday.month == todayDate.month);
           return FutureBuilder(
               future: DatabaseServiceMiniTB()
                   .dailyStandings(formatter.format(yesterdayDate)),
@@ -79,6 +82,30 @@ class MiniTBStandings extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            isUpdated
+                                ? Container()
+                                : AlertDialog(
+                                    key: key,
+                                    title: Icon(Icons.warning_amber_outlined,
+                                        color: Colors.red, size: 40),
+                                    content: Text(
+                                        "Classifiche del giorno non ancora aggiornate",
+                                        textAlign: TextAlign.center),
+                                    contentPadding: const EdgeInsets.fromLTRB(
+                                        20, 10, 20, 20),
+                                    contentTextStyle: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                    backgroundColor: Colors.yellow[100],
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      side: BorderSide(
+                                          width: 4.0, color: Colors.red),
+                                    ),
+                                  ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 20, horizontal: 20),
