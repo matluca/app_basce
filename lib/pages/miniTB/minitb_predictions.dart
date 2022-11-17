@@ -51,7 +51,7 @@ class MiniTBPredictions extends StatelessWidget {
                           key: const Key("MiniTB predictions"),
                           prediction: reference,
                           reference: reference,
-                          showMalus: false),
+                          isReference: true),
                     ],
                   ),
                 ),
@@ -89,7 +89,7 @@ class MiniTBPredictions extends StatelessWidget {
                                       key: const Key("MiniTB predictions"),
                                       prediction: pred,
                                       reference: reference,
-                                      showMalus: true),
+                                      isReference: false),
                                 ],
                               ),
                             );
@@ -113,13 +113,13 @@ class MiniTBPredictions extends StatelessWidget {
 class Predictions extends StatefulWidget {
   final MiniTBPred prediction;
   final MiniTBPred reference;
-  final bool showMalus;
+  final bool isReference;
 
   const Predictions(
       {required Key key,
       required this.prediction,
       required this.reference,
-      required this.showMalus})
+      required this.isReference})
       : super(key: key);
 
   @override
@@ -129,12 +129,11 @@ class Predictions extends StatefulWidget {
 class _PredictionsState extends State<Predictions> {
   @override
   Widget build(BuildContext context) {
-    var eastStandings = buildStandings(widget.prediction.east).toString();
-    eastStandings = eastStandings.substring(1, eastStandings.length - 1);
-    var westStandings = buildStandings(widget.prediction.west).toString();
-    westStandings = westStandings.substring(1, westStandings.length - 1);
+    var eastStandingsMap = buildStandings(widget.prediction.east);
+    var westStandingsMap = buildStandings(widget.prediction.west);
+    var eastReferenceMap = buildStandings(widget.reference.east);
+    var westReferenceMap = buildStandings(widget.reference.west);
     var m = malus(widget.prediction, widget.reference);
-    var showMalus = widget.showMalus;
 
     return Container(
         padding: const EdgeInsets.all(5),
@@ -145,23 +144,47 @@ class _PredictionsState extends State<Predictions> {
             children: [
               ListTile(
                 title: const Text('East'),
-                subtitle: Text(eastStandings),
+                subtitle: displayPrediction(
+                    eastStandingsMap, eastReferenceMap, widget.isReference),
               ),
               ListTile(
                 title: const Text('West'),
-                subtitle: Text(westStandings),
+                subtitle: displayPrediction(
+                    westStandingsMap, westReferenceMap, widget.isReference),
               ),
-              showMalus
-                  ? Padding(
+              widget.isReference
+                  ? Container()
+                  : Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Malus East: ${m[0]}, Malus West: ${m[1]}, Malus Tot: ${m[0] + m[1]}',
                         style: TextStyle(color: Colors.red[600]),
                       ),
-                    )
-                  : Container(),
+                    ),
             ],
           ),
         ));
   }
+}
+
+Widget displayPrediction(Map pred, Map reference, bool isNotReference) {
+  List<InlineSpan> teams = [];
+  for (var e in pred.entries) {
+    Color color = Colors.black54;
+    FontWeight weight = FontWeight.normal;
+    if ((e.value == reference[e.key]) && !isNotReference) {
+      color = Colors.green;
+      weight = FontWeight.bold;
+    }
+    if (e.key < 15) {
+      teams.add(TextSpan(
+          text: "${e.key}: ${e.value}, ",
+          style: TextStyle(color: color, fontWeight: weight)));
+    } else {
+      teams.add(TextSpan(
+          text: "${e.key}: ${e.value}",
+          style: TextStyle(color: color, fontWeight: weight)));
+    }
+  }
+  return RichText(text: TextSpan(children: teams));
 }
