@@ -1,6 +1,6 @@
 {
-    "name": "appbasce",
-    "short_name": "appbasce",
+    "name": "App Bascé",
+    "short_name": "App Bascé",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

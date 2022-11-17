@@ -117,6 +117,7 @@ class AppBasce extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "App Bascé",
       debugShowCheckedModeBanner: false,
       initialRoute: "/",
       routes: {
