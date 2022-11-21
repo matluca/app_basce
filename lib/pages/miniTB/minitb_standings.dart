@@ -18,7 +18,7 @@ class MiniTBStandings extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<MiniTBPred> preds = snapshot.data as List<MiniTBPred>;
-          MiniTBPred reference = MiniTBPred("", {}, {}, "");
+          MiniTBPred reference = MiniTBPred("", {}, {}, "", {});
           for (var i = 0; i < preds.length; i++) {
             if (preds[i].name == "Admin") {
               reference = preds[i];

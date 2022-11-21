@@ -88,7 +88,7 @@ class DatabaseServiceMiniTB {
         westPred[westTeams[team]] = (doc.data() as Map)[westTeams[team]] ?? -1;
       }
 
-      return MiniTBPred((doc.data() as Map)['name'] ?? '', eastPred, westPred, (doc.data() as Map)['date'] ?? '');
+      return MiniTBPred((doc.data() as Map)['name'] ?? '', eastPred, westPred, (doc.data() as Map)['date'] ?? '', {});
     }).toList();
   }
 
@@ -99,14 +99,17 @@ class DatabaseServiceMiniTB {
 
   MiniTBPred _dailyStandings(DocumentSnapshot snapshot) {
     var eastPred = {};
+    var wins={};
     for (var team = 0; team < eastTeams.length; team++) {
       eastPred[eastTeams[team]] = (snapshot.data() as Map)[eastTeams[team]] ?? -1;
+      wins[eastTeams[team]] = (snapshot.data() as Map)['${eastTeams[team]}-wins'] ?? "";
     }
     var westPred = {};
     for (var team = 0; team < westTeams.length; team++) {
       westPred[westTeams[team]] = (snapshot.data() as Map)[westTeams[team]] ?? -1;
+      wins[westTeams[team]] = (snapshot.data() as Map)['${westTeams[team]}-wins'] ?? "";
     }
-    return MiniTBPred('', eastPred, westPred, '');
+    return MiniTBPred('', eastPred, westPred, '', wins);
   }
 
   // get passwords

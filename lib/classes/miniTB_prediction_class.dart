@@ -35,8 +35,9 @@ class MiniTBPred {
   final Map east;
   final Map west;
   final String date;
+  final Map wins;
 
-  MiniTBPred(this.name, this.east, this.west, this.date);
+  MiniTBPred(this.name, this.east, this.west, this.date, this.wins);
 }
 
 Map buildStandings(Map predictions) {
@@ -80,7 +81,7 @@ List<int> malus(MiniTBPred prediction, MiniTBPred reference) {
 }
 
 String miniTBStandings(List<MiniTBPred> preds, MiniTBPred yesterday) {
-  MiniTBPred reference = MiniTBPred("", {}, {}, "");
+  MiniTBPred reference = MiniTBPred("", {}, {}, "", {});
   for (var i = 0; i < preds.length; i++) {
     if (preds[i].name == "Admin") {
       reference = preds[i];

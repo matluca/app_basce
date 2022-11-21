@@ -15,7 +15,7 @@ class MiniTBNBAStandings extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<MiniTBPred> preds = snapshot.data as List<MiniTBPred>;
-            MiniTBPred reference = MiniTBPred("", {}, {}, "");
+            MiniTBPred reference = MiniTBPred("", {}, {}, "", {});
             for (var i = 0; i < preds.length; i++) {
               if (preds[i].name == "Admin") {
                 reference = preds[i];
@@ -87,8 +87,9 @@ class MiniTBNBAStandings extends StatelessWidget {
                                             const SizedBox(height: 15),
                                             StandingsList(
                                               key: const Key("StandingsList"),
-                                              today: List<String>.from(
+                                              todayList: List<String>.from(
                                                   buildCurrentList(today.east)),
+                                              todayWins: today.wins,
                                               yesterday: yesterday.east,
                                             ),
                                           ],
@@ -103,9 +104,10 @@ class MiniTBNBAStandings extends StatelessWidget {
                                               const SizedBox(height: 10),
                                               StandingsList(
                                                 key: const Key("StandingsList"),
-                                                today: List<String>.from(
+                                                todayList: List<String>.from(
                                                     buildCurrentList(
                                                         today.west)),
+                                                todayWins: today.wins,
                                                 yesterday: yesterday.west,
                                               ),
                                             ]),
@@ -133,11 +135,12 @@ class MiniTBNBAStandings extends StatelessWidget {
 }
 
 class StandingsList extends StatefulWidget {
-  final List<String> today;
+  final List<String> todayList;
+  final Map todayWins;
   final Map yesterday;
 
   const StandingsList(
-      {required Key key, required this.today, required this.yesterday})
+      {required Key key, required this.todayList, required this.todayWins, required this.yesterday})
       : super(key: key);
 
   @override
@@ -147,7 +150,8 @@ class StandingsList extends StatefulWidget {
 class _StandingsListState extends State<StandingsList> {
   @override
   Widget build(BuildContext context) {
-    var today = widget.today;
+    var todayList = widget.todayList;
+    var todayWins = widget.todayWins;
     var yestarday = widget.yesterday;
     return Column(
       children: [
@@ -157,8 +161,9 @@ class _StandingsListState extends State<StandingsList> {
             maxWidth: 0.45 * MediaQuery.of(context).size.width,
           ),
           child: ListView(
-            children: List.generate(today.length, (index) {
-              num diff = index - yestarday[today[index]] + 1;
+            children: List.generate(todayList.length, (index) {
+              num diff = index - yestarday[todayList[index]] + 1;
+              String wins = todayWins[todayList[index]] ?? "";
               MaterialColor color = Colors.grey;
               String display = '=';
               if (diff > 0) {
@@ -181,10 +186,11 @@ class _StandingsListState extends State<StandingsList> {
                         color: Colors.grey[900],
                       ),
                       children: [
-                        TextSpan(text: '${index + 1}: ${today[index]}  ('),
+                        TextSpan(text: '${index + 1}: ${todayList[index]}  ('),
                         TextSpan(
                             text: '${display}', style: TextStyle(color: color)),
-                        TextSpan(text: ')')
+                        TextSpan(text: ')'),
+                        TextSpan(text: ' (${wins})')
                       ],
                     ))
                   ],
