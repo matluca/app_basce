@@ -168,11 +168,11 @@ class _StandingsListState extends State<StandingsList> {
               String display = '=';
               if (diff > 0) {
                 color = Colors.red;
-                display = '-${diff}';
+                display = '\u2193${diff}';
               }
               if (diff < 0) {
                 color = Colors.green;
-                display = '+${-diff}';
+                display = '\u2191${-diff}';
               }
               return Center(
                   child: Padding(
