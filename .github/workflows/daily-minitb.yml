@@ -16,5 +16,18 @@ jobs:
           python-version: '3.8'
       - run: pip install requests numpy nba_api
       - run: python scripts/daily_minitb.py
+        id: retry1
+        continue-on-error: true
+        env:
+          PASSWORD: ${{ secrets.FIREBASE_DB_ADMIN_PASSWORD }}
+      - run: python scripts/daily_minitb.py
+        id: retry2
+        if: steps.retry1.outcome == 'failure'
+        continue-on-error: true
+        env:
+          PASSWORD: ${{ secrets.FIREBASE_DB_ADMIN_PASSWORD }}
+      - run: python scripts/daily_minitb.py
+        id: retry3
+        if: steps.retry2.outcome == 'failure'
         env:
           PASSWORD: ${{ secrets.FIREBASE_DB_ADMIN_PASSWORD }}
