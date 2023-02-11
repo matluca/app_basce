@@ -43,7 +43,7 @@ tricode_map = {
 
 
 def get_daily_standings_from_api_2():
-    d = leaguestandings.LeagueStandings(proxy='115.144.101.200:10000').get_dict()
+    d = leaguestandings.LeagueStandings(proxy='190.113.42.162:999').get_dict()
     r = d['resultSets'][0]['rowSet']
     standings = {}
     for team in r:
