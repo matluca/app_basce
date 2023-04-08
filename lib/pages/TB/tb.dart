@@ -1,3 +1,4 @@
+import 'package:appbasce/classes/profile_class.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:math' as math;
@@ -58,6 +59,19 @@ class _TBState extends State<TB> {
                           color: Colors.grey[700], fontSize: 18)),
                   onTap: () {
                     Navigator.pushNamed(context, '/tb_view_results');
+                  },
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: const Icon(MdiIcons.fileDocumentEdit),
+                  trailing: const Icon(Icons.play_arrow),
+                  title: Text(
+                      "Modifica risultati reali",
+                      style: TextStyle(
+                          color: Colors.grey[700], fontSize: 18)),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/tb_insert', arguments: admin);
                   },
                 ),
               ),

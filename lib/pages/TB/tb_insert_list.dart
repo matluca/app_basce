@@ -48,7 +48,7 @@ class _TBInsertListState extends State<TBInsertList> {
                             crossAxisCount: columns),
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: pwds.length,
+                        itemCount: pwds.length-1,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.symmetric(
@@ -56,17 +56,12 @@ class _TBInsertListState extends State<TBInsertList> {
                             child: Card(
                               child: ListTile(
                                 onTap: () {
-                                  if (allowedParticipants[pwds[index].name]!.name == "Admin") {
-                                    Navigator.pushNamed(context, '/tb_insert',
-                                        arguments: allowedParticipants[pwds[index].name]);
-                                  } else {
-                                    Navigator.pushNamed(context, '/tb_pwd',
-                                        arguments: index);
-                                  }
+                                  Navigator.pushNamed(context, '/tb_pwd',
+                                      arguments: index+1);
                                 },
                                 title: Center(
                                   child: Text(
-                                    displayName(allowedParticipants[pwds[index].name]!.name),
+                                    displayName(allowedParticipants[pwds[index+1].name]!.name),
                                     style: TextStyle(
                                       color: Colors.grey[700],
                                       fontSize: 18,
@@ -75,7 +70,7 @@ class _TBInsertListState extends State<TBInsertList> {
                                 ),
                                 leading: CircleAvatar(
                                   backgroundImage: AssetImage(
-                                      'assets/${allowedParticipants[pwds[index].name]!.image}'),
+                                      'assets/${allowedParticipants[pwds[index+1].name]!.image}'),
                                   radius: 23,
                                 ),
                                 //trailing: Icon(Icons.play_arrow),
