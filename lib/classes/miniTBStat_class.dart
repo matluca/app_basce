@@ -12,5 +12,6 @@ class MiniTBStats {
 
 MiniTBStats iMini = MiniTBStats('I', "2020-21", [luca], [ale], [nic]);
 MiniTBStats iiMini = MiniTBStats('II', "2021-22", [magu], [luca], [ale]);
+MiniTBStats iiiMini = MiniTBStats('III', "2022-23", [luca], [ale], [nic]);
 
-List<MiniTBStats> miniTBStats = [iMini, iiMini];
+List<MiniTBStats> miniTBStats = [iMini, iiMini, iiiMini];
