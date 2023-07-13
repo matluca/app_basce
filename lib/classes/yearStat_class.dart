@@ -27,6 +27,7 @@ Stats vi = Stats('VI', 2021, [luca], [teo], [fabio], [fabio, melo], [teo],
     ['assets/profile2021.jpg']);
 Stats vii = Stats('VII', 2022, [nic], [melo], [enrico], [nic], [melo],
     ['assets/profile2022.jpg']);
-Stats viii = Stats('VIII', 2023, [teo], [enrico], [nic], [teo], [melo], []);
+Stats viii = Stats('VIII', 2023, [teo], [enrico], [nic], [teo], [melo],
+    ['assets/profile2023.png']);
 
 List<Stats> yearStats = [i, ii, iii, iv, v, vi, vii, viii];
