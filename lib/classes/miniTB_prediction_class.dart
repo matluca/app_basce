@@ -5,6 +5,7 @@ import 'dart:collection';
 List<Profile> miniTBParticipants = [
   ale,
   enrico,
+  fabio,
   luca,
   magu,
   melo,

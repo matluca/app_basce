@@ -19,7 +19,7 @@ names = [
     'Teo'
 ]
 
-out_file_name = 'minitb_2022.yaml'
+out_file_name = 'minitb_2023.yaml'
 
 
 def get_di_token():

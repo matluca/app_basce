@@ -27,7 +27,7 @@ names = [
     'Teo'
 ]
 
-out_file_name = 'tb_2022.yaml'
+out_file_name = 'tb_2023.yaml'
 
 
 def get_di_token():
