@@ -6,6 +6,7 @@ import requests
 import sys
 from datetime import date
 from nba_api.stats.endpoints import leaguestandings
+from fp.fp import FreeProxy
 
 
 tricode_map = {
@@ -43,13 +44,20 @@ tricode_map = {
 
 
 def get_daily_standings_from_api_2():
-    d = leaguestandings.LeagueStandings(proxy='132.248.159.223:3128').get_dict()
-    r = d['resultSets'][0]['rowSet']
-    standings = {}
-    for team in r:
-        standings[tricode_map[team[4]]] = {'integerValue': f'{team[7]}'}
-        standings[f'{tricode_map[team[4]]}-wins'] = {'stringValue': f'{team[16]}'}
-    return standings
+    for n in range(20):
+        print('Getting new proxy...')
+        proxy = FreeProxy(https=True).get().split('://')[1]
+        print('Trying proxy ', proxy)
+        try:
+            d = leaguestandings.LeagueStandings(proxy=proxy).get_dict()
+        except:
+            continue
+        r = d['resultSets'][0]['rowSet']
+        standings = {}
+        for team in r:
+            standings[tricode_map[team[4]]] = {'integerValue': f'{team[7]}'}
+            standings[f'{tricode_map[team[4]]}-wins'] = {'stringValue': f'{team[16]}'}
+        return standings
 
 
 def get_daily_standings_from_api():
