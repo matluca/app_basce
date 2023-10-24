@@ -52,12 +52,21 @@ def get_daily_standings_from_api_2():
             d = leaguestandings.LeagueStandings(proxy=proxy).get_dict()
         except:
             continue
+        proxy_ip = proxy.split(':')[0]
+        try:
+            ip_lookup_response = requests.get('https://geolocation-db.com/jsonp/' + proxy_ip)
+            ip_lookup_response = ip_lookup_response.content.decode().split("(")[1].strip(")")
+            ip_lookup_response = json.loads(ip_lookup_response)
+            proxy_country = ip_lookup_response['country_name']
+        except:
+            proxy_country = ""
+        print('Proxy country: ', proxy_country)
         r = d['resultSets'][0]['rowSet']
         standings = {}
         for team in r:
             standings[tricode_map[team[4]]] = {'integerValue': f'{team[7]}'}
             standings[f'{tricode_map[team[4]]}-wins'] = {'stringValue': f'{team[16]}'}
-        return standings
+        return standings, proxy_country
 
 
 def get_daily_standings_from_api():
@@ -95,7 +104,7 @@ def get_di_token():
     return (r.json())['idToken']
 
 
-def push_standings_to_db(standings):
+def push_standings_to_db(standings, proxy_country):
     document = {'fields': standings}
     id_token = get_di_token()
     headers = {'Authorization': f'Bearer {id_token}'}
@@ -110,6 +119,7 @@ def push_standings_to_db(standings):
     url = f'https://firestore.googleapis.com/v1/projects/minitb-rs/databases/(default)/documents/predictions/Admin'
     document['fields']['name'] = {'stringValue': 'Admin'}
     document['fields']['date'] = {'stringValue': today_string}
+    document['fields']['proxy_country'] = {'stringValue': proxy_country}
     resp = requests.patch(url, data=json.dumps(document), headers=headers)
     if resp.status_code != 200:
         print(resp.json())
@@ -118,8 +128,8 @@ def push_standings_to_db(standings):
 
 
 def daily_minitb():
-    standings = get_daily_standings_from_api_2()
-    push_standings_to_db(standings)
+    standings, proxy_country = get_daily_standings_from_api_2()
+    push_standings_to_db(standings, proxy_country)
 
 
 if __name__ == '__main__':

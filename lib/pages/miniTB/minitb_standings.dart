@@ -18,7 +18,7 @@ class MiniTBStandings extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<MiniTBPred> preds = snapshot.data as List<MiniTBPred>;
-          MiniTBPred reference = MiniTBPred("", {}, {}, "", {});
+          MiniTBPred reference = MiniTBPred("", {}, {}, "", {}, "");
           for (var i = 0; i < preds.length; i++) {
             if (preds[i].name == "Admin") {
               reference = preds[i];
@@ -31,6 +31,7 @@ class MiniTBStandings extends StatelessWidget {
           String sponsor = sponsors[actualToday.weekday - 1];
           bool isUpdated = (actualToday.day == todayDate.day) &&
               (actualToday.month == todayDate.month);
+          String proxyCountry = reference.proxy_country;
           return FutureBuilder(
               future: DatabaseServiceMiniTB()
                   .dailyStandings(formatter.format(yesterdayDate)),
@@ -73,7 +74,7 @@ class MiniTBStandings extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(0, 20, 20, 10),
                               child: Text(
-                                "Presented by $sponsor",
+                                "Presented by $sponsor\nCourtesy of proxy in $proxyCountry",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: Colors.grey[700],
@@ -129,7 +130,7 @@ class MiniTBStandings extends StatelessWidget {
                                   onTap: () async => await launch(
                                     WhatsAppUnilink(
                                       text:
-                                          "*MiniTB Standings of the Day*\n_Presented by ${sponsor}_\n\n" +
+                                          "*MiniTB Standings of the Day*\n_Presented by ${sponsor}_\n_Courtesy of proxy in ${proxyCountry}_\n\n" +
                                               miniTBStandings(preds, yesterday),
                                     ).toString(),
                                   ),
