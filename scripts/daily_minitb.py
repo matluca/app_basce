@@ -2,12 +2,12 @@
 
 import json
 import os
+import io
 import requests
+import pandas as pd
 import sys
 from datetime import date
 from nba_api.stats.endpoints import leaguestandings
-from fp.fp import FreeProxy
-
 
 tricode_map = {
     'Celtics': 'BOS',
@@ -43,30 +43,34 @@ tricode_map = {
 }
 
 
+def get_proxy_list():
+    resp = requests.get('https://free-proxy-list.net/')
+    df = pd.read_html(io.StringIO(resp.text))[0]
+    df = df[df['Https'] == 'yes']
+    df = df[df['Country'] != 'United States']
+    return df[['IP Address', 'Port', 'Country']]
+
+
 def get_daily_standings_from_api_2():
-    for n in range(20):
-        print('Getting new proxy...')
-        proxy = FreeProxy(https=True).get().split('://')[1]
-        print('Trying proxy ', proxy)
+    proxy_list = get_proxy_list()
+    count = 0
+    for _, row in proxy_list.iterrows():
+        count += 1
+        if count > 100:
+            break
+        proxy = row['IP Address'] + ':' + str(row['Port'])
+        country = row['Country']
+        print('Trying Proxy:', proxy, ', Country:', country)
         try:
             d = leaguestandings.LeagueStandings(proxy=proxy).get_dict()
         except:
             continue
-        proxy_ip = proxy.split(':')[0]
-        try:
-            ip_lookup_response = requests.get('https://geolocation-db.com/jsonp/' + proxy_ip)
-            ip_lookup_response = ip_lookup_response.content.decode().split("(")[1].strip(")")
-            ip_lookup_response = json.loads(ip_lookup_response)
-            proxy_country = ip_lookup_response['country_name']
-        except:
-            proxy_country = ""
-        print('Proxy country: ', proxy_country)
         r = d['resultSets'][0]['rowSet']
         standings = {}
         for team in r:
             standings[tricode_map[team[4]]] = {'integerValue': f'{team[7]}'}
             standings[f'{tricode_map[team[4]]}-wins'] = {'stringValue': f'{team[16]}'}
-        return standings, proxy_country
+        return standings, country
 
 
 def get_daily_standings_from_api():
@@ -85,8 +89,8 @@ def get_daily_standings_from_api():
     west = json_resp['league']['standard']['conference']['west']
     standings = {}
     for i in range(15):
-        standings[east[i]['teamSitesOnly']['teamTricode']] = {'integerValue': f'{i+1}'}
-        standings[west[i]['teamSitesOnly']['teamTricode']] = {'integerValue': f'{i+1}'}
+        standings[east[i]['teamSitesOnly']['teamTricode']] = {'integerValue': f'{i + 1}'}
+        standings[west[i]['teamSitesOnly']['teamTricode']] = {'integerValue': f'{i + 1}'}
     return standings
 
 
