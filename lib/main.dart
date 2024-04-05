@@ -31,7 +31,6 @@ import 'package:appbasce/pages/TB/tb_change_seeds.dart';
 import 'package:appbasce/pages/TB/tb_change_extra.dart';
 import 'package:appbasce/pages/TB/tb_change_bracket_deadline.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_web_plugins/url_strategy.dart';
 import 'configure_non_web.dart' if (dart.library.html) 'configure_web.dart';
 
 void main() {

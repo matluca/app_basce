@@ -61,7 +61,7 @@ class Menu extends StatelessWidget {
       children: <Widget>[
         Card(
           child: ListTile(
-            leading: const Icon(MdiIcons.basketball),
+            leading: Icon(MdiIcons.basketball),
             trailing: const Icon(Icons.play_arrow),
             title: Text(
               'Partecipa al Torneo Bascé',
@@ -77,7 +77,7 @@ class Menu extends StatelessWidget {
         ),
         Card(
           child: ListTile(
-            leading: const Icon(MdiIcons.playBoxMultiple),
+            leading: Icon(MdiIcons.playBoxMultiple),
             trailing: const Icon(Icons.play_arrow),
             title: Text(
               'Partecipa al Mini-TB per la RS',
@@ -96,7 +96,7 @@ class Menu extends StatelessWidget {
             leading: Transform(
               alignment: Alignment.center,
               transform: Matrix4.rotationY(math.pi),
-              child: const Icon(MdiIcons.podium),
+              child: Icon(MdiIcons.podium),
             ),
             trailing: const Icon(Icons.play_arrow),
             title: Text("Albo d'oro",
@@ -111,7 +111,7 @@ class Menu extends StatelessWidget {
             leading: Transform(
               alignment: Alignment.center,
               transform: Matrix4.rotationY(math.pi),
-              child: const Icon(MdiIcons.podium),
+              child: Icon(MdiIcons.podium),
             ),
             trailing: const Icon(Icons.play_arrow),
             title: Text("Albo d'oro MiniTB",
@@ -150,7 +150,7 @@ alertDialog(BuildContext context) {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text('Versione: 5.3.0', style: TextStyle(color: Colors.grey[700])),
+            Text('Versione: 6.0.0', style: TextStyle(color: Colors.grey[700])),
             const SizedBox(height: 10),
             Text('Creatore: Luca', style: TextStyle(color: Colors.grey[700]))
           ],

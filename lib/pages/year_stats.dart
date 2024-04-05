@@ -135,8 +135,8 @@ class _YearPageState extends State<YearPage> {
                         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
                         child: Row(
                           children: <Widget>[
-                            const Icon(MdiIcons.reorderHorizontal, size: 30),
-                            const Icon(MdiIcons.dragHorizontalVariant, size: 30),
+                            Icon(MdiIcons.reorderHorizontal, size: 30),
+                            Icon(MdiIcons.dragHorizontalVariant, size: 30),
                             const SizedBox(width: 40),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -181,8 +181,8 @@ class _YearPageState extends State<YearPage> {
                         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
                         child: Row(
                           children: <Widget>[
-                            const Icon(MdiIcons.numeric4Circle, size: 30),
-                            const Icon(MdiIcons.numeric2CircleOutline, size: 30),
+                            Icon(MdiIcons.numeric4Circle, size: 30),
+                            Icon(MdiIcons.numeric2CircleOutline, size: 30),
                             const SizedBox(width: 40),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -254,7 +254,7 @@ class _YearPageState extends State<YearPage> {
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: DotsIndicator(
                 dotsCount: yearStats.length,
-                position: widget.screen.toDouble(),
+                position: widget.screen.toInt(),
               ),
             ),
           ),

@@ -1,9 +1,7 @@
 import 'package:appbasce/pages/loading.dart';
 import 'package:appbasce/services/database_TB.dart';
 import 'package:flutter/material.dart';
-import 'package:appbasce/classes/profile_class.dart';
 import 'package:appbasce/classes/tb_prediction_class.dart';
-import 'package:intl/intl.dart';
 
 class TBInsertPredictionAdmin extends StatefulWidget {
   const TBInsertPredictionAdmin({Key? key}) : super(key: key);

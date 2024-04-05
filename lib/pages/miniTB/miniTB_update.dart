@@ -58,7 +58,7 @@ class _MiniTBUpdateState extends State<MiniTBUpdate> {
                           padding: const EdgeInsets.all(5),
                           child: ElevatedButton(
                             style:
-                                ElevatedButton.styleFrom(primary: Colors.red),
+                                ElevatedButton.styleFrom(backgroundColor: Colors.red),
                             child: const Text(
                               'Update and exit',
                               style: TextStyle(color: Colors.white),

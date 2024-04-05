@@ -4,6 +4,14 @@ import 'package:base32/base32.dart';
 import 'dart:async';
 
 List<String> tbRoundsIds = [
+  'E-1-1',
+  'E-1-2',
+  'E-1-3',
+  'E-1-4',
+  'W-1-1',
+  'W-1-2',
+  'W-1-3',
+  'W-1-4',
   'E-2-1',
   'E-2-2',
   'W-2-1',

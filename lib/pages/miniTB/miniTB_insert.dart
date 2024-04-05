@@ -100,7 +100,7 @@ class _InsertPredictionPageState extends State<InsertPredictionPage> {
                     Padding(
                       padding: const EdgeInsets.all(5),
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.red),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                         child: const Text(
                           'Update and exit',
                           style: TextStyle(color: Colors.white),

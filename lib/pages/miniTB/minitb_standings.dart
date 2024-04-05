@@ -121,7 +121,7 @@ class MiniTBStandings extends StatelessWidget {
                               padding: const EdgeInsets.fromLTRB(9, 10, 9, 0),
                               child: Card(
                                 child: ListTile(
-                                  leading: const Icon(MdiIcons.whatsapp),
+                                  leading: Icon(MdiIcons.whatsapp),
                                   trailing: const Icon(Icons.send),
                                   title: Text("Manda classifica alla CB",
                                       style: TextStyle(

@@ -48,6 +48,14 @@ TBPred? namedPrediction(List<TBPred> pred, String name) {
 }
 
 Map<String,double> multiplier = {
+  "E-1-1": 0.7,
+  "E-1-2": 0.7,
+  "E-1-3": 0.7,
+  "E-1-4": 0.7,
+  "W-1-1": 0.7,
+  "W-1-2": 0.7,
+  "W-1-3": 0.7,
+  "W-1-4": 0.7,
   "E-2-1": 1,
   "E-2-2": 1,
   "W-2-1": 1,

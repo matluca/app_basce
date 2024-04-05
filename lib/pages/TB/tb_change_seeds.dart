@@ -118,7 +118,7 @@ class _TBChangeSeedsPageState extends State<TBChangeSeedsPage> {
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.red),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                         child: const Text(
                           'Confirm and exit',
                           style: TextStyle(color: Colors.white),

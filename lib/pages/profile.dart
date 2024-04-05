@@ -116,7 +116,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Row(
                         children: <Widget>[
                           const SizedBox(width: 10),
-                          const Icon(MdiIcons.trophy,
+                          Icon(MdiIcons.trophy,
                               size: 40, color: Color(0xFFFFD700)),
                           const SizedBox(width: 50),
                           Column(
@@ -147,7 +147,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Row(
                         children: <Widget>[
                           const SizedBox(width: 10),
-                          const Icon(MdiIcons.trophy,
+                          Icon(MdiIcons.trophy,
                               size: 40, color: Color(0xFFA9A9A9)),
                           const SizedBox(width: 50),
                           Column(
@@ -178,7 +178,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Row(
                         children: <Widget>[
                           const SizedBox(width: 10),
-                          const Icon(MdiIcons.trophy,
+                          Icon(MdiIcons.trophy,
                               size: 40, color: Color(0xFFCD7F32)),
                           const SizedBox(width: 50),
                           Column(
@@ -208,8 +208,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       const SizedBox(height: 25),
                       Row(
                         children: <Widget>[
-                          const Icon(MdiIcons.reorderHorizontal, size: 30),
-                          const Icon(MdiIcons.dragHorizontalVariant, size: 30),
+                          Icon(MdiIcons.reorderHorizontal, size: 30),
+                          Icon(MdiIcons.dragHorizontalVariant, size: 30),
                           const SizedBox(width: 40),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -238,8 +238,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       const SizedBox(height: 25),
                       Row(
                         children: <Widget>[
-                          const Icon(MdiIcons.numeric4Circle, size: 30),
-                          const Icon(MdiIcons.numeric2CircleOutline, size: 30),
+                          Icon(MdiIcons.numeric4Circle, size: 30),
+                          Icon(MdiIcons.numeric2CircleOutline, size: 30),
                           const SizedBox(width: 40),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -277,7 +277,7 @@ class _ProfilePageState extends State<ProfilePage> {
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: DotsIndicator(
                 dotsCount: profiles.length,
-                position: widget.screen.toDouble(),
+                position: widget.screen.toInt(),
               ),
             ),
           ),
