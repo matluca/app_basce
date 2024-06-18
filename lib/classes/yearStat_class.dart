@@ -29,5 +29,7 @@ Stats vii = Stats('VII', 2022, [nic], [melo], [enrico], [nic], [melo],
     ['assets/profile2022.jpg']);
 Stats viii = Stats('VIII', 2023, [teo], [enrico], [nic], [teo], [melo],
     ['assets/profile2023.png']);
+Stats ix = Stats('IX', 2024, [nic], [melo], [magu], [nic], [nic],
+    ['']);
 
-List<Stats> yearStats = [i, ii, iii, iv, v, vi, vii, viii];
+List<Stats> yearStats = [i, ii, iii, iv, v, vi, vii, viii, ix];

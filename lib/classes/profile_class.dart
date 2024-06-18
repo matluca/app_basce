@@ -18,11 +18,11 @@ Profile fabio =
     Profile('Fabio', 'fabio.jpg', [], [], [2017, 2021], [2017, 2021], []);
 Profile luca = Profile('Luca', 'luca.jpg', [2021], [2019], [], [2019], []);
 Profile magu = Profile(
-    'Magu', 'gianluca.jpg', [2016], [2018], [2020], [2016, 2017, 2018], []);
-Profile melo = Profile('Melo', 'melo.jpg', [2017, 2019], [2022], [2018],
+    'Magu', 'gianluca.jpg', [2016], [2018], [2020, 2024], [2016, 2017, 2018], []);
+Profile melo = Profile('Melo', 'melo.jpg', [2017, 2019], [2022, 2024], [2018],
     [2017, 2021], [2017, 2019, 2022, 2023]);
 Profile nic =
-    Profile('Nic', 'nic.jpg', [2022], [2016], [], [2022], [2016, 2020]);
+    Profile('Nic', 'nic.jpg', [2022, 2024], [2016], [], [2022, 2024], [2016, 2020, 2024]);
 Profile teo =
     Profile('Teo', 'teo.jpg', [2020, 2023], [2016, 2021], [], [2020, 2023], [2021]);
 Profile yiwei = Profile('Yiwei', 'yiwei.jpg', [], [], [], [], []);

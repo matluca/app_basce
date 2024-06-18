@@ -12,7 +12,8 @@ Map tournamentMap = {
   2020: 'V',
   2021: 'VI',
   2022: 'VII',
-  2023: 'VIII'
+  2023: 'VIII',
+  2024: 'IX'
 };
 
 class PersonalProfile extends StatefulWidget {

@@ -10,7 +10,8 @@ Map iconMap = {
   v: MdiIcons.romanNumeral5,
   vi: MdiIcons.romanNumeral6,
   vii: MdiIcons.romanNumeral7,
-  viii: MdiIcons.romanNumeral8
+  viii: MdiIcons.romanNumeral8,
+  ix: MdiIcons.romanNumeral9
 };
 
 class Albo extends StatefulWidget {
