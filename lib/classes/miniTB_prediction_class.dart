@@ -82,6 +82,21 @@ List<int> malus(MiniTBPred prediction, MiniTBPred reference) {
   return [mEast, mWest];
 }
 
+List<int> exact(MiniTBPred prediction, MiniTBPred reference) {
+  List<int> matches = List<int>.filled(16, 0);
+  for (var team in prediction.east.keys) {
+    if (prediction.east[team] == reference.east[team]) {
+      matches[prediction.east[team]] += 1;
+    }
+  }
+  for (var team in prediction.west.keys) {
+    if (prediction.west[team] == reference.west[team]) {
+      matches[prediction.west[team]] += 1;
+    }
+  }
+  return matches;
+}
+
 String miniTBStandings(List<MiniTBPred> preds, MiniTBPred yesterday) {
   MiniTBPred reference = MiniTBPred("", {}, {}, "", {}, "");
   for (var i = 0; i < preds.length; i++) {
@@ -93,6 +108,7 @@ String miniTBStandings(List<MiniTBPred> preds, MiniTBPred yesterday) {
   var eastStandings = {};
   var westStandings = {};
   var diff = {};
+  var correct = {};
   for (int i = 0; i < preds.length; i++) {
     if (preds[i].name != "Admin") {
       int east = malus(preds[i], reference)[0];
@@ -109,10 +125,30 @@ String miniTBStandings(List<MiniTBPred> preds, MiniTBPred yesterday) {
       }
       eastStandings[preds[i].name] = east;
       westStandings[preds[i].name] = west;
+      correct[preds[i].name] = exact(preds[i], reference);
     }
   }
+
   var sortedKeys = standings.keys.toList(growable: false)
-    ..sort((k1, k2) => standings[k1].compareTo(standings[k2]));
+    ..sort((k1, k2) {
+      // compare standings
+      if (standings[k1] < standings[k2]) {
+        return -1;
+      }
+      if (standings[k1] > standings[k2]) {
+        return 1;
+      }
+      // tiebreaker: check exact predictions
+      for (int j = 1; j < 16; j++) {
+        if (correct[k1][j] > correct[k2][j]) {
+          return -1;
+        }
+        if (correct[k1][j] < correct[k2][j]) {
+          return 1;
+        }
+      }
+      return 0;
+    });
   LinkedHashMap sortedStandings = LinkedHashMap.fromIterable(sortedKeys,
       key: (k) => k, value: (k) => standings[k]);
   LinkedHashMap sortedEastStandings = LinkedHashMap.fromIterable(sortedKeys,
