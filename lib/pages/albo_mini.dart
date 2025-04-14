@@ -7,6 +7,7 @@ Map iconMapMini = {
   iiMini: MdiIcons.romanNumeral2,
   iiiMini: MdiIcons.romanNumeral3,
   ivMini: MdiIcons.romanNumeral4,
+  vMini: MdiIcons.romanNumeral5,
 };
 
 class AlboMini extends StatefulWidget {
