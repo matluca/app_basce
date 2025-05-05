@@ -84,7 +84,7 @@ double roundsMalus(Map<String,List<TBPred>> allPredictions, String name) {
       double thisMalus = ((reference.home - prediction.home).abs() + (reference.away - prediction.away).abs()) * multiplier[p.key]!;
       malus += thisMalus;
       if ((thisMalus == 0) && (reference.home+reference.away == 4)) {  // bonus sweep
-        malus += -0.5;
+        malus += -0.5 * multiplier[p.key]!;
       }
     }
   }
