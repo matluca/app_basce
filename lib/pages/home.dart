@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                SizedBox(child: Image.asset('assets/profile2023.png'), width: 700),
+                SizedBox(child: Image.asset('assets/profile2025.png'), width: 700),
                 const SizedBox(height: 25),
                 const Menu(),
               ],
