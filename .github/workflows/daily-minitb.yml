@@ -1,9 +1,9 @@
 name: MiniTB Daily Standings Update
 
 on:
-#  schedule:
-#    # runs every day at 6:10 (UTC)
-#    - cron: '10 7 * * *'
+  schedule:
+    # runs every day at 6:10 (UTC)
+    - cron: '10 7 * * *'
   workflow_dispatch:
 
 jobs:
