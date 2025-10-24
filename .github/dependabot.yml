@@ -20,3 +20,18 @@ updates:
         update-types:
           - "minor"
           - "patch"
+  - package-ecosystem: "npm"
+    directory: "/scripts/firebase-backup"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      # Prefix all commit messages with "chore(dependabot): "
+      prefix: "chore(dependabot)"
+    groups:
+      # Specify a name for the group, which will be used in pull request titles
+      # and branch names
+      minor-updates:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
