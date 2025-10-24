@@ -42,7 +42,7 @@ dependencies:
   http: ^1.2.1
   dots_indicator: ^3.0.0
   flutter_spinkit: ^5.1.0
-  firebase_auth: ^4.19.0
+  firebase_auth: ^4.20.0
   cloud_firestore: ^4.16.0
   base32: ^2.1.1
 
