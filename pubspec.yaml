@@ -40,7 +40,7 @@ dependencies:
   whatsapp_unilink: ^2.0.0
   url_launcher: ^6.0.17
   http: ^1.2.1
-  dots_indicator: ^3.0.0
+  dots_indicator: ^4.0.1
   flutter_spinkit: ^5.1.0
   firebase_auth: ^4.19.0
   cloud_firestore: ^4.16.0
