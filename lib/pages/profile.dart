@@ -279,7 +279,7 @@ class _ProfilePageState extends State<ProfilePage> {
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: DotsIndicator(
                 dotsCount: profiles.length,
-                position: widget.screen.toInt(),
+                position: widget.screen.toDouble(),
               ),
             ),
           ),

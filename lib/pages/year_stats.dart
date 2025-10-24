@@ -254,7 +254,7 @@ class _YearPageState extends State<YearPage> {
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: DotsIndicator(
                 dotsCount: yearStats.length,
-                position: widget.screen.toInt(),
+                position: widget.screen.toDouble(),
               ),
             ),
           ),
