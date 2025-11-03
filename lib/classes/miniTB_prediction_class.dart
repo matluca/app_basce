@@ -39,7 +39,8 @@ class MiniTBPred {
   final Map wins;
   final String proxy_country;
 
-  MiniTBPred(this.name, this.east, this.west, this.date, this.wins, this.proxy_country);
+  MiniTBPred(this.name, this.east, this.west, this.date, this.wins,
+      this.proxy_country);
 }
 
 Map buildStandings(Map predictions) {
@@ -97,7 +98,7 @@ List<int> exact(MiniTBPred prediction, MiniTBPred reference) {
   return matches;
 }
 
-String miniTBStandings(List<MiniTBPred> preds, MiniTBPred yesterday) {
+List<String> miniTBStandings(List<MiniTBPred> preds, MiniTBPred yesterday) {
   MiniTBPred reference = MiniTBPred("", {}, {}, "", {}, "");
   for (var i = 0; i < preds.length; i++) {
     if (preds[i].name == "Admin") {
@@ -159,21 +160,23 @@ String miniTBStandings(List<MiniTBPred> preds, MiniTBPred yesterday) {
       key: (k) => k, value: (k) => diff[k]);
 
   var msg = "";
+  var waMsg = "```";
   for (int i = 0; i < sortedKeys.length; i++) {
-    msg = msg +
-        sortedKeys[i] +
-        ": " +
+    msg = msg + sortedKeys[i] + ": " +
         sortedStandings.values.toList()[i].toString() +
-        "  (E: " +
-        sortedEastStandings.values.toList()[i].toString() +
-        ", W: " +
-        sortedWestStandings.values.toList()[i].toString() +
-        ")" +
-        "  " +
-        sortedDiffs.values.toList()[i];
+        "  " + sortedDiffs.values.toList()[i] +
+        "  E:" + sortedEastStandings.values.toList()[i].toString() +
+        ", W:" + sortedWestStandings.values.toList()[i].toString();
+    waMsg = waMsg + sortedKeys[i] + ":\t" +
+        sortedStandings.values.toList()[i].toString() +
+        "  " + sortedDiffs.values.toList()[i] +
+        "  E:" + sortedEastStandings.values.toList()[i].toString() +
+        ", W:" + sortedWestStandings.values.toList()[i].toString();
     if (i != sortedKeys.length - 1) {
       msg = msg + "\n";
+      waMsg = waMsg + "\n";
     }
   }
-  return msg;
+  waMsg = waMsg + "```";
+  return [msg, waMsg];
 }

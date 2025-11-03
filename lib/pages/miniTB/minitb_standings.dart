@@ -111,7 +111,7 @@ class MiniTBStandings extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 20, horizontal: 20),
                               child: SelectableText(
-                                miniTBStandings(preds, yesterday),
+                                miniTBStandings(preds, yesterday)[0],
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.grey[800], fontSize: 18),
@@ -131,7 +131,7 @@ class MiniTBStandings extends StatelessWidget {
                                     WhatsAppUnilink(
                                       text:
                                           "*MiniTB Standings of the Day*\n_Presented by ${sponsor}_\n_Courtesy of proxy in ${proxyCountry}_\n\n" +
-                                              miniTBStandings(preds, yesterday),
+                                              miniTBStandings(preds, yesterday)[1],
                                     ).toString(),
                                   ),
                                 ),
