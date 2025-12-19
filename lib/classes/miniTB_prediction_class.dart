@@ -118,7 +118,7 @@ List<String> miniTBStandings(List<MiniTBPred> preds, MiniTBPred yesterday) {
       int westYesterday = malus(preds[i], yesterday)[1];
       standings[preds[i].name] = east + west;
       int d = east + west - eastYesterday - westYesterday;
-      diff[preds[i].name] = "(=)";
+      diff[preds[i].name] = "(==)";
       if (d > 0) {
         diff[preds[i].name] = "(+${d})";
       } else if (d < 0) {
@@ -167,7 +167,7 @@ List<String> miniTBStandings(List<MiniTBPred> preds, MiniTBPred yesterday) {
         "  " + sortedDiffs.values.toList()[i] +
         "  E:" + sortedEastStandings.values.toList()[i].toString() +
         ", W:" + sortedWestStandings.values.toList()[i].toString();
-    waMsg = waMsg + sortedKeys[i] + ":\t" +
+    waMsg = waMsg + sortedKeys[i].toString().substring(0, 3) + ": " +
         sortedStandings.values.toList()[i].toString() +
         "  " + sortedDiffs.values.toList()[i] +
         "  E:" + sortedEastStandings.values.toList()[i].toString() +
