@@ -15,5 +15,6 @@ MiniTBStats iiMini = MiniTBStats('II', "2021-22", [magu], [luca], [ale]);
 MiniTBStats iiiMini = MiniTBStats('III', "2022-23", [luca], [ale], [nic]);
 MiniTBStats ivMini = MiniTBStats('IV', "2023-24", [ale], [luca], [melo]);
 MiniTBStats vMini = MiniTBStats('V', "2024-25", [magu], [melo], [teo]);
+MiniTBStats viMini = MiniTBStats('VI', "2025-26", [melo], [fabio], [magu]);
 
-List<MiniTBStats> miniTBStats = [iMini, iiMini, iiiMini, ivMini, vMini];
+List<MiniTBStats> miniTBStats = [iMini, iiMini, iiiMini, ivMini, vMini, viMini];
