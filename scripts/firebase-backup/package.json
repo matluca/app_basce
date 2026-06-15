@@ -8,7 +8,7 @@
   },
   "license": "UNLICENSED",
   "dependencies": {
-    "firebase-tools": "^15.19.1",
+    "firebase-tools": "^15.20.0",
     "firestore-export-import": "^1.6.0"
   }
 }
