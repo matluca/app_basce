@@ -33,5 +33,7 @@ Stats ix = Stats('IX', 2024, [nic], [melo], [magu], [nic], [nic],
     ['']);
 Stats x = Stats('X', 2025, [enrico], [magu], [ale], [enrico], [ale, teo],
     ['assets/profile2025.png']);
+Stats xi = Stats('XI', 2026, [nic], [teo], [magu], [melo], [nic],
+    ['assets/profile2026.png']);
 
-List<Stats> yearStats = [i, ii, iii, iv, v, vi, vii, viii, ix, x];
+List<Stats> yearStats = [i, ii, iii, iv, v, vi, vii, viii, ix, x, xi];

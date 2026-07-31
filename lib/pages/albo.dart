@@ -1,19 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:appbasce/classes/yearStat_class.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
-Map iconMap = {
-  i: MdiIcons.romanNumeral1,
-  ii: MdiIcons.romanNumeral2,
-  iii: MdiIcons.romanNumeral3,
-  iv: MdiIcons.romanNumeral4,
-  v: MdiIcons.romanNumeral5,
-  vi: MdiIcons.romanNumeral6,
-  vii: MdiIcons.romanNumeral7,
-  viii: MdiIcons.romanNumeral8,
-  ix: MdiIcons.romanNumeral9,
-  x: MdiIcons.romanNumeral10
-};
 
 class Albo extends StatefulWidget {
   const Albo({Key? key}) : super(key: key);
@@ -72,7 +58,18 @@ class _AlboState extends State<Albo> {
                             ),
                           ),
                         ),
-                        leading: Icon(iconMap[yearStats[index]], size: 40),
+                        leading: SizedBox(
+                          width: 44,
+                          child: Text(
+                            yearStats[index].label,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey[800],
+                            ),
+                          ),
+                        ),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[

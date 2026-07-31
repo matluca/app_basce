@@ -1,15 +1,5 @@
 import 'package:appbasce/classes/miniTBStat_class.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
-Map iconMapMini = {
-  iMini: MdiIcons.romanNumeral1,
-  iiMini: MdiIcons.romanNumeral2,
-  iiiMini: MdiIcons.romanNumeral3,
-  ivMini: MdiIcons.romanNumeral4,
-  vMini: MdiIcons.romanNumeral5,
-  viMini: MdiIcons.romanNumeral6,
-};
 
 class AlboMini extends StatefulWidget {
   const AlboMini({Key? key}) : super(key: key);
@@ -68,8 +58,18 @@ class _AlboMiniState extends State<AlboMini> {
                             ),
                           ),
                         ),
-                        leading:
-                            Icon(iconMapMini[miniTBStats[index]], size: 40),
+                        leading: SizedBox(
+                          width: 44,
+                          child: Text(
+                            miniTBStats[index].label,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey[800],
+                            ),
+                          ),
+                        ),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
