@@ -48,7 +48,7 @@ def get_proxy_list():
     df = pd.read_html(io.StringIO(resp.text))[0]
     # df = df[df['Https'] == 'yes']
     df = df[df['Country'] != 'United States']
-    return df[['IP Address', 'Port', 'Country']]
+    return df[['IP:Port', 'Country']]
 
 
 def get_daily_standings_from_api_2():
@@ -58,7 +58,7 @@ def get_daily_standings_from_api_2():
         count += 1
         if count > 100:
             break
-        proxy = row['IP Address'] + ':' + str(row['Port'])
+        proxy = row['IP:Port']
         country = row['Country']
         print('Trying Proxy:', proxy, ', Country:', country)
         try:
