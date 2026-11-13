@@ -46,6 +46,7 @@ tricode_map = {
 def get_proxy_list():
     resp = requests.get('https://free-proxy-list.net/')
     df = pd.read_html(io.StringIO(resp.text))[0]
+    df.columns = df.columns.str.replace(' ', '')
     # df = df[df['Https'] == 'yes']
     df = df[df['Country'] != 'United States']
     return df[['IP:Port', 'Country']]
