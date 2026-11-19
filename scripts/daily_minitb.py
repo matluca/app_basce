@@ -45,33 +45,41 @@ tricode_map = {
 
 def get_proxy_list():
     resp = requests.get('https://free-proxy-list.net/')
-    df = pd.read_html(io.StringIO(resp.text))[0]
+    tables = pd.read_html(io.StringIO(resp.text))
+    df = next(t for t in tables if 'Https' in t.columns.str.replace(' ', ''))
     df.columns = df.columns.str.replace(' ', '')
-    # df = df[df['Https'] == 'yes']
     df = df[df['Country'] != 'United States']
     return df[['IP:Port', 'Country']]
 
 
+def fetch_league_standings(proxy=None):
+    return leaguestandings.LeagueStandings(proxy=proxy, timeout=30).get_dict()
+
+
+def parse_standings(d):
+    standings = {}
+    for team in d['resultSets'][0]['rowSet']:
+        standings[tricode_map[team[4]]] = {'integerValue': f'{team[7]}'}
+        standings[f'{tricode_map[team[4]]}-wins'] = {'stringValue': f'{team[16]}'}
+    return standings
+
+
 def get_daily_standings_from_api_2():
-    proxy_list = get_proxy_list()
-    count = 0
-    for _, row in proxy_list.iterrows():
-        count += 1
-        if count > 100:
-            break
+    try:
+        return parse_standings(fetch_league_standings()), 'direct'
+    except Exception as e:
+        print('Direct request failed:', repr(e))
+
+    for _, row in get_proxy_list().head(100).iterrows():
         proxy = row['IP:Port']
         country = row['Country']
         print('Trying Proxy:', proxy, ', Country:', country)
         try:
-            d = leaguestandings.LeagueStandings(proxy=proxy).get_dict()
-        except:
-            continue
-        r = d['resultSets'][0]['rowSet']
-        standings = {}
-        for team in r:
-            standings[tricode_map[team[4]]] = {'integerValue': f'{team[7]}'}
-            standings[f'{tricode_map[team[4]]}-wins'] = {'stringValue': f'{team[16]}'}
-        return standings, country
+            return parse_standings(fetch_league_standings(proxy)), country
+        except Exception as e:
+            print('Proxy failed:', repr(e))
+
+    sys.exit('Could not retrieve NBA standings directly or via any proxy')
 
 
 def get_daily_standings_from_api():
