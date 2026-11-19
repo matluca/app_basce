@@ -82,28 +82,7 @@ def get_daily_standings_from_api_2():
     sys.exit('Could not retrieve NBA standings directly or via any proxy')
 
 
-def get_daily_standings_from_api():
-    url = 'https://data.nba.net/10s/prod/v1/current/standings_conference.json'
-    headers = {
-        "Accept": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET"
-    }
-    resp = requests.get(url, headers=headers)
-    if resp.status_code != 200:
-        print(resp.json())
-        sys.exit('Could not retrieve NBA standings')
-    json_resp = resp.json()
-    east = json_resp['league']['standard']['conference']['east']
-    west = json_resp['league']['standard']['conference']['west']
-    standings = {}
-    for i in range(15):
-        standings[east[i]['teamSitesOnly']['teamTricode']] = {'integerValue': f'{i + 1}'}
-        standings[west[i]['teamSitesOnly']['teamTricode']] = {'integerValue': f'{i + 1}'}
-    return standings
-
-
-def get_di_token():
+def get_id_token():
     pwd = os.getenv('PASSWORD')
     if pwd is None:
         pwd = ""
@@ -119,7 +98,7 @@ def get_di_token():
 
 def push_standings_to_db(standings, proxy_country):
     document = {'fields': standings}
-    id_token = get_di_token()
+    id_token = get_id_token()
     headers = {'Authorization': f'Bearer {id_token}'}
     today = date.today()
     today_string = today.strftime("%Y-%m-%d")
